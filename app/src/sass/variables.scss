@@ -1,0 +1,11 @@
+$transparent: rgba(255, 255, 255, 0);
+
+$color-1: #E83A25;
+$color-1-t: transparentize($color-1, 1);
+$color-2: #98CC96;
+$color-2-t: transparentize($color-2, 1);
+
+$size: 4em;
+$big-size: $size*2;
+$min: $size*.3;
+$max: $size*.7;
