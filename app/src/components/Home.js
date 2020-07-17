@@ -1,16 +1,20 @@
 import React , {Component} from 'react'
 import title from '../assets/thankloop-title.svg'
 
+import titlelogo from '../assets/thankloop-white-logo.svg'
+
+
 export default class Home extends Component{
 
-//
+
     render(){
       let i 
         return (
 
           <body>
 
-            
+
+
            
                 
                 <div className= "box-loading"> 
@@ -37,10 +41,24 @@ export default class Home extends Component{
               </div>
              
               <div className="text">
-      
-                <img src={title} style={{ height: 500, width: 700 }}
-              alt="website logo" />
+               
+                <p className="paragraph">Did you thank someone today?</p> 
+            
+                
+                <p className= "paragraph2">
+                Cultivate gratitude right here, right now, by thanking professionals around the world.  
+                  <span className = "bolded"> We’ll generate 5 profiles for you to scroll on, daily</span>
+                 
+                </p>
+
+                <div className="btn">
+              <button  className="logo" data-wipe="Get thanking" >Get thanking</button>
+                
               </div>
+
+              </div>
+
+             
         
             </div>
 
