@@ -1,4 +1,5 @@
 $w : 500px;
+$ws: 300px;
 $duration: .20;
 $easing: ease-in-out;
 
@@ -34,6 +35,7 @@ body {
     left:0;
     border-radius:40%;
     background: radial-gradient(ellipse at center, rgba(100,162,255,1) 0%,rgba(85,139,219,0) 100%);
+   
 
   }
   .text{

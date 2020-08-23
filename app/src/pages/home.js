@@ -15,7 +15,9 @@ export default class Home extends Component{
 
 
 
-           
+<div className= "container"> 
+<div className= "row"> 
+<div className= "colum"> 
                 
                 <div className= "box-loading"> 
 
@@ -46,8 +48,8 @@ export default class Home extends Component{
             
                 
                 <p className= "paragraph2">
-                Cultivate gratitude right here, right now, by thanking professionals around the world.  
-                  <span className = "bolded"> We’ll generate 5 profiles for you to scroll on, daily</span>
+                Cultivate gratitude right here, right now by thanking professionals around the world.
+           
                  
                 </p>
 
@@ -57,11 +59,13 @@ export default class Home extends Component{
               </div>
 
               </div>
+              </div>
 
+</div>
              
         
             </div>
-
+</div>
             
           </body>
           )
