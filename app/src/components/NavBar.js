@@ -7,7 +7,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 
-
+import thankloop from '../assets/thankloop-logo-2.svg'
 import {Link} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -41,7 +41,8 @@ const styleSheet = {
 
 
   },buttons:{
-    marginLeft:'auto',
+    marginRight:'auto',
+  
     color: 'black', 
     
    
@@ -57,7 +58,7 @@ const styleSheet = {
   },
   links:{
      
-    color: 'white', 
+    color: '#70a1ff', 
     padding:0,
     textDecoration : 'none',
     '&:hover': {
@@ -80,6 +81,11 @@ const styleSheet = {
     '&:hover': {
       backgroundColor: "white",
    }
+  },
+  image:{
+
+    marginLeft:'auto',
+    
   }
 
   
@@ -120,12 +126,12 @@ class ResAppBar extends Component{
   }
 
   componentWillMount(){
-    if(window.innerWidth <= 880){
+    if(window.innerWidth <= 900){
       this.setState({drawerActivate:true});
     }
 
     window.addEventListener('resize',()=>{
-      if(window.innerWidth <= 880){
+      if(window.innerWidth <= 900){
         this.setState({drawerActivate:true});
       }
       else{
@@ -139,8 +145,8 @@ class ResAppBar extends Component{
     const {classes} = this.props
     return (
       <div className={styleSheet.root}>
-        <AppBar position="fixed"  style={{ margin: 0, padding: 0, background: '#70a1ff', boxShadow: 'none',height:60}} >
-          <Toolbar style={{background:'#70a1ff'}}>
+        <AppBar position="fixed"  style={{ margin: 0, padding: 0, background: '#e5f1ff', boxShadow: 'none',height:60}} >
+          <Toolbar style={{background:'#e5f1ff'}}>
           
             <Grid container direction = "row" justify = "space-between" alignItems="center">
               <MenuIcon
@@ -184,11 +190,11 @@ class ResAppBar extends Component{
   destroyDrawer(){
     const {classes} = this.props
     return (
-      <AppBar position="fixed"  style={{flexGrow:0, margin: 0, padding: 0, background: '#70a1ff', boxShadow: 'none', height:60}}>
-        <Toolbar  style={{background: '#70a1ff'}}>
-       
+      <AppBar  style={{flexGrow:0, margin: 0, padding: 0, background: '#e5f1ff', boxShadow: 'none', height:60}}>
+        <Toolbar  style={{background: '#e5f1ff'}}>
+        <img className={classes.image} src={thankloop}></img>
             <div className={classes.buttons}>
-            
+           
             {navLinks.map((link,index) =>(
                 <Button className={classes.button}>
                   

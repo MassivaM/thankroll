@@ -1,76 +1,67 @@
-import React , {Component} from 'react'
+import React , {Component, useState} from 'react'
 import title from '../assets/thankloop-title.svg'
 
 import titlelogo from '../assets/thankloop-white-logo.svg'
+import Intro from '../components/Intro.js'
 
 
-export default class Home extends Component{
+import Person from '../components/Person.js';
+import data from '../data.json';
 
+const Home = () => {
 
-    render(){
-      let i 
+  const [people, setPeople] = useState(data);
+  const [likedUsers, setLikedUsers] = useState([]);
+  const [dislikedUsers, setDislikedUsers] = useState([]);
+  const activeUser = 0;
+
+  const removedPersonFromDataSrc = (peopleSource, userId) =>
+    peopleSource.filter(user => user.id !== userId);
+
+  const modifySuperficialChoices = (userId, action) => {
+    const newPeople = [...people];
+    const newLikedUsers = [...likedUsers];
+    const newDislikedUsers = [...dislikedUsers];
+
+    switch (action) {
+      case 'ADD_TO_LIKED_USERS':
+        if (!people[activeUser].likedUsers.includes(userId)) {
+          newPeople[activeUser].likedUsers.push(userId);
+          newLikedUsers.push(data[userId]);
+
+          setLikedUsers(newLikedUsers);
+          setPeople(removedPersonFromDataSrc(people, userId));
+        }
+        break;
+      case 'ADD_TO_DISLIKED_USERS':
+        if (!people[activeUser].dislikedUsers.includes(userId)) {
+          newPeople[activeUser].dislikedUsers.push(userId);
+          newDislikedUsers.push(data[userId]);
+
+          setDislikedUsers(newLikedUsers);
+          setPeople(removedPersonFromDataSrc(people, userId));
+        }
+        break;
+     
+      default:
+        return people;
+    }
+  };
+   
         return (
 
           <body>
+<Intro/>
 
 
 
-<div className= "container"> 
-<div className= "row"> 
-<div className= "colum"> 
-                
-                <div className= "box-loading"> 
-
-                
-          
-                <div className= "cirlce-wave"> 
-
-               
-               
-                  
-               </div>
-               <div className="cirlce-wave--2">
-     
-              </div>
-              <div className="cirlce-wave--3">
-     
-              </div>
-              <div className="cirlce-wave--4">
-     
-              </div>
-              <div className="cirlce-wave--5">
-              
-              </div>
-             
-              <div className="text">
-               
-                <p className="paragraph">Did you thank someone today?</p> 
-            
-                
-                <p className= "paragraph2">
-                Cultivate gratitude right here, right now by thanking professionals around the world.
-           
-                 
-                </p>
-
-                <div className="btn">
-              <button  className="logo" data-wipe="Get thanking" >Get thanking</button>
-                
-              </div>
-
-              </div>
-              </div>
-
-</div>
-             
-        
-            </div>
-</div>
             
           </body>
           )
 
-    }
+  
     
 
 }
+
+export default Home
