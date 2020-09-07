@@ -10,6 +10,7 @@ import researcher from '../assets/researcher.jpg'
 import teacher from '../assets/teacher.jpg'
 import artist from '../assets/artist.jpg'
 import present from '../assets/present.jpg'
+import Swipper from '../components/Swipper.js'
 export default class Home extends Component{
   constructor(){
     super();
@@ -18,12 +19,12 @@ export default class Home extends Component{
     }
 }
 
-    render(){
+render(){
       let i 
         return (
 
      
-
+<body>
 
 <div className= {this.state.show?'fadeIn':'fadeOut'}>
 
@@ -157,7 +158,7 @@ export default class Home extends Component{
                   </p>
   
                   <div className="btn">
-                <button  className="logo" data-wipe="Get thanking"  style={{border:'none', outline: 0}}onClick={()=>{this.setState({show:!this.state.show})}} >Get thanking</button>
+                <button  className="logo" data-wipe="Get thanking"   style={{border:'none', outline: 0}} onClick={()=>{this.setState({show:!this.state.show})}} visible={this.state.show} >Get thanking</button>
                   
                 </div>
   
@@ -171,8 +172,13 @@ export default class Home extends Component{
             
  </div>
 </div>
-</div>       
 
+</div>       
+<div className={this.state.show?"blurred" : ""}>
+            <Swipper/>
+    </div>
+
+    </body>
           )
 
     }

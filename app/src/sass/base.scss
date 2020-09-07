@@ -1,8 +1,13 @@
+@import 'swipper.scss';
+
 $w : 500px;
 $ws: 300px;
 $duration: .20;
 $easing: ease-in-out;
-
+.intro{
+ 
+  z-index:10
+}
 .app{
   width:100%
 }
@@ -287,20 +292,31 @@ z-index:1;
 
 .fadeOut{
   opacity:0;
-
+  z-index:10;
   transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
 
 }
 .fadeIn{
   opacity:1;
-
+z-index:10;
   transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
 
 }
 
+.blurred{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  filter: blur(20px)
+}
+.blurred-out{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  filter: blur(0px);
+  transition: blur 0.5s;
 
-
-
+}
 $svg-height: 150px;
 $svg-width: 150px;
 
@@ -335,7 +351,7 @@ svg,
     .wrapper3 {
       top: 70%;
       left: 90%;
-      transform: translate(-50%,-45%);
+      transform: translate(-50%,-50%);
       animation: svg-sizes 5s infinite linear alternate;
       overflow: hidden;
       animation-delay: 5s ;
@@ -375,19 +391,13 @@ svg,
               }
               .wrapper8{
                 top: 70%;
-                left: 60%;
+                left: 70%;
                 
                 animation: svg-sizes 5s infinite linear alternate;
                 overflow: hidden;
                 animation-delay: 6s ;
                 }
-.svg-visible {
-  //animation: svg-move 3s infinite linear alternate;
-}
-text {
-  font: 16em/1 'Russo One', Impact;
-  }
-$stroke-step: 2;
+
 
 
 @keyframes svg-sizes {
@@ -424,25 +434,3 @@ $stroke-step: 2;
   }
 }
 
-@keyframes svg-move {
-  0% {
-    top: -$svg-height/2;
-    left: -$svg-width/2;
-   
-  }
-  10% {
-    top: -$svg-height/2;
-    left: -$svg-width/2;
-    
-  }
-  35% {
-    top: -$svg-height/2;
-    left: 0;
-   
-  }
-  49% {
-    top: 0;
-    left: 0;
-   
-  }
-}
