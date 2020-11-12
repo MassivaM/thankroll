@@ -5,13 +5,42 @@ import 'swiper/swiper-bundle.css';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Swiper, { Navigation, Pagination } from 'swiper';
 import fire from '../assets/fire.jpg'
+import profiles from '../assets/data/profiles/profiles.js'
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
 
 // init Swiper:
 
-export default class Swipper extends Component{
+export default class Swipper extends React.Component{
  
+	constructor(props){
+		super(props)
+		this.state={
+			name:"",
+			firstName:"",
+			profession:"",
+			image:"fire.jpg",
+			description: "",
+			email:""
+		};
+	}
+componentDidMount(){
+	var value= Math.random(profiles.length - 1)
+	var position = Math.round(value)
+	var positionarray = []
+	positionarray.push(position)
+	this.setState({name: profiles[position].name, firstName: profiles[position].firstName, profession: profiles[position].profession, description: profiles[position].description, image : profiles[position].image})
+}
+setList(){
+	var listprofiles = []
+	for(var i =0; i<profiles.length; i++){
+		listprofiles.push(profiles[i])
+	}
+	
+}
+changeProfile(){
+	
+}
 render(){
 
    
@@ -20,20 +49,20 @@ render(){
 	
 		<div className="card">
 			<div className="left">
-			<div className="ava"><img src={fire}/></div>
-				<h1 className="name">	Nick Canon</h1>
+			<div className="ava"><img src={require('../assets/'+this.state.image)}/></div>
+				<h1 className="name">	{this.state.name}</h1>
         
-				<span className="status">Firefighter</span>
+				<span className="status">{this.state.profession}</span>
   
 			</div>
 			<div className="right">
 			<span className="descr">
-				Nick is a firefighter and has started a new initiative for young boys and girls to come visit the fire station every week to teach how to protect themselves and their family.
+				{this.state.description}
 				</span>
 				<button className="follow_btn">
 				<img src={thankloop} alt="Place Holder" />
 				
-				<span>Thank Nick</span>
+				<span>Thank {this.state.firstName}</span>
 				</button>
 				
 			</div>
