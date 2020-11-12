@@ -1,0 +1,155 @@
+.Rectangle {
+  width: 65em;
+  height: 202px;
+  margin: 0;
+  top: 15%;
+  padding: 0;
+  position: absolute;
+  border: 10px solid #6c5ce7;
+  //box-sizing: border-box;
+  .Rectangle2 {
+    width: 65em;
+    height: 201px;
+    left: 0.5em;
+    top: 10px;
+
+    border: 10px solid #70a9ff;
+    box-sizing: border-box;
+    h1 {
+      width: 973px;
+      height: 142px;
+      left: 20px;
+      top: 10px;
+
+      font-family: Baloo 2;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 90px;
+      line-height: 142px;
+      /* identical to box height */
+
+      color: #0049b8;
+    }
+  }
+}
+p {
+  font-family: "Baloo 2";
+  font-size: 20px;
+  font-weight: 300;
+}
+.welcome {
+  width: 100%;
+  max-width: 60em;
+  margin: 0 auto;
+  padding-top: 10.5em;
+  @media only screen and (max-width: 800px) {
+    padding-top: 7em;
+  }
+
+  img {
+    padding-left: 4em;
+    @media only screen and (max-width: 800px) {
+      width: 80%;
+    }
+  }
+  .profile {
+    padding-left: 4em;
+    width: 10%;
+    @media only screen and (max-width: 800px) {
+      width: 15%;
+      padding-left: 4em;
+    }
+  }
+
+  .hide-small {
+    display: block;
+  }
+  .show-small {
+    display: none;
+  }
+  @media screen and (max-width: 725px) {
+    .hide-small {
+      display: none !important;
+    }
+    .show-small {
+      display: block !important;
+      font-size: 3vw;
+      padding-left: 4.5em;
+    }
+  }
+}
+
+.article {
+  padding-top: 10em;
+  font-size: 1.4vw;
+  padding-left: 4.5em;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+  text-align: justify;
+  text-justify: inter-word;
+  font-family: "Source Sans Pro", sans-serif;
+  @media only screen and (max-width: 800px) {
+    font-size: 2.3vw;
+  }
+  @media only screen and (min-width: 800px) {
+    font-size: 1vw;
+  }
+}
+
+.footing {
+  position: absolute;
+  top: 120em;
+  text-align: center;
+  font-family: "Staatliches", cursive;
+  width: 100%;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+
+  @media only screen and (max-width: 800px) {
+    top: 85em;
+  }
+  a {
+    font-size: 12vw;
+    padding-left: 0.5em;
+    color: #ecf0f1;
+  }
+  .footerend {
+    width: 100%;
+    align-items: center;
+    font-size: 0.8vw;
+    position: relative;
+    font-family: "Helvetica", sans-serif;
+    text-align: justify;
+    padding-right: 0.5em;
+    text-align: center;
+    .social-container {
+      position: absolute;
+    }
+    h2 {
+      position: absolute;
+      font-weight: bold;
+      color: black;
+      padding-left: 48em;
+      padding-top: 2em;
+      font-size: 1.5vw;
+    }
+    .p1 {
+      position: absolute;
+      padding-left: 75em;
+      padding-top: 8em;
+      font-size: 0.9vw;
+    }
+    .p2 {
+      position: absolute;
+      padding-left: 60em;
+      padding-top: 20em;
+      color: #bdc3c7;
+    }
+
+    .copyright {
+      left: 570px;
+      position: absolute;
+      padding-top: 70px;
+    }
+  }
+}

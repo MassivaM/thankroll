@@ -96,7 +96,7 @@ render(){
   <svg className="svg-visible">
   <svg className="svg-defs" viewBox="0 0 200 200">
   
-  <image href={artist} width="200px" height="200px"/>
+  <image href={artist} width="200px" height="180px"/>
 
 </svg>
 

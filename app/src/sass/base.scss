@@ -1,5 +1,5 @@
 @import 'swipper.scss';
-
+@import 'benefits.scss';
 $w : 500px;
 $ws: 300px;
 $duration: .20;
@@ -60,7 +60,7 @@ body {
       padding-left: 45px;
       padding-bottom: 50px;
       color: #FFFFFF;
-      font-family: 'Libre Franklin', sans-serif;
+      font-family: Baloo 2;
       font-weight: 600;
       text-align: center;
       font-size: 22px;
@@ -79,7 +79,7 @@ body {
       padding-left: 30px;
       color: #FFFFFF;
       padding-top: 0px;
-      font-family: 'Libre Franklin', sans-serif;
+      font-family: Baloo 2;
       font-weight: 400;
       text-align: center;
 
