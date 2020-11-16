@@ -1,216 +1,296 @@
-$turquoise: #27E9E1;
+$turquoise: #27e9e1;
 $velvet: #630eff;
 
 @mixin centerer {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) ;
+  transform: translate(-50%, -50%);
 }
 
-html{
-	font-family: 'Open Sans', sans-serif;
+html {
+  font-family: "Open Sans", sans-serif;
 }
 
-body{
-	background:#e9e6e6 ;
-
+body {
+  background: #e9e6e6;
 }
 
-.card{
-	@include centerer;
-	box-sizing: border-box;
-	width: 1000px;
-	height: 450px;
-	padding: 20px;
-	background: #fdf7f7 ;
-	border: 2px solid $turquoise;
-	
-	border-radius: 50px;
+.card {
+  @include centerer;
+  box-sizing: border-box;
+  width: 1000px;
+  height: 450px;
+  padding: 20px;
+  background: #fdf7f7;
+  border: 2px solid $turquoise;
 
-		//transform: translate(-50%, -51%) ;
-		box-shadow: 0 10px 30px rgba(69, 69, 69, 0.3);
-	
-    transition:all 0.2s;
-    
-  
+  border-radius: 50px;
 
+  //transform: translate(-50%, -51%) ;
+  box-shadow: 0 10px 30px rgba(69, 69, 69, 0.3);
+
+  transition: all 0.2s;
 }
 
-
-.left{
-	//margin-top: -200px;
-	position:relative;
-	float:left;
-	padding: 20px;
-	bottom: 40px;
-	height:100%;
-	width: 260px;
-	//background: blue;
+.left {
+  //margin-top: -200px;
+  position: relative;
+  float: left;
+  padding: 20px;
+  bottom: 40px;
+  height: 100%;
+  width: 260px;
+  //background: blue;
 }
 
-.ava{
-	margin-top: 80px;
-	width: 260px;
-	height: 220px;
-	background: linear-gradient(145deg, rgba(255,0,0,1) 0%, #630eff 100%);
-	-webkit-clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
-	clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
-	background-image: url(http://dariographics.com//DUI/006/ava.png);
-	background-size: cover;
+.ava {
+  margin-top: 80px;
+  width: 260px;
+  height: 220px;
+  background: linear-gradient(145deg, rgba(255, 0, 0, 1) 0%, #630eff 100%);
+  -webkit-clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+  background-image: url(http://dariographics.com//DUI/006/ava.png);
+  background-size: cover;
 }
 
-.name{
- 
-	margin: 20px 0 6px;
-	font-weight: 800;
-	font-size: 28px;
+.name {
+  margin: 20px 0 6px;
+  font-weight: 800;
+  font-size: 28px;
 }
 
-.status{
-	opacity:0.4;
-	font-size: 16px;
-	font-weight: 600;
+.status {
+  opacity: 0.4;
+  font-size: 16px;
+  font-weight: 600;
 }
-.descr{
-	opacity:0.8;
-	font-size: 20px;
-	font-weight: 600;
+.descr {
+  opacity: 0.8;
+  font-size: 20px;
+  font-weight: 600;
 }
-#edit{
-	position:absolute;
-	padding:20px;
-	left:0;
-	bottom:0;
-	color: $turquoise;
-	opacity: 0.5;
-	font-weight: 600;
-	transition:all 0.2s;
-	&:hover{
-		color: black;
-	}
+#edit {
+  position: absolute;
+  padding: 20px;
+  left: 0;
+  bottom: 0;
+  color: $turquoise;
+  opacity: 0.5;
+  font-weight: 600;
+  transition: all 0.2s;
+  &:hover {
+    color: black;
+  }
 }
 
-.right{
-	margin-left:70px;
-	margin-top: 13%;
-	float:left;
-	width:500px;
-	height:100%;
-	//background:grey;
+.right {
+  margin-left: 70px;
+  margin-top: 13%;
+  float: left;
+  width: 500px;
+  height: 100%;
+  //background:grey;
 }
-.description{
-	font-size: 25px;
+.description {
+  font-size: 25px;
 }
-.icons{
-	margin-top:20px;
-	display: flex;
-	flex-flow: row wrap;
+.icons {
+  margin-top: 20px;
+  display: flex;
+  flex-flow: row wrap;
   justify-content: space-around;
-	width: 100%;
-	transition:all 0.2s;
-	i{
-		margin:0 auto 10px;
-		display: flex;
-		width: 46px;
- 		height: 46px;
-		mask-size: cover;
-		transition:all 0.2s;
-	}
-	a{
-		color: black;
-		text-decoration: none;
-		font-size: 14px;
-	}
+  width: 100%;
+  transition: all 0.2s;
+  i {
+    margin: 0 auto 10px;
+    display: flex;
+    width: 46px;
+    height: 46px;
+    mask-size: cover;
+    transition: all 0.2s;
+  }
+  a {
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+  }
 }
 
-.i_active{
-	background: linear-gradient(145deg, rgba(255,0,0,1) 0%, #630eff 100%) !important;
+.i_active {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 0, 0, 1) 0%,
+    #630eff 100%
+  ) !important;
 }
-.a_active{
-	color: $velvet !important;
-}
-
-.icon_item{
-	cursor:pointer;
-	border-bottom:4px solid transparent;
-	padding:0 0 20px;
-	display: flex;
-	justify-content: center;
-	text-align: center;
-	width: 56px;
-	display:inline-block;
-	transition:all 0.2s;
-	&_active{
-		border-bottom:6px solid $velvet;
-	}
+.a_active {
+  color: $velvet !important;
 }
 
-.pins{
-	background: linear-gradient(145deg, #454545 0%, #454545 100%);
-	mask: url(http://dariographics.com//DUI/006/picked_icon.svg);
-}
-.friends{
-	background: linear-gradient(145deg, #454545 0%, #454545 100%);
-	mask: url(http://dariographics.com//DUI/006/friend_icon.svg);
-}
-.fav{
-	background: linear-gradient(145deg, #454545 0%, #454545 100%);
-	mask: url(http://dariographics.com//DUI/006/hearth_icon.svg);
-}
-
-.follow_btn{
-	border:none;
-	position:absolute;
-	bottom:40px;
-	display: inline-block;
-    
-	left:45%;
-	width:180px;
-	height:50px;
-	background : #70a1ff;
-	text-align: center;
-	border-radius: 45px;
-	img {
-		margin-right: 5px;
-		vertical-align: middle;
-	  }
-	span{
-		font-weight: 700;
-		color: white;
-		text-transform: uppercase;
-	}
-	
+.icon_item {
+  cursor: pointer;
+  border-bottom: 4px solid transparent;
+  padding: 0 0 20px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 56px;
+  display: inline-block;
+  transition: all 0.2s;
+  &_active {
+    border-bottom: 6px solid $velvet;
+  }
 }
 
-.next{
-	position: absolute;
-	padding-left: 50px;
-	left:100%;
-	top:45%;
-	background: transparent;
-	border: none;
+.pins {
+  background: linear-gradient(145deg, #454545 0%, #454545 100%);
+  mask: url(http://dariographics.com//DUI/006/picked_icon.svg);
+}
+.friends {
+  background: linear-gradient(145deg, #454545 0%, #454545 100%);
+  mask: url(http://dariographics.com//DUI/006/friend_icon.svg);
+}
+.fav {
+  background: linear-gradient(145deg, #454545 0%, #454545 100%);
+  mask: url(http://dariographics.com//DUI/006/hearth_icon.svg);
 }
 
-.unfoll{
-	display:none;
+.follow_btn {
+  border: none;
+  position: absolute;
+  bottom: 40px;
+  display: inline-block;
+
+  left: 45%;
+  width: 180px;
+  height: 50px;
+  background: #70a1ff;
+  text-align: center;
+  border-radius: 45px;
+  img {
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  span {
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+  }
 }
 
-.fa-check{
-	display: none;
-	font-size: 18px;
-	color: white;
+.next {
+  position: absolute;
+  padding-left: 50px;
+  left: 100%;
+  top: 45%;
+  background: transparent;
+  border: none;
+}
+
+.unfoll {
+  display: none;
+}
+
+.fa-check {
+  display: none;
+  font-size: 18px;
+  color: white;
 }
 
 //
 
-#another{
-	position:absolute;
-	bottom: -60px;
-	text-decoration:none;
-	color: #b4b4b4;
-	font-size:12px;
-	&:hover{
-		text-decoration:underline;
-	}
+#another {
+  position: absolute;
+  bottom: -60px;
+  text-decoration: none;
+  color: #b4b4b4;
+  font-size: 12px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.input {
+  // needs to be relative so the :focus span is positioned correctly
+  position: relative;
+
+  // bigger font size for demo purposes
+  font-size: 1.5em;
+
+  // the border gradient
+  background: linear-gradient(21deg, #10abff, #1beabd);
+
+  // the width of the input border
+  padding: 3px;
+
+  // we want inline fields by default
+  display: inline-block;
+
+  // we want rounded corners no matter the size of the field
+  border-radius: 9999em;
+
+  // style of the actual input field
+  *:not(span) {
+    position: relative;
+    display: inherit;
+    border-radius: inherit;
+    margin: 0;
+    border: none;
+    outline: none;
+    z-index: 1; // needs to be above the :focus span
+
+    // summon fancy shadow styles when focussed
+    &:focus + span {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // we don't animate box-shadow directly as that can't be done on the GPU, only animate opacity and transform for high performance animations.
+  span {
+    transform: scale(0.993, 0.94); // scale it down just a little bit
+    transition: transform 0.5s, opacity 0.25s;
+    opacity: 0; // is hidden by default
+
+    position: absolute;
+    z-index: 0; // needs to be below the field (would block input otherwise)
+    margin: 4px; // a bit bigger than .input padding, this prevents background color pixels shining through
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    pointer-events: none; // this allows the user to click through this element, as the shadow is rather wide it might overlap with other fields and we don't want to block those.
+
+    // fancy shadow styles
+    box-shadow: inset 0 0 0 3px #fff, 0 0 0 4px #fff, 3px -3px 30px #1beabd,
+      -3px 3px 30px #10abff;
+  }
+}
+
+textarea {
+  color: #2e3750;
+  min-width: 12em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.5;
+  font-size: 12px;
+  border-radius: 9999em;
+  resize: none;
+  padding-left: 3em;
+  padding-right: 4em;
+  margin: 10em;
+}
+
+::placeholder {
+  color: #cbd0d5;
+}
+
+.para {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

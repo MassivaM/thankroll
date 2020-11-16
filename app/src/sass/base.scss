@@ -1,83 +1,80 @@
-@import 'swipper.scss';
-@import 'benefits.scss';
-$w : 500px;
+@import "swipper.scss";
+@import "benefits.scss";
+$w: 500px;
 $ws: 300px;
-$duration: .20;
+$duration: 0.2;
 $easing: ease-in-out;
-.intro{
- 
-  z-index:10
+.intro {
+  z-index: 10;
 }
-.app{
-  width:100%
+.app {
+  width: 100%;
 }
 
 * {
-  padding:0;
-  margin:0;
-  box-sizing:border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 body {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:100%;
-  height:100vh;
-  background:#e5f1ff;
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background: #e5f1ff;
 }
 
 .box-loading {
-  position:relative;
-  width:$w;
-  height:$w;
+  position: relative;
+  width: $w;
+  height: $w;
   &:before {
-    content:'';
-    width:100%;
-    height:100%;
-    position:absolute;
-    top:0;
-    left:0;
-    border-radius:40%;
-    background: radial-gradient(ellipse at center, rgba(100,162,255,1) 0%,rgba(85,139,219,0) 100%);
-   
-
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 40%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(100, 162, 255, 1) 0%,
+      rgba(85, 139, 219, 0) 100%
+    );
   }
-  .text{
-    width:$w;
-    height:$w;
+  .text {
+    width: $w;
+    height: $w;
     z-index: 6;
     text-align: center;
-    align-items:center;
-    padding-top:120px;
+    align-items: center;
+    padding-top: 120px;
     padding-left: 50px;
     position: relative;
     width: 80%;
     border: 0px;
 
-    .paragraph{
-      
+    .paragraph {
       padding-left: 45px;
-      padding-bottom: 50px;
-      color: #FFFFFF;
+      padding-bottom: 30px;
+      color: #ffffff;
       font-family: Baloo 2;
       font-weight: 600;
       text-align: center;
       font-size: 22px;
     }
-  
-     
-     .btn{
-       padding-top: 120px;
-       padding-left: 35px;
-       border-radius: 25px;
-     }
-   
-    
-    .paragraph2{
+
+    .btn {
+      padding-top: 140px;
+      padding-left: 35px;
+      border-radius: 25px;
+    }
+
+    .paragraph2 {
       position: absolute;
       padding-left: 30px;
-      color: #FFFFFF;
+      color: #ffffff;
       padding-top: 0px;
       font-family: Baloo 2;
       font-weight: 400;
@@ -85,13 +82,11 @@ body {
 
       font-size: 15px;
 
-
-      .bolded{
+      .bolded {
         font-weight: 600;
       }
-
     }
-    [data-wipe] {  
+    [data-wipe] {
       display: inline-block;
       background-color: white;
       position: absolute;
@@ -105,8 +100,9 @@ body {
       text-align: left;
       color: #445561;
       overflow: hidden;
-      
-      &:before, &:after {
+
+      &:before,
+      &:after {
         content: attr(data-wipe);
         padding-top: inherit;
         padding-bottom: inherit;
@@ -115,17 +111,17 @@ body {
         top: 0;
         overflow: hidden;
         color: white;
-        background: #70a9ff;
+        background: #6c5ce7;
         border-radius: 25px;
       }
-      
+
       &:before {
         left: 0;
         text-indent: 18px;
         width: 0;
         border-radius: 25px;
       }
-      
+
       &:after {
         padding-left: inherit;
         padding-right: inherit;
@@ -134,14 +130,14 @@ body {
         transition: $duration + s $easing;
         border-radius: 25px;
       }
-      
+
       &:hover {
         &:before {
           width: 100%;
           transition: width $duration + s $easing;
           border-radius: 25px;
         }
-        
+
         &:after {
           left: 0;
           text-indent: 0;
@@ -150,172 +146,161 @@ body {
         }
       }
     }
-
-  
-}
-  .cirlce-wave {
-    width:100%;
-    height:100%;
-    border-radius:40%;
-    position:absolute;
-    background:#70a9ff;
-        opacity:0.6;
-        animation: load 4s infinite linear;
-        z-index:5;}
-    
-    
-
-     .cirlce-wave--2 {
-        width:100%;
-        height:100%;
-        border-radius:40%;
-        position:absolute;
-      background: #6c5ce7;
-      opacity:0.7;
-      animation: load 8s infinite linear;
-       z-index:4;
-       
-    }
-   
-    .cirlce-wave--3{
-        width:100%;
-    height:100%;
-    border-radius:40%;
-    position:absolute;
-      background:#68ffc8;
-      opacity:0.4;
-      animation: load 12s infinite linear;
-       z-index:3;
-    }
-    .cirlce-wave-4{
-        width:100%;
-    height:100%;
-    border-radius:40%;
-    position:absolute;
-      background:#ffd668;
-      opacity:0.6;
-      animation: load 18s infinite linear;
-       z-index:2;
-    }
-    .cirlce-wave--5{
-        width:100%;
-    height:100%;
-    border-radius:40%;
-    position:absolute;
-      background:#ff9870;
-      opacity:0.6;
-      animation: load 8s infinite linear;
-      z-index:1;
-    }
-
-    .cirlce-wave--6{
-      width:100%;
-  height:100%;
-  border-radius:40%;
-  position:absolute;
- 
-    opacity:0.8;
-    animation: load 20s infinite linear;
-    z-index:1;
   }
-  .cirlce-wave--7{
-    width:100%;
-height:100%;
-border-radius:40%;
-position:absolute;
+  .cirlce-wave {
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+    position: absolute;
+    background: #70a9ff;
+    opacity: 0.6;
+    animation: load 4s infinite linear;
+    z-index: 5;
+  }
 
-  opacity:1;
-  animation: load 10s infinite linear;
-  z-index:1;
+  .cirlce-wave--2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+    position: absolute;
+    background: #6c5ce7;
+    opacity: 0.7;
+    animation: load 8s infinite linear;
+    z-index: 4;
+  }
+
+  .cirlce-wave--3 {
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+    position: absolute;
+    background: #68ffc8;
+    opacity: 0.4;
+    animation: load 12s infinite linear;
+    z-index: 3;
+  }
+  .cirlce-wave-4 {
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+    position: absolute;
+    background: #ffd668;
+    opacity: 0.6;
+    animation: load 18s infinite linear;
+    z-index: 2;
+  }
+  .cirlce-wave--5 {
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+    position: absolute;
+    background: #ff9870;
+    opacity: 0.6;
+    animation: load 8s infinite linear;
+    z-index: 1;
+  }
+
+  .cirlce-wave--6 {
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+    position: absolute;
+
+    opacity: 0.8;
+    animation: load 20s infinite linear;
+    z-index: 1;
+  }
+  .cirlce-wave--7 {
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+    position: absolute;
+
+    opacity: 1;
+    animation: load 10s infinite linear;
+    z-index: 1;
+  }
+  .cirlce-wave--8 {
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+    position: absolute;
+
+    opacity: 1;
+    animation: load 12s infinite linear;
+    z-index: 1;
+  }
+  .cirlce-wave--9 {
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+    position: absolute;
+
+    opacity: 1;
+    animation: load 10s infinite linear;
+    z-index: 1;
+  }
+  .cirlce-wave--10 {
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+    position: absolute;
+
+    opacity: 1;
+    animation: load 17s infinite linear;
+    z-index: 1;
+  }
+  .cirlce-wave--11 {
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+    position: absolute;
+
+    opacity: 1;
+    animation: load 13s infinite linear;
+    z-index: 1;
+  }
+  .cirlce-wave--12 {
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+    position: absolute;
+
+    opacity: 1;
+    animation: load 15s infinite linear;
+    z-index: 1;
+  }
 }
-.cirlce-wave--8{
-  width:100%;
-height:100%;
-border-radius:40%;
-position:absolute;
 
-opacity:1;
-animation: load 12s infinite linear;
-z-index:1;
-}
-.cirlce-wave--9{
-  width:100%;
-height:100%;
-border-radius:40%;
-position:absolute;
-
-opacity:1;
-animation: load 10s infinite linear;
-z-index:1;
-}
-.cirlce-wave--10{
-  width:100%;
-height:100%;
-border-radius:40%;
-position:absolute;
-
-opacity:1;
-animation: load 17s infinite linear;
-z-index:1;
-}
-.cirlce-wave--11{
-  width:100%;
-height:100%;
-border-radius:40%;
-position:absolute;
-
-opacity:1;
-animation: load 13s infinite linear;
-z-index:1;
-}
-.cirlce-wave--12{
-  width:100%;
-height:100%;
-border-radius:40%;
-position:absolute;
-
-opacity:1;
-animation: load 15s infinite linear;
-z-index:1;
-}
-  
-    
-    
-  } 
-
-
-@keyframes load{
-  from{
+@keyframes load {
+  from {
     transform: rotate(360deg);
   }
 }
 
-.fadeOut{
-  opacity:0;
-  z-index:10;
+.fadeOut {
+  opacity: 0;
+  z-index: 10;
   transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
-
 }
-.fadeIn{
-  opacity:1;
-z-index:10;
+.fadeIn {
+  opacity: 1;
+  z-index: 10;
   transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
-
 }
 
-.blurred{
+.blurred {
   position: absolute;
   top: 50%;
   left: 50%;
-  filter: blur(20px)
+  filter: blur(20px);
 }
-.blurred-out{
+.blurred-out {
   position: absolute;
   top: 50%;
   left: 50%;
   filter: blur(0px);
   transition: blur 0.5s;
-
 }
 $svg-height: 150px;
 $svg-width: 150px;
@@ -323,10 +308,10 @@ $svg-width: 150px;
 svg,
 .wrapper {
   position: absolute;
-  
+
   width: $svg-width;
   height: $svg-height;
-  }
+}
 
 .wrapper {
   top: 50%;
@@ -336,69 +321,65 @@ svg,
   animation: svg-sizes 5s infinite linear alternate;
 
   overflow: hidden;
-  }
-  .wrapper2 {
-    top: 30%;
-    left: 80%;
-    //transform: translate(-50%,-45%);
-    animation: svg-sizes 6s infinite linear alternate;
-    animation-delay: 2s ;
-    overflow: hidden;
-    
-    
-    }
+}
+.wrapper2 {
+  top: 30%;
+  left: 80%;
+  //transform: translate(-50%,-45%);
+  animation: svg-sizes 6s infinite linear alternate;
+  animation-delay: 2s;
+  overflow: hidden;
+}
 
-    .wrapper3 {
-      top: 70%;
-      left: 90%;
-      transform: translate(-50%,-50%);
-      animation: svg-sizes 5s infinite linear alternate;
-      overflow: hidden;
-      animation-delay: 5s ;
-      }
+.wrapper3 {
+  top: 70%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  animation: svg-sizes 5s infinite linear alternate;
+  overflow: hidden;
+  animation-delay: 5s;
+}
 
-      .wrapper4 {
-        top: 20%;
-        left: 70%;
-        
-        animation: svg-sizes 3s infinite linear alternate;
-        overflow: hidden;
-        animation-delay: 9s ;
-        }
-        .wrapper5 {
-          top: 60%;
-          left: 8%;
-          
-          animation: svg-sizes 5s infinite linear alternate;
-          overflow: hidden;
-          animation-delay: 4s ;
-          }
-          .wrapper6{
-            top: 10%;
-            left: 10%;
-            
-            animation: svg-sizes 4s infinite linear alternate;
-            overflow: hidden;
-            animation-delay: 6s ;
-            }
-            .wrapper7{
-              top: 40%;
-              left: 5%;
-              
-              animation: svg-sizes 5s infinite linear alternate;
-              overflow: hidden;
-              animation-delay: 3s ;
-              }
-              .wrapper8{
-                top: 70%;
-                left: 70%;
-                
-                animation: svg-sizes 5s infinite linear alternate;
-                overflow: hidden;
-                animation-delay: 6s ;
-                }
+.wrapper4 {
+  top: 20%;
+  left: 70%;
 
+  animation: svg-sizes 3s infinite linear alternate;
+  overflow: hidden;
+  animation-delay: 9s;
+}
+.wrapper5 {
+  top: 60%;
+  left: 8%;
 
+  animation: svg-sizes 5s infinite linear alternate;
+  overflow: hidden;
+  animation-delay: 4s;
+}
+.wrapper6 {
+  top: 10%;
+  left: 10%;
+
+  animation: svg-sizes 4s infinite linear alternate;
+  overflow: hidden;
+  animation-delay: 6s;
+}
+.wrapper7 {
+  top: 40%;
+  left: 5%;
+
+  animation: svg-sizes 5s infinite linear alternate;
+  overflow: hidden;
+  animation-delay: 3s;
+}
+.wrapper8 {
+  top: 70%;
+  left: 70%;
+
+  animation: svg-sizes 5s infinite linear alternate;
+  overflow: hidden;
+  animation-delay: 6s;
+}
 
 @keyframes svg-sizes {
   0% {
@@ -406,31 +387,25 @@ svg,
     height: 0;
     opacity: 0;
     visibility: visible;
-   
   }
   10% {
     width: 0;
     height: 0;
     opacity: 0;
-
-
   }
   35% {
-    opacity: .6;
+    opacity: 0.6;
     visibility: visible;
-   
+
     width: $svg-width;
     height: 1%;
-    
   }
   50% {
     opacity: 0.7;
     visibility: visible;
-   
+
     width: $svg-width;
-  height: $svg-height;
-  //transform: scale(1,2)
-  
+    height: $svg-height;
+    //transform: scale(1,2)
   }
 }
-

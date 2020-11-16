@@ -20,10 +20,13 @@ export default class Swipper extends React.Component {
     description: "",
     email: "",
     positionarray: [],
+    visible: false,
+    textValue: "",
   };
   constructor(props) {
     super(props);
-    this.hangleProfile = this.changeProfile.bind(this);
+    this.changeProfile = this.changeProfile.bind(this);
+    this.changeText = this.changeText.bind(this);
   }
 
   componentDidMount() {
@@ -36,7 +39,6 @@ export default class Swipper extends React.Component {
     array.sort(function (a, b) {
       return 0.5 - Math.random();
     });
-    console.log("this is array" + array);
     this.setState({
       name: profiles[array[0]].name,
       firstName: profiles[array[0]].firstName,
@@ -77,28 +79,54 @@ export default class Swipper extends React.Component {
       });
     }
   };
+
+  changeText(event) {
+    this.setState({ textValue: event.target.value });
+  }
   render() {
     return (
-      <div className="card">
-        <div className="left">
-          <div className="ava">
-            <img src={require("../assets/" + this.state.image)} />
+      <div>
+        <div className="card">
+          <div className="left">
+            <div className="ava">
+              <img src={require("../assets/" + this.state.image)} />
+            </div>
+            <h1 className="name"> {this.state.name}</h1>
+
+            <span className="status">{this.state.profession}</span>
           </div>
-          <h1 className="name"> {this.state.name}</h1>
-
-          <span className="status">{this.state.profession}</span>
-        </div>
-        <div className="right">
-          <span className="descr">{this.state.description}</span>
-          <button className="follow_btn">
-            <img src={thankloop} alt="Place Holder" />
-
-            <span>Thank {this.state.firstName}</span>
+          <div className="right">
+            <span className="descr">{this.state.description}</span>
+            <button
+              className="follow_btn"
+              onClick={() => {
+                this.setState({ show: !this.state.show });
+              }}
+            >
+              <img src={thankloop} alt="Place Holder" />
+              <span>Thank {this.state.firstName}</span>
+            </button>
+          </div>
+          <button className="next" onClick={this.changeProfile}>
+            <img src={rightarrow} />
           </button>
         </div>
-        <button className="next" onClick={this.changeProfile}>
-          <img src={rightarrow} />
-        </button>
+        <div
+          className={this.state.visible ? "message fadeIn" : "message fadeOut"}
+        >
+          <p className="para">
+            <span className="input">
+              <textarea
+                rows="6"
+                cols="50"
+                value={this.state.textValue}
+                onChange={this.changeText}
+                placeholder="Enter your message here"
+              ></textarea>
+              <span></span>
+            </span>
+          </p>
+        </div>
       </div>
     );
   }

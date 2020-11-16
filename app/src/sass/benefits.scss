@@ -1,31 +1,35 @@
 .Rectangle {
-  width: 65em;
-  height: 202px;
+  left: 21%;
+  width: 55em;
+  height: 152px;
   margin: 0;
   top: 15%;
   padding: 0;
   position: absolute;
   border: 10px solid #6c5ce7;
+  @media only screen and (min-width: 1450px) {
+    left: 29%;
+  }
   //box-sizing: border-box;
   .Rectangle2 {
-    width: 65em;
-    height: 201px;
+    width: 55em;
+    height: 151px;
     left: 0.5em;
     top: 10px;
-
+    align-items: center;
     border: 10px solid #70a9ff;
     box-sizing: border-box;
     h1 {
       width: 973px;
       height: 142px;
-      left: 20px;
-      top: 10px;
+      left: 30px;
 
+      margin-left: 80px;
       font-family: Baloo 2;
       font-style: normal;
       font-weight: 500;
-      font-size: 90px;
-      line-height: 142px;
+      font-size: 70px;
+      line-height: 108px;
       /* identical to box height */
 
       color: #0049b8;
@@ -41,7 +45,7 @@ p {
   width: 100%;
   max-width: 60em;
   margin: 0 auto;
-  padding-top: 10.5em;
+  padding-top: 1em;
   @media only screen and (max-width: 800px) {
     padding-top: 7em;
   }
