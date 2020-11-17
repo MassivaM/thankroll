@@ -22,11 +22,13 @@ export default class Swipper extends React.Component {
     positionarray: [],
     visible: false,
     textValue: "",
+    email: "",
   };
   constructor(props) {
     super(props);
     this.changeProfile = this.changeProfile.bind(this);
     this.changeText = this.changeText.bind(this);
+    this.changeEmail = this.changeEmail.bind(this);
   }
 
   componentDidMount() {
@@ -83,7 +85,12 @@ export default class Swipper extends React.Component {
   changeText(event) {
     this.setState({ textValue: event.target.value });
   }
+
+  changeEmail(event) {
+    this.setState({ email: event.target.value });
+  }
   render() {
+    console.log(this.state.visible);
     return (
       <div>
         <div className="card">
@@ -100,7 +107,7 @@ export default class Swipper extends React.Component {
             <button
               className="follow_btn"
               onClick={() => {
-                this.setState({ show: !this.state.show });
+                this.setState({ visible: !this.state.visible });
               }}
             >
               <img src={thankloop} alt="Place Holder" />
@@ -112,16 +119,27 @@ export default class Swipper extends React.Component {
           </button>
         </div>
         <div
-          className={this.state.visible ? "message fadeIn" : "message fadeOut"}
+          className={this.state.visible ? "fadeIn2" : "fadeOut2"}
+          style={{ marginTop: 300, marginLeft: 320 }}
         >
           <p className="para">
             <span className="input">
+              <input
+                type="text"
+                placeholder="Enter your email if you'd like to be contacted"
+                cols="40"
+              ></input>
+              <span></span>
+            </span>
+          </p>
+          <p className="para">
+            <span className="input">
               <textarea
-                rows="6"
-                cols="50"
+                rows="4"
+                cols="40"
                 value={this.state.textValue}
                 onChange={this.changeText}
-                placeholder="Enter your message here"
+                placeholder="Enter your message here it'll go straight to"
               ></textarea>
               <span></span>
             </span>

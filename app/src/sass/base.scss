@@ -289,6 +289,17 @@ body {
   transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
 }
 
+.fadeOut2 {
+  opacity: 0;
+  z-index: 10;
+  transition: width 0.1s 0.1s, height 0.1s 0.1s, opacity 0.1s;
+}
+.fadeIn2 {
+  opacity: 1;
+  z-index: 10;
+  transition: width 0.1s, height 0.1s, opacity 0.1s 0.1s;
+}
+
 .blurred {
   position: absolute;
   top: 50%;
