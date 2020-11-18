@@ -5,6 +5,8 @@ import "swiper/swiper-bundle.css";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Swiper, { Navigation, Pagination } from "swiper";
 import fire from "../assets/fire.jpg";
+import send from "../assets/send.png";
+import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import profiles from "../assets/data/profiles/profiles.js";
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
@@ -29,6 +31,7 @@ export default class Swipper extends React.Component {
     this.changeProfile = this.changeProfile.bind(this);
     this.changeText = this.changeText.bind(this);
     this.changeEmail = this.changeEmail.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -61,6 +64,9 @@ export default class Swipper extends React.Component {
         profession: profiles[this.state.positionarray[0]].profession,
         description: profiles[this.state.positionarray[0]].description,
         image: profiles[this.state.positionarray[0]].image,
+        textValue: "",
+        email: "",
+        visible: false,
       });
     } else {
       var array = [];
@@ -78,6 +84,9 @@ export default class Swipper extends React.Component {
         profession: profiles[array[0]].profession,
         description: profiles[array[0]].description,
         image: profiles[array[0]].image,
+        textValue: "",
+        email: "",
+        visible: false,
       });
     }
   };
@@ -88,6 +97,10 @@ export default class Swipper extends React.Component {
 
   changeEmail(event) {
     this.setState({ email: event.target.value });
+  }
+  handleSubmit(event) {
+    this.setState({ textValue: "", email: "", visible: false });
+    event.preventDefault();
   }
   render() {
     console.log(this.state.visible);
@@ -122,28 +135,47 @@ export default class Swipper extends React.Component {
           className={this.state.visible ? "fadeIn2" : "fadeOut2"}
           style={{ marginTop: 300, marginLeft: 320 }}
         >
-          <p className="para">
-            <span className="input">
-              <input
-                type="text"
-                placeholder="Enter your email if you'd like to be contacted"
-                cols="40"
-              ></input>
-              <span></span>
-            </span>
-          </p>
-          <p className="para">
-            <span className="input">
-              <textarea
-                rows="4"
-                cols="40"
-                value={this.state.textValue}
-                onChange={this.changeText}
-                placeholder="Enter your message here it'll go straight to"
-              ></textarea>
-              <span></span>
-            </span>
-          </p>
+          <form onSubmit={this.handleSubmit}>
+            <p className="para">
+              <span className="input">
+                <input
+                  type="text"
+                  placeholder="Enter your email here if you'd like to be contacted"
+                  value={this.state.email}
+                  onChange={this.changeEmail}
+                  style={{
+                    position: "absolute",
+                    top: 10,
+                    left: 100,
+                    zIndex: 15,
+                    width: 300,
+                    fontSize: 13,
+                    borderRadius: 0,
+                  }}
+                ></input>
+                <textarea
+                  rows="4"
+                  cols="40"
+                  value={this.state.textValue}
+                  onChange={this.changeText}
+                  placeholder="Enter your message here, it'll go straight to their inbox"
+                ></textarea>
+
+                <span></span>
+              </span>
+            </p>
+            <button
+              type="submit"
+              style={{
+                position: "relative",
+                marginLeft: "36em",
+                top: -30,
+                zIndex: 15,
+              }}
+            >
+              <SendRoundedIcon style={{ color: "#70a1ff" }} />
+            </button>
+          </form>
         </div>
       </div>
     );
