@@ -154,6 +154,7 @@ export default class Swipper extends React.Component {
                   }}
                 ></input>
                 <textarea
+                  className="text2"
                   rows="4"
                   cols="40"
                   value={this.state.textValue}
