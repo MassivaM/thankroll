@@ -1,6 +1,7 @@
 import React from "react";
 import validate from "./ValidateInfo";
 import useForm from "./UseForm";
+import UploadPic from "./UploadPic";
 
 const FormSignup = ({ submitForm }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
@@ -65,6 +66,7 @@ const FormSignup = ({ submitForm }) => {
         <div className="form-inputs">
           <label className="form-label">Why should they be on Thankloop?</label>
           <textarea
+            className="text3"
             name="text"
             rows="4"
             cols="40"
@@ -73,6 +75,10 @@ const FormSignup = ({ submitForm }) => {
             placeholder="Enter a short description of them here"
           ></textarea>
           {errors.text && <p>{errors.text}</p>}
+        </div>
+        <div className="form-inputs">
+          <label className="form-label">Upload a picture of them here</label>
+          <UploadPic />
         </div>
         <button className="form-input-btn" type="submit">
           Submit

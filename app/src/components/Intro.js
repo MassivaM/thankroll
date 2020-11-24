@@ -97,8 +97,7 @@ export default class Home extends Component {
 
                     <p className="paragraph2">
                       Cultivate gratitude right here, right now by thanking
-                      professionals around the world. They will receive a
-                      beautifully curated email with your message.
+                      professionals around the world.
                     </p>
 
                     <div className="btn">

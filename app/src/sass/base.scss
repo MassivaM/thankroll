@@ -1,6 +1,7 @@
 @import "swipper.scss";
 @import "benefits.scss";
 @import "submit.scss";
+@import "success.scss";
 $w: 500px;
 $ws: 300px;
 $duration: 0.2;
@@ -76,7 +77,7 @@ body {
       position: absolute;
       padding-left: 30px;
       color: #ffffff;
-      padding-top: 0px;
+      padding-top: 35px;
       font-family: Baloo 2;
       font-weight: 400;
       text-align: center;

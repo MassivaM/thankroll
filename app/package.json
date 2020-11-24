@@ -17,6 +17,7 @@
     "react-burger-menu": "^2.7.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.11.3",
+    "react-images-upload": "^1.2.8",
     "react-router-dom": "^5.2.0",
     "react-script-tag": "^1.1.2",
     "react-scripts": "^3.4.3",

@@ -223,7 +223,7 @@ body {
 
   // the border gradient
   //background: $turquoise;
-  border: 2px solid $turquoise;
+  border: 2px solid $blue;
 
   border-radius: 50px;
 
@@ -272,8 +272,8 @@ body {
     pointer-events: none; // this allows the user to click through this element, as the shadow is rather wide it might overlap with other fields and we don't want to block those.
 
     // fancy shadow styles
-    box-shadow: inset 0 0 0 3px #fff, 0 0 0 4px #fff, 3px -3px 30px $turquoise,
-      -3px 3px 30px $turquoise;
+    box-shadow: inset 0 0 0 3px #fff, 0 0 0 4px #fff, 3px -3px 30px $blue,
+      -3px 3px 30px $blue;
   }
 }
 
