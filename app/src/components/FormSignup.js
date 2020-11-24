@@ -4,20 +4,22 @@ import useForm from "./UseForm";
 import UploadPic from "./UploadPic";
 
 const FormSignup = ({ submitForm }) => {
-  const { handleChange, handleSubmit, values, errors } = useForm(
+  const { handleChange, handleSubmit, handleCheck, values, errors } = useForm(
     submitForm,
     validate
   );
-
+  console.log("checked" + values.accept);
   return (
     <div className="form-content-right">
       <form onSubmit={handleSubmit} className="form" noValidate>
-        <h1>
+        <h1 style={{ marginTop: 100, textAlign: "center" }}>
           Submit someone to be on Thankloop! Fill out this form and they'll be
-          added to the loop. Please make sure you get their approval beforehand.
+          added to the loop.
         </h1>
         <div className="form-inputs">
-          <label className="form-label">First Name</label>
+          <label className="form-label">
+            First Name <span style={{ color: "red" }}>*</span>{" "}
+          </label>
           <input
             className="form-input"
             type="text"
@@ -40,7 +42,9 @@ const FormSignup = ({ submitForm }) => {
           />
         </div>
         <div className="form-inputs">
-          <label className="form-label">Profession</label>
+          <label className="form-label">
+            Profession <span style={{ color: "red" }}>*</span>{" "}
+          </label>
           <input
             className="form-input"
             type="text"
@@ -49,10 +53,12 @@ const FormSignup = ({ submitForm }) => {
             value={values.profession}
             onChange={handleChange}
           />
-          {errors.username && <p>{errors.username}</p>}
+          {errors.profession && <p>{errors.profession}</p>}
         </div>
         <div className="form-inputs">
-          <label className="form-label">Email</label>
+          <label className="form-label">
+            Email <span style={{ color: "red" }}>*</span>{" "}
+          </label>
           <input
             className="form-input"
             type="email"
@@ -64,7 +70,10 @@ const FormSignup = ({ submitForm }) => {
           {errors.email && <p>{errors.email}</p>}
         </div>
         <div className="form-inputs">
-          <label className="form-label">Why should they be on Thankloop?</label>
+          <label className="form-label">
+            Why should they be on Thankloop?{" "}
+            <span style={{ color: "red" }}>*</span>
+          </label>
           <textarea
             className="text3"
             name="text"
@@ -77,8 +86,27 @@ const FormSignup = ({ submitForm }) => {
           {errors.text && <p>{errors.text}</p>}
         </div>
         <div className="form-inputs">
-          <label className="form-label">Upload a picture of them here</label>
+          <label className="form-label">Upload a picture of them here </label>
           <UploadPic />
+        </div>
+        <div className="form-inputs">
+          <input
+            type="checkbox"
+            id="accept"
+            name="accept"
+            checked={values.accept}
+            onChange={handleChange}
+          />
+          <label
+            for="accept"
+            className="form-label"
+            style={{ paddingLeft: 20 }}
+          >
+            I have gotten approval from this person to publish their picture,
+            first name and story on Thankloop
+            <span style={{ color: "red" }}>*</span>
+          </label>
+          {errors.accept && <p>{errors.accept}</p>}
         </div>
         <button className="form-input-btn" type="submit">
           Submit

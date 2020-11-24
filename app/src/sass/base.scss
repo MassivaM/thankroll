@@ -315,8 +315,8 @@ body {
   filter: blur(0px);
   transition: blur 0.5s;
 }
-$svg-height: 150px;
-$svg-width: 150px;
+$svg-height: 36px;
+$svg-width: 259px;
 
 svg,
 .wrapper {
@@ -327,16 +327,16 @@ svg,
 }
 
 .wrapper {
-  top: 50%;
-  left: 20%;
-  visibility: hidden;
+  top: 80%;
+  left: 10%;
+  //visibility: hidden;
   //transform: translate(-50%,-45%);
   animation: svg-sizes 5s infinite linear alternate;
 
   overflow: hidden;
 }
 .wrapper2 {
-  top: 30%;
+  top: 40%;
   left: 80%;
   //transform: translate(-50%,-45%);
   animation: svg-sizes 6s infinite linear alternate;
@@ -345,7 +345,7 @@ svg,
 }
 
 .wrapper3 {
-  top: 70%;
+  top: 90%;
   left: 90%;
   transform: translate(-50%, -50%);
   animation: svg-sizes 5s infinite linear alternate;
@@ -362,15 +362,15 @@ svg,
   animation-delay: 9s;
 }
 .wrapper5 {
-  top: 60%;
-  left: 8%;
+  top: 15%;
+  left: 4%;
 
   animation: svg-sizes 5s infinite linear alternate;
   overflow: hidden;
   animation-delay: 4s;
 }
 .wrapper6 {
-  top: 10%;
+  top: 60%;
   left: 10%;
 
   animation: svg-sizes 4s infinite linear alternate;

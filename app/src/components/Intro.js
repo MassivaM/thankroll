@@ -10,6 +10,10 @@ import researcher from "../assets/researcher.jpg";
 import teacher from "../assets/teacher.jpg";
 import artist from "../assets/artist.jpg";
 import present from "../assets/present.jpg";
+import quote1 from "../assets/quote1.png";
+import quote2 from "../assets/quote2.png";
+import quote3 from "../assets/quote3.png";
+import quote4 from "../assets/quote4.png";
 import Swipper from "../components/Swipper.js";
 export default class Home extends Component {
   constructor() {
@@ -26,60 +30,46 @@ export default class Home extends Component {
         <div className={this.state.show ? "fadeIn" : "fadeOut"}>
           <div className="wrapper fadeIn2">
             <svg className="svg-visible">
-              <image href={nurse} width="150px" height="150px" />
+              <image href={quote1} width="259px" height="36px" />
             </svg>
           </div>
           <div className="wrapper wrapper2 fadeIn2">
             <svg className="svg-visible">
-              <svg className="svg-defs" viewBox="0 0 100 100">
-                <image href={cook} width="150px" height="150px" />
-              </svg>
+              <image href={quote1} width="259px" height="36px" />
             </svg>
           </div>
 
           <div className="wrapper wrapper3 fadeIn2">
             <svg className="svg-visible">
-              <svg className="svg-defs" viewBox="0 0 200 200">
-                <image href={construction} width="200px" height="200px" />
-              </svg>
+              <image href={quote1} width="259px" height="36px" />
             </svg>
           </div>
 
           <div className="wrapper wrapper4 fadeIn2">
             <svg className="svg-visible">
-              <svg className="svg-defs" viewBox="0 0 250 150">
-                <image href={fire} width="250px" height="150px" />
-              </svg>
+              <image href={quote1} width="259px" height="36px" />
             </svg>
           </div>
           <div className="wrapper wrapper5 fadeIn2">
             <svg className="svg-visible">
-              <svg className="svg-defs" viewBox="0 0 120 120">
-                <image href={researcher} width="200px" height="200px" />
-              </svg>
+              <image href={quote1} width="259px" height="36px" />
             </svg>
           </div>
 
           <div className="wrapper wrapper6 fadeIn2">
             <svg className="svg-visible">
-              <svg className="svg-defs" viewBox="0 0 100 100">
-                <image href={teacher} width="150px" height="150px" />
-              </svg>
+              <image href={quote1} width="259px" height="36px" />
             </svg>
           </div>
 
           <div className="wrapper wrapper7 fadeIn2">
             <svg className="svg-visible">
-              <svg className="svg-defs" viewBox="0 0 200 200">
-                <image href={artist} width="200px" height="180px" />
-              </svg>
+              <image href={quote1} width="259px" height="36px" />
             </svg>
           </div>
           <div className="wrapper wrapper8 fadeIn2">
             <svg className="svg-visible">
-              <svg className="svg-defs" viewBox="0 0 250 250">
-                <image href={present} width="250px" height="250px" />
-              </svg>
+              <image href={quote1} width="259px" height="36px" />
             </svg>
           </div>
           <div className="container">

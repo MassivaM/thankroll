@@ -7,7 +7,9 @@
   color: #fff;
   cursor: pointer;
 }
-
+.form-content-right {
+  margin-top: 100px;
+}
 .form-content-left {
   background: linear-gradient(
     90deg,
@@ -95,7 +97,7 @@
 
 .form-input-btn {
   width: 80%;
-  height: 50px;
+  height: 30px;
   margin-top: 10px;
   border-radius: 2px;
   background: linear-gradient(
@@ -111,11 +113,7 @@
 
 .form-input-btn:hover {
   cursor: pointer;
-  background: linear-gradient(
-    90deg,
-    rgb(39, 143, 255) 0%,
-    rgb(12, 99, 250) 100%
-  );
+  background: linear-gradient(90deg, rgb(39, 143, 255) 0%, #70a1ff 100%);
   transition: all 0.4s ease-out;
 }
 

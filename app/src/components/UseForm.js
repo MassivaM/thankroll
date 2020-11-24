@@ -8,18 +8,31 @@ const useForm = (callback, validate) => {
     email: "",
     text: "",
     pictures: [],
+    accept: false,
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const target = e.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
     setValues({
       ...values,
       [name]: value,
     });
   };
-
+  const handleCheck = (e) => {
+    if (e.checked) {
+      setValues({
+        [values.accept]: true,
+      });
+    } else {
+      setValues({
+        [values.accept]: false,
+      });
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -33,7 +46,7 @@ const useForm = (callback, validate) => {
     }
   }, [errors]);
 
-  return { handleChange, handleSubmit, values, errors };
+  return { handleChange, handleCheck, handleSubmit, values, errors };
 };
 
 export default useForm;
