@@ -5,104 +5,35 @@ body {
   //justify-content: center;
   background-color: #fff;
 }
-
-.confetti {
-  position: absolute;
-  animation: grow 1.4s cubic-bezier(0.42, 0, 0.275, 1.155) both;
-}
-.confetti:nth-child(1) {
-  width: 12px;
-  height: 12px;
-  left: 12px;
-  top: 16px;
-}
-.confetti:nth-child(2) {
-  width: 18px;
-  height: 18px;
-  left: 168px;
-  top: 84px;
-}
-.confetti:nth-child(3) {
-  width: 10px;
-  height: 10px;
-  left: 32px;
-  top: 162px;
-}
-.confetti:nth-child(4) {
-  width: 20px;
-  height: 20px;
-  left: 82px;
-  top: -12px;
-}
-.confetti:nth-child(5) {
-  width: 14px;
-  height: 14px;
-  left: 125px;
-  top: 162px;
-}
-.confetti:nth-child(6) {
-  width: 10px;
-  height: 10px;
-  left: 16px;
-  top: 16px;
-}
-.confetti:nth-child(1) {
-  animation-delay: 0.7s;
-}
-.confetti:nth-child(2) {
-  animation-delay: 1.4s;
-}
-.confetti:nth-child(3) {
-  animation-delay: 2.1s;
-}
-.confetti:nth-child(4) {
-  animation-delay: 2.8s;
-}
-.confetti:nth-child(5) {
-  animation-delay: 3.5s;
-}
-.confetti:nth-child(6) {
-  animation-delay: 4.2s;
+.successtext {
+  text-align: center;
+  font-size: 100;
+  color: #0049b8;
 }
 
 .checkmark {
   position: absolute;
+  top: 35%;
+  left: 30%;
+  font-size: large;
+  text-align: center;
   padding: 0;
   margin: 0;
-  animation: checkmark 5.6s cubic-bezier(0.42, 0, 0.275, 1.155) both;
-}
-
-.checkmark__check {
   z-index: 10;
-  transform: scale(1);
-  fill: #fff;
 }
 
-.checkmark__back {
-  position: absolute;
-  animation: rotate 35s linear both infinite;
-
-  transform: scale(3);
-}
-
-@keyframes grow {
-  0%,
-  100% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1);
-  }
-}
 @keyframes checkmark {
   0% {
     opacity: 0;
     transform: scale(0);
   }
-  10%,
-  50%,
-  100% {
+
+  50% {
     opacity: 1;
     transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
   }
 }

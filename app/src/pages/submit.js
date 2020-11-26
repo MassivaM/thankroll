@@ -10,13 +10,15 @@ const Form = () => {
   }
   return (
     <>
-      <div className="form-container">
+      <div className="form-container" style={{ paddingTop: 160 }}>
         <span className="close-btn">×</span>
 
         {!isSubmitted ? (
           <FormSignup submitForm={submitForm} />
         ) : (
-          <FormSuccess />
+          <div>
+            <FormSuccess style={{ position: "absolute", zIndex: 10 }} />
+          </div>
         )}
       </div>
     </>

@@ -28,50 +28,6 @@ export default class Home extends Component {
     return (
       <body>
         <div className={this.state.show ? "fadeIn" : "fadeOut"}>
-          <div className="wrapper fadeIn2">
-            <svg className="svg-visible">
-              <image href={quote1} width="259px" height="36px" />
-            </svg>
-          </div>
-          <div className="wrapper wrapper2 fadeIn2">
-            <svg className="svg-visible">
-              <image href={quote1} width="259px" height="36px" />
-            </svg>
-          </div>
-
-          <div className="wrapper wrapper3 fadeIn2">
-            <svg className="svg-visible">
-              <image href={quote1} width="259px" height="36px" />
-            </svg>
-          </div>
-
-          <div className="wrapper wrapper4 fadeIn2">
-            <svg className="svg-visible">
-              <image href={quote1} width="259px" height="36px" />
-            </svg>
-          </div>
-          <div className="wrapper wrapper5 fadeIn2">
-            <svg className="svg-visible">
-              <image href={quote1} width="259px" height="36px" />
-            </svg>
-          </div>
-
-          <div className="wrapper wrapper6 fadeIn2">
-            <svg className="svg-visible">
-              <image href={quote1} width="259px" height="36px" />
-            </svg>
-          </div>
-
-          <div className="wrapper wrapper7 fadeIn2">
-            <svg className="svg-visible">
-              <image href={quote1} width="259px" height="36px" />
-            </svg>
-          </div>
-          <div className="wrapper wrapper8 fadeIn2">
-            <svg className="svg-visible">
-              <image href={quote1} width="259px" height="36px" />
-            </svg>
-          </div>
           <div className="container">
             <div className="row">
               <div className="colum">
@@ -128,4 +84,48 @@ export default class Home extends Component {
 }
 
 /*
+ <div className="wrapper fadeIn2">
+            <svg className="svg-visible">
+              <image href={quote1} width="259px" height="36px" />
+            </svg>
+          </div>
+          <div className="wrapper wrapper2 fadeIn2">
+            <svg className="svg-visible">
+              <image href={quote1} width="259px" height="36px" />
+            </svg>
+          </div>
+
+          <div className="wrapper wrapper3 fadeIn2">
+            <svg className="svg-visible">
+              <image href={quote1} width="259px" height="36px" />
+            </svg>
+          </div>
+
+          <div className="wrapper wrapper4 fadeIn2">
+            <svg className="svg-visible">
+              <image href={quote1} width="259px" height="36px" />
+            </svg>
+          </div>
+          <div className="wrapper wrapper5 fadeIn2">
+            <svg className="svg-visible">
+              <image href={quote1} width="259px" height="36px" />
+            </svg>
+          </div>
+
+          <div className="wrapper wrapper6 fadeIn2">
+            <svg className="svg-visible">
+              <image href={quote1} width="259px" height="36px" />
+            </svg>
+          </div>
+
+          <div className="wrapper wrapper7 fadeIn2">
+            <svg className="svg-visible">
+              <image href={quote1} width="259px" height="36px" />
+            </svg>
+          </div>
+          <div className="wrapper wrapper8 fadeIn2">
+            <svg className="svg-visible">
+              <image href={quote1} width="259px" height="36px" />
+            </svg>
+          </div>
  */

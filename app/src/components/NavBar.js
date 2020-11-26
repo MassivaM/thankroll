@@ -33,7 +33,7 @@ const styleSheet = {
 
   sideBarIcon: {
     padding: 0,
-    color: "white",
+    color: "#0049B8",
     cursor: "pointer",
   },
   logo: {
@@ -76,6 +76,8 @@ const styleSheet = {
   },
   image: {
     marginLeft: "auto",
+    width: 50,
+    height: 50,
   },
 };
 

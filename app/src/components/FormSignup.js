@@ -12,7 +12,7 @@ const FormSignup = ({ submitForm }) => {
   return (
     <div className="form-content-right">
       <form onSubmit={handleSubmit} className="form" noValidate>
-        <h1 style={{ marginTop: 100, textAlign: "center" }}>
+        <h1 style={{ textAlign: "center" }}>
           Submit someone to be on Thankloop! Fill out this form and they'll be
           added to the loop.
         </h1>

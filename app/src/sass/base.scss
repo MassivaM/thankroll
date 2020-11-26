@@ -308,6 +308,9 @@ body {
   left: 50%;
   filter: blur(20px);
 }
+.blurred2 {
+  filter: blur(10px);
+}
 .blurred-out {
   position: absolute;
   top: 50%;
@@ -423,11 +426,11 @@ svg,
   }
 }
 .swippy {
-  top: 18%;
-  left: 20%;
+  top: 23%;
+  left: 22%;
 
   @media only screen and (min-width: 1450px) {
     left: 25%;
-    top: 23%;
+    top: 29%;
   }
 }
