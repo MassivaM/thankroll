@@ -75,7 +75,7 @@ const FormSignup = ({ submitForm }) => {
             <span style={{ color: "red" }}>*</span>
           </label>
           <textarea
-            className="text3"
+            className="text4"
             name="text"
             rows="4"
             cols="40"
