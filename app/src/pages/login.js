@@ -77,7 +77,7 @@ export default class Login extends Component {
           <GoogleLogin
             longTitle={true}
             //check git ignore
-            clientId=""
+            clientId="33938796980-dgbpq06p6p17ghsoi292befdcfca4ers.apps.googleusercontent.com"
             buttonText="Login with Google"
             onSuccess={this.responseGoogle}
             onFailure={this.responseGoogle}
