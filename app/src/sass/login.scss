@@ -1,0 +1,24 @@
+.login-btn {
+  width: 150px;
+  height: 40px;
+
+  margin: 5%;
+  margin-left: 0%;
+  border: none;
+
+  bottom: 40px;
+  display: inline-block;
+
+  background: #70a1ff;
+  text-align: center;
+  border-radius: 45px;
+  img {
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  span {
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+  }
+}

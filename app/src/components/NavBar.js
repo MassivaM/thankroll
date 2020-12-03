@@ -99,6 +99,10 @@ const navLinks = [
     title: "Login",
     path: "/login",
   },
+  {
+    title: "Sign up",
+    path: "/register",
+  },
 ];
 
 class ResAppBar extends Component {

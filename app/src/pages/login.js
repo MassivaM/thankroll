@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import GoogleLogin from "react-google-login";
 import validate from "../components/ValidateInfo";
 import useForm from "../components/UseForm";
-
+import thankloop from "../assets/thankloop-white-logo.svg";
+import { Link } from "react-router-dom";
 const errors = useForm(validate);
 export default class Login extends Component {
   state = {
@@ -34,14 +35,16 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <div className="form-content-right">
+        <div
+          className="form-content-right"
+          style={{ position: "absolute", left: "38%", top: "30%" }}
+        >
           <form
             onSubmit={this.handleSubmit}
-            className="form"
             noValidate
-            style={{ width: "40%", marginTop: 50 }}
+            style={{ width: "100%" }}
           >
-            <div className="form-inputs">
+            <div className="form-inputs2">
               <label className="form-label">
                 Email <span style={{ color: "red" }}>*</span>{" "}
               </label>
@@ -54,7 +57,7 @@ export default class Login extends Component {
                 onChange={this.changeEmail}
               />
             </div>
-            <div className="form-inputs">
+            <div className="form-inputs2">
               <label className="form-label">
                 Password
                 <span style={{ color: "red" }}>*</span>
@@ -69,20 +72,30 @@ export default class Login extends Component {
                 required
               ></input>
             </div>
-
-            <button className="form-input-btn" type="submit">
-              Login to Thankloop
+            <Link to="/register">
+              <label className="form-label" style={{ color: "#0049B8" }}>
+                Sign up
+              </label>
+            </Link>
+            <br></br>
+            <label className="form-label">Forgot password?</label>
+            <button type="submit" className="login-btn">
+              <img src={thankloop} alt="Place Holder" />
+              <span>Login</span>
             </button>
           </form>
-          <GoogleLogin
-            longTitle={true}
-            //check git ignore
-            clientId="33938796980-dgbpq06p6p17ghsoi292befdcfca4ers.apps.googleusercontent.com"
-            buttonText="Login with Google"
-            onSuccess={this.responseGoogle}
-            onFailure={this.responseGoogle}
-            cookiePolicy={"single_host_origin"}
-          />
+
+          <div>
+            <GoogleLogin
+              longTitle={true}
+              //check git ignore
+              clientId="33938796980-dgbpq06p6p17ghsoi292befdcfca4ers.apps.googleusercontent.com"
+              buttonText="Login with Google"
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseGoogle}
+              cookiePolicy={"single_host_origin"}
+            />
+          </div>
         </div>
       </div>
     );
