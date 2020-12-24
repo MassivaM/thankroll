@@ -8,7 +8,7 @@ import fire from "../assets/fire.jpg";
 import send from "../assets/send.png";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import profiles from "../assets/data/profiles/profiles.js";
-
+import Stats from "./Stats.js";
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
 
@@ -106,7 +106,8 @@ export default class Swipper extends React.Component {
   render() {
     console.log(this.state.visible);
     return (
-      <div style={{ position: "static" }}>
+      <div>
+        <Stats />
         <div className="card">
           <div className="left">
             <div className="ava">

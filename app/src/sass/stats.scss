@@ -1,0 +1,18 @@
+.pplthanked {
+  left: 15em;
+  top: 15%;
+  position: absolute;
+  font-family: "Open Sans";
+
+  &_text {
+    font-family: "Open Sans" "italic";
+    font-weight: 600;
+    font-style: italic;
+
+    font-size: 1.8vw;
+  }
+  @media only screen and (min-width: 1500px) {
+    left: 20em;
+    top: 7em;
+  }
+}
