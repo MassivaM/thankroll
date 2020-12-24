@@ -75,7 +75,7 @@ export default class Home extends Component {
             </div>
           </div>
         </div>
-        <div className={this.state.show ? "swippy blurred" : ""}>
+        <div className={this.state.show ? "swippy blurred" : "swippy"}>
           <Swipper />
         </div>
       </body>

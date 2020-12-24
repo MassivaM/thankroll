@@ -106,7 +106,7 @@ export default class Swipper extends React.Component {
   render() {
     console.log(this.state.visible);
     return (
-      <div>
+      <div style={{ position: "static" }}>
         <div className="card">
           <div className="left">
             <div className="ava">
