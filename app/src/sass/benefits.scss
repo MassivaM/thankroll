@@ -1,5 +1,5 @@
 .Rectangle {
-  left: 21%;
+  left: 18.6%;
   width: 55em;
   height: 152px;
   margin: 0;
@@ -154,6 +154,48 @@ p {
       left: 570px;
       position: absolute;
       padding-top: 70px;
+    }
+  }
+}
+.svg-purple {
+  display: block;
+  width: 100%;
+  height: auto;
+  top: 32.5em;
+  margin: 0;
+  left: 0;
+
+  @media only screen and (min-width: 1500px) {
+    top: 38.25em;
+  }
+}
+
+.reasons {
+  position: absolute;
+  left: 4em;
+  top: 19em;
+  .about {
+    /* It’s about... */
+
+    font-family: Baloo 2;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+
+    /* or 38px */
+
+    letter-spacing: 0.085em;
+
+    color: #0049b8;
+  }
+  .reason1 {
+    padding-top: 20px;
+    &_image {
+      display: inline-block;
+      vertical-align: top;
+    }
+    &_text {
+      display: inline-block;
     }
   }
 }

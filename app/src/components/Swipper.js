@@ -8,6 +8,7 @@ import fire from "../assets/fire.jpg";
 import send from "../assets/send.png";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import profiles from "../assets/data/profiles/profiles.js";
+
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
 
