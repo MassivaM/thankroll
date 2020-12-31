@@ -125,7 +125,6 @@ export default class Swipper extends React.Component {
                 this.setState({ visible: !this.state.visible });
               }}
             >
-              <img src={thankloop} alt="Place Holder" />
               <span>Thank {this.state.firstName}</span>
             </button>
           </div>

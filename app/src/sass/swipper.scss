@@ -32,6 +32,16 @@ body {
   box-shadow: 0 10px 30px rgba(69, 69, 69, 0.3);
 
   transition: all 0.2s;
+
+  .right {
+    //margin-left: 140px;
+    //margin-top: 13%;
+    float: left;
+    width: 500px;
+    height: 100%;
+    transform: translate(30%, 30%);
+    //background:grey;
+  }
 }
 
 .left {
@@ -61,6 +71,7 @@ body {
   margin: 20px 0 6px;
   font-weight: 800;
   font-size: 28px;
+  width: 100%;
 }
 
 .status {
@@ -87,14 +98,6 @@ body {
   }
 }
 
-.right {
-  margin-left: 140px;
-  margin-top: 13%;
-  float: left;
-  width: 500px;
-  height: 100%;
-  //background:grey;
-}
 .description {
   font-size: 25px;
 }
@@ -163,10 +166,10 @@ body {
   border: none;
   position: absolute;
   bottom: 40px;
-  display: inline-block;
-
-  left: 45%;
-  width: 180px;
+  //display: inline-block;
+  top: 55%;
+  left: 30%;
+  width: 200px;
   height: 50px;
   background: #70a1ff;
   text-align: center;
