@@ -23,6 +23,10 @@ const profileSchema = new Schema({
     type: Date,
     required: true,
   },
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 module.exports = mongoose.model("Profile", profileSchema);
