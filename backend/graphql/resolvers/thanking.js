@@ -3,7 +3,10 @@ const Profile = require("../../models/profiles");
 const { transformThanking, transformProfile } = require("./merge");
 
 module.exports = {
-  thanks: async () => {
+  thanks: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error("Unauthenticated");
+    }
     try {
       const thanks = await Thanking.find();
       return thanks.map((thank) => {
@@ -14,17 +17,32 @@ module.exports = {
     }
   },
 
-  thankProfile: async (args) => {
+  thankProfile: async (args, req) => {
+    if (!req.isAuth) {
+      const fetchedProfile = await Profile.findOne({
+        _id: args.profileId,
+      });
+      const thank = new Thanking({
+        message: args.message,
+        user: "unauthenticated user",
+        profile: fetchedProfile,
+      });
+      const result = await thank.save();
+      return transformThanking(result);
+    }
     const fetchedProfile = await Profile.findOne({ _id: args.profileId });
     const thank = new Thanking({
       message: args.message,
-      user: "5ff0c0961be1ed5112f0cfaa",
+      user: req.userId,
       profile: fetchedProfile,
     });
     const result = await thank.save();
     return transformThanking(result);
   },
-  cancelThanking: async (args) => {
+  cancelThanking: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error("Unauthenticated");
+    }
     try {
       const thank = await Thanking.findById(args.thankingId).populate(
         "profile"

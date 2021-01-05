@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { graphqlHTTP } = require("express-graphql");
-
+const isAuth = require("./middleware/is-auth");
 const mongoose = require("mongoose");
 
 const app = express();
@@ -10,6 +10,7 @@ const graphqlSchema = require("./graphql/schema/index");
 const graphqlResolver = require("./graphql/resolvers/index");
 app.use(bodyParser.json());
 
+app.use(isAuth);
 //created a file type to describe the pictures uploaded
 app.use(
   "/graphql",

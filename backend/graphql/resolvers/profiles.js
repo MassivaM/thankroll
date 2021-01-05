@@ -1,4 +1,5 @@
 const Profile = require("../../models/profiles");
+const User = require("../../models/user");
 const { transformProfile } = require("./merge");
 
 module.exports = {
@@ -12,20 +13,23 @@ module.exports = {
       throw err;
     }
   },
-  createProfile: async (args) => {
+  createProfile: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error("Unauthenticated");
+    }
     const profile = new Profile({
       name: args.profileinput.name,
       description: args.profileinput.description,
       profession: args.profileinput.profession,
       picture: args.profileinput.picture,
       date: new Date(args.profileinput.date),
-      creator: "5ff0c0961be1ed5112f0cfaa",
+      creator: req.userId,
     });
     let createdprofile;
     try {
       const result = await profile.save();
       createdprofile = transformProfile(result);
-      const creator = await User.findById("5ff0c0961be1ed5112f0cfaa");
+      const creator = await User.findById(req.userId);
 
       if (!creator) {
         throw new Error("User not found");
