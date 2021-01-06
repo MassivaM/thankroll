@@ -1,119 +1,153 @@
-import React from "react";
-import validate from "./ValidateInfo";
-import useForm from "./UseForm";
-import UploadPic from "./UploadPic";
+import React, { Component } from "react";
+import GoogleLogin from "react-google-login";
+import validate from "../components/ValidateInfo";
+import useForm from "../components/UseForm";
+import thankloop from "../assets/thankloop-white-logo.svg";
+import { NavLink } from "react-router-dom";
+const errors = useForm(validate);
+export default class Signup extends Component {
+  state = {
+    isLogin: true,
+  };
 
-const FormSignup = ({ submitForm }) => {
-  const { handleChange, handleSubmit, handleCheck, values, errors } = useForm(
-    submitForm,
-    validate
-  );
-  console.log("checked" + values.accept);
-  return (
-    <div className="form-content-right">
-      <form onSubmit={handleSubmit} className="form" noValidate>
-        <h1 style={{ textAlign: "center" }}>
-          Submit someone to be on Thankloop! Fill out this form and they'll be
-          added to the loop.
-        </h1>
-        <div className="form-inputs">
-          <label className="form-label">
-            First Name <span style={{ color: "red" }}>*</span>{" "}
-          </label>
-          <input
-            className="form-input"
-            type="text"
-            name="firstname"
-            placeholder="Their first name"
-            value={values.firstname}
-            onChange={handleChange}
-          />
-          {errors.firstname && <p>{errors.firstname}</p>}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">Last Name</label>
-          <input
-            className="form-input"
-            type="text"
-            name="lastname"
-            placeholder="Their last name"
-            value={values.lastname}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">
-            Profession <span style={{ color: "red" }}>*</span>{" "}
-          </label>
-          <input
-            className="form-input"
-            type="text"
-            name="profession"
-            placeholder="Their profession"
-            value={values.profession}
-            onChange={handleChange}
-          />
-          {errors.profession && <p>{errors.profession}</p>}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">
-            Email <span style={{ color: "red" }}>*</span>{" "}
-          </label>
-          <input
-            className="form-input"
-            type="email"
-            name="email"
-            placeholder="Their email"
-            value={values.email}
-            onChange={handleChange}
-          />
-          {errors.email && <p>{errors.email}</p>}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">
-            Why should they be on Thankloop?{" "}
-            <span style={{ color: "red" }}>*</span>
-          </label>
-          <textarea
-            className="text4"
-            name="text"
-            rows="4"
-            cols="40"
-            value={values.text}
-            onChange={handleChange}
-            placeholder="Enter a short description of them here"
-          ></textarea>
-          {errors.text && <p>{errors.text}</p>}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">Upload a picture of them here </label>
-          <UploadPic />
-        </div>
-        <div className="form-inputs">
-          <input
-            type="checkbox"
-            id="accept"
-            name="accept"
-            checked={values.accept}
-            onChange={handleChange}
-          />
-          <label
-            for="accept"
-            className="form-label"
-            style={{ paddingLeft: 20 }}
+  constructor(props) {
+    super(props);
+    this.emailEl = React.createRef();
+    this.passwordEl = React.createRef();
+    this.firstNameEl = React.createRef();
+    this.lastNameEl = React.createRef();
+  }
+
+  submitHandler = (event) => {
+    event.preventDefault();
+    const email = this.emailEl.current.value;
+    const password = this.passwordEl.current.value;
+    const firstName = this.firstNameEl.current.value;
+    const lastName = "";
+    if (email.trim().length === 0 || password.trim().length === 0) {
+      return;
+    }
+
+    const requestBody = {
+      query: `
+        mutation {
+          createUser(userinput: {email: "${email}", password: "${password}", firstName:"${firstName}", lastName: "Allo"}){
+            _id
+            email
+          }
+        }
+      `,
+    };
+    fetch("http://localhost:4000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Failed!");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        console.log(resData);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  /*responseGoogle = (response) => {
+    console.log(response);
+    console.log(response.profileObj);
+  };*/
+
+  render() {
+    return (
+      <div>
+        <div
+          className="form-content-right"
+          style={{ position: "absolute", left: "38%", top: "30%" }}
+        >
+          <form
+            onSubmit={this.submitHandler}
+            noValidate
+            style={{ width: "100%" }}
           >
-            I have gotten approval from this person to publish their picture,
-            first name and story on Thankloop
-            <span style={{ color: "red" }}>*</span>
-          </label>
-          {errors.accept && <p>{errors.accept}</p>}
-        </div>
-        <button className="form-input-btn" type="submit">
-          Submit
-        </button>
-      </form>
-    </div>
-  );
-};
+            <div className="form-inputs2">
+              <label htmlFor="firstName" className="form-label">
+                First Name <span style={{ color: "red" }}>*</span>{" "}
+              </label>
+              <input
+                className="form-input"
+                type="text"
+                id="firstName"
+                placeholder="First Name"
+                ref={this.firstNameEl}
+              />
+              <label htmlFor="lastName" className="form-label">
+                Last Name
+              </label>
+              <input
+                className="form-input"
+                type="text"
+                id="firstName"
+                placeholder="Last Name"
+                ref={this.lasttNameEl}
+              />
+              <label htmlFor="email" className="form-label">
+                Email <span style={{ color: "red" }}>*</span>{" "}
+              </label>
+              <input
+                className="form-input"
+                type="email"
+                name="email"
+                placeholder="Email"
+                ref={this.emailEl}
+              />
+            </div>
+            <div className="form-inputs2">
+              <label className="form-label">
+                Password
+                <span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                className="form-input"
+                type="password"
+                id="pass"
+                name="password"
+                placeholder="Password"
+                minlength="8"
+                required
+                ref={this.passwordEl}
+              ></input>
+            </div>
+            <br></br>
+            <NavLink to="/login">
+              <label className="form-label">Already have an account?</label>
+            </NavLink>
+            <button type="submit" className="login-btn">
+              <img src={thankloop} alt="Place Holder" />
+              <span>Sign up</span>
+            </button>
+          </form>
 
-export default FormSignup;
+          <div></div>
+        </div>
+      </div>
+    );
+  }
+}
+/*
+ <GoogleLogin
+              longTitle={true}
+              //check git ignore
+              clientId=""
+              buttonText="Login with Google"
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseGoogle}
+              cookiePolicy={"single_host_origin"}
+            />
+       */

@@ -3,34 +3,60 @@ import GoogleLogin from "react-google-login";
 import validate from "../components/ValidateInfo";
 import useForm from "../components/UseForm";
 import thankloop from "../assets/thankloop-white-logo.svg";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const errors = useForm(validate);
 export default class Login extends Component {
-  state = {
-    email: "",
-    password: "",
-  };
   constructor(props) {
     super(props);
+    this.emailEl = React.createRef();
+    this.passwordEl = React.createRef();
+  }
 
-    this.changePassword = this.changePassword.bind(this);
-    this.changeEmail = this.changeEmail.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  changeEmail(event) {
-    this.setState({ email: event.target.value });
-  }
-  changePassword(event) {
-    this.setState({ password: event.target.value });
-  }
-  handleSubmit(event) {
-    this.setState({ password: "", email: "" });
+  submitHandler = (event) => {
     event.preventDefault();
-  }
-  responseGoogle = (response) => {
+    const email = this.emailEl.current.value;
+    const password = this.passwordEl.current.value;
+
+    if (email.trim().length === 0 || password.trim().length === 0) {
+      return;
+    }
+
+    const requestBody = {
+      query: `
+        query{ 
+          login(email: "${email}", password: "${password}"){
+            userId
+            token
+            tokenExpiration
+          }
+        }
+      `,
+    };
+    fetch("http://localhost:4000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Failed!");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        console.log(resData);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  /*responseGoogle = (response) => {
     console.log(response);
     console.log(response.profileObj);
-  };
+  };*/
 
   render() {
     return (
@@ -40,12 +66,12 @@ export default class Login extends Component {
           style={{ position: "absolute", left: "38%", top: "30%" }}
         >
           <form
-            onSubmit={this.handleSubmit}
+            onSubmit={this.submitHandler}
             noValidate
             style={{ width: "100%" }}
           >
             <div className="form-inputs2">
-              <label className="form-label">
+              <label htmlFor="email" className="form-label">
                 Email <span style={{ color: "red" }}>*</span>{" "}
               </label>
               <input
@@ -53,8 +79,7 @@ export default class Login extends Component {
                 type="email"
                 name="email"
                 placeholder="Email"
-                value={this.state.email}
-                onChange={this.changeEmail}
+                ref={this.emailEl}
               />
             </div>
             <div className="form-inputs2">
@@ -70,13 +95,14 @@ export default class Login extends Component {
                 placeholder="Password"
                 minlength="8"
                 required
+                ref={this.passwordEl}
               ></input>
             </div>
-            <Link to="/register">
+            <NavLink to="/register">
               <label className="form-label" style={{ color: "#0049B8" }}>
                 Sign up
               </label>
-            </Link>
+            </NavLink>
             <br></br>
             <label className="form-label">Forgot password?</label>
             <button type="submit" className="login-btn">
@@ -85,8 +111,14 @@ export default class Login extends Component {
             </button>
           </form>
 
-          <div>
-            <GoogleLogin
+          <div></div>
+        </div>
+      </div>
+    );
+  }
+}
+/*
+ <GoogleLogin
               longTitle={true}
               //check git ignore
               clientId=""
@@ -95,12 +127,4 @@ export default class Login extends Component {
               onFailure={this.responseGoogle}
               cookiePolicy={"single_host_origin"}
             />
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-/*
-
        */

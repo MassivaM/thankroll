@@ -14,7 +14,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Button from "@material-ui/core/Button";
 
 import thankloop from "../assets/thankloop-logo-2.svg";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 const styleSheet = {
@@ -99,10 +99,6 @@ const navLinks = [
     title: "Login",
     path: "/login",
   },
-  {
-    title: "Sign up",
-    path: "/register",
-  },
 ];
 
 class ResAppBar extends Component {
@@ -183,9 +179,9 @@ class ResAppBar extends Component {
             <List className={this.props.classes.list}>
               {navLinks.map((link, index) => (
                 <ListItem key={1} button divider className={classes.links2}>
-                  <Link to={link.path} className={classes.links2}>
+                  <NavLink to={link.path} className={classes.links2}>
                     {link.title}
-                  </Link>{" "}
+                  </NavLink>{" "}
                 </ListItem>
               ))}
             </List>
@@ -214,9 +210,9 @@ class ResAppBar extends Component {
           <div className={classes.buttons}>
             {navLinks.map((link, index) => (
               <Button className={classes.button}>
-                <Link to={link.path} className={classes.links}>
+                <NavLink to={link.path} className={classes.links}>
                   {link.title}
-                </Link>
+                </NavLink>
               </Button>
             ))}
           </div>
