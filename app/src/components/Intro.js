@@ -1,19 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/thankloop-logo-2.svg";
-import heart from "../assets/heart.svg";
-import nurse from "../assets/nurse.jpg";
-import cook from "../assets/cook.jpg";
-import construction from "../assets/construction.jpg";
-import fire from "../assets/fire.jpg";
-import researcher from "../assets/researcher.jpg";
-import teacher from "../assets/teacher.jpg";
-import artist from "../assets/artist.jpg";
-import present from "../assets/present.jpg";
-import quote1 from "../assets/quote1.png";
-import quote2 from "../assets/quote2.png";
-import quote3 from "../assets/quote3.png";
-import quote4 from "../assets/quote4.png";
+import AuthContext from "../context/authContext";
 import Swipper from "../components/Swipper.js";
 export default class Home extends Component {
   constructor() {
@@ -26,60 +13,80 @@ export default class Home extends Component {
   render() {
     let i;
     return (
-      <body>
-        <div className={this.state.show ? "fadeIn" : "fadeOut"}>
-          <div className="container">
-            <div className="row">
-              <div className="colum">
-                <div className="box-loading">
-                  <div className="cirlce-wave"></div>
-                  <div className="cirlce-wave--2"></div>
-                  <div className="cirlce-wave--3"></div>
-                  <div className="cirlce-wave--4"></div>
-                  <div className="cirlce-wave--5"></div>
+      <AuthContext.Consumer>
+        {(context) => {
+          return (
+            <body>
+              {!context.token && (
+                <div>
+                  <div className={this.state.show ? "fadeIn" : "fadeOut"}>
+                    <div className="container">
+                      <div className="row">
+                        <div className="colum">
+                          <div className="box-loading">
+                            <div className="cirlce-wave"></div>
+                            <div className="cirlce-wave--2"></div>
+                            <div className="cirlce-wave--3"></div>
+                            <div className="cirlce-wave--4"></div>
+                            <div className="cirlce-wave--5"></div>
 
-                  <div className="text">
-                    <p className="paragraph">Did you thank someone today?</p>
+                            <div className="text">
+                              <p className="paragraph">
+                                Did you thank someone today?
+                              </p>
 
-                    <p className="paragraph2">
-                      Cultivate gratitude right here, right now by thanking
-                      people that have had an impact on communities and
-                      individuals.
-                    </p>
+                              <p className="paragraph2">
+                                Cultivate gratitude right here, right now by
+                                thanking people that have had an impact on
+                                communities and individuals.
+                              </p>
 
-                    <div className="btn">
-                      <button
-                        className="logo"
-                        data-wipe="Get thanking"
-                        style={{ border: "none", outline: 0 }}
-                        onClick={() => {
-                          this.setState({ show: !this.state.show });
-                        }}
-                        visible={this.state.show}
-                      >
-                        Get thanking
-                      </button>
-                      <Link to="/submit">
-                        <button
-                          className="logo2"
-                          data-wipe="Submit someone"
-                          style={{ border: "none", outline: 0, marginTop: 10 }}
-                          disabled={this.state.show ? "" : "true"}
-                        >
-                          Submit someone
-                        </button>
-                      </Link>
+                              <div className="btn">
+                                <button
+                                  className="logo"
+                                  data-wipe="Get thanking"
+                                  style={{ border: "none", outline: 0 }}
+                                  onClick={() => {
+                                    this.setState({ show: !this.state.show });
+                                  }}
+                                  visible={this.state.show}
+                                >
+                                  Get thanking
+                                </button>
+                                <Link to="/submit">
+                                  <button
+                                    className="logo2"
+                                    data-wipe="Submit someone"
+                                    style={{
+                                      border: "none",
+                                      outline: 0,
+                                      marginTop: 10,
+                                    }}
+                                    disabled={this.state.show ? "" : "true"}
+                                  >
+                                    Submit someone
+                                  </button>
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <div
+                    className={this.state.show ? "swippy blurred" : "swippy"}
+                  >
+                    <Swipper />
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={this.state.show ? "swippy blurred" : "swippy"}>
-          <Swipper />
-        </div>
-      </body>
+              )}
+
+              {context.token && <Swipper />}
+            </body>
+          );
+        }}
+      </AuthContext.Consumer>
     );
   }
 }

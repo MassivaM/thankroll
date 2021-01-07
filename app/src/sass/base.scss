@@ -79,12 +79,12 @@ body {
       position: absolute;
       padding-left: 30px;
       color: #ffffff;
-      padding-top: 35px;
+      padding-top: 10px;
       font-family: Baloo 2;
       font-weight: 400;
       text-align: center;
 
-      font-size: 15px;
+      font-size: 17px;
 
       .bolded {
         font-weight: 600;
@@ -312,6 +312,9 @@ body {
 }
 .blurred2 {
   filter: blur(10px);
+}
+.blurred3 {
+  filter: blur(5px);
 }
 .blurred-out {
   position: absolute;

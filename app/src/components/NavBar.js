@@ -16,7 +16,7 @@ import Button from "@material-ui/core/Button";
 import thankloop from "../assets/thankloop-logo-2.svg";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-
+import AuthContext from "../context/authContext";
 const styleSheet = {
   root: {
     padding: 0,
@@ -177,13 +177,33 @@ class ResAppBar extends Component {
             }}
           >
             <List className={this.props.classes.list}>
-              {navLinks.map((link, index) => (
-                <ListItem key={1} button divider className={classes.links2}>
-                  <NavLink to={link.path} className={classes.links2}>
-                    {link.title}
+              <ListItem key={1} button divider className={classes.links2}>
+                <NavLink to="./" className={classes.links2}>
+                  Home
+                </NavLink>
+              </ListItem>
+              <ListItem key={2} button divider className={classes.links2}>
+                <NavLink to="./submit" className={classes.links2}>
+                  Submit someone
+                </NavLink>
+              </ListItem>
+              <ListItem key={3} button divider className={classes.links2}>
+                <NavLink to="./benefits" className={classes.links2}>
+                  Benefits of thanking
+                </NavLink>
+              </ListItem>
+              <ListItem key={4} button divider className={classes.links2}>
+                <NavLink to="./login" className={classes.links2}>
+                  Login
+                </NavLink>{" "}
+              </ListItem>
+              {!this.context.token ?? (
+                <ListItem key={5} button divider className={classes.links2}>
+                  <NavLink to="./mypage" className={classes.links2}>
+                    Dashboard
                   </NavLink>{" "}
                 </ListItem>
-              ))}
+              )}
             </List>
           </div>
         </SwipeableDrawer>
@@ -192,7 +212,7 @@ class ResAppBar extends Component {
   }
 
   //Larger Screens
-  destroyDrawer() {
+  destroyDrawer(context) {
     const { classes } = this.props;
     return (
       <AppBar
@@ -208,13 +228,35 @@ class ResAppBar extends Component {
         <Toolbar style={{ background: "#e5f1ff" }}>
           <img className={classes.image} src={thankloop}></img>
           <div className={classes.buttons}>
-            {navLinks.map((link, index) => (
+            <Button className={classes.button}>
+              <NavLink to="./" className={classes.links}>
+                Home
+              </NavLink>
+            </Button>
+            <Button className={classes.button}>
+              <NavLink to="./submit" className={classes.links}>
+                Submit someone
+              </NavLink>
+            </Button>
+            <Button className={classes.button}>
+              <NavLink to="./benefits" className={classes.links}>
+                Benefits of thanking
+              </NavLink>
+            </Button>
+            {!context.token && (
               <Button className={classes.button}>
-                <NavLink to={link.path} className={classes.links}>
-                  {link.title}
+                <NavLink to="./login" className={classes.links}>
+                  Login
                 </NavLink>
               </Button>
-            ))}
+            )}
+            {context.token && (
+              <Button className={classes.button}>
+                <NavLink to="./mypage" className={classes.links}>
+                  Dashboard
+                </NavLink>
+              </Button>
+            )}
           </div>
         </Toolbar>
       </AppBar>
@@ -223,9 +265,17 @@ class ResAppBar extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.drawerActivate ? this.createDrawer() : this.destroyDrawer()}
-      </div>
+      <AuthContext.Consumer>
+        {(context) => {
+          return (
+            <div>
+              {this.state.drawerActivate
+                ? this.createDrawer()
+                : this.destroyDrawer(context)}
+            </div>
+          );
+        }}
+      </AuthContext.Consumer>
     );
   }
 }

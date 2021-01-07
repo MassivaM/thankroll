@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import meditation from "../assets/meditation.png";
-import envelope from "../assets/envelope.png";
-import clock from "../assets/clock.png";
+import AuthContext from "../context/authContext";
+import { NavLink } from "react-router-dom";
 export default class Stats extends React.Component {
   state = {
     pplThanked: 0,
@@ -11,18 +10,36 @@ export default class Stats extends React.Component {
   }
   render() {
     return (
-      <div>
-        <div className="pplthanked">
-          <div className="reason1_text">
-            <p className="pplthanked_text">
-              <span style={{ fontStyle: "normal" }}>
-                {this.state.pplThanked}
-              </span>{" "}
-              people thanked
-            </p>
-          </div>
-        </div>
-      </div>
+      <AuthContext.Consumer>
+        {(context) => {
+          return (
+            <div>
+              {context.token && (
+                <div className="pplthanked">
+                  <div className="reason1_text">
+                    <p className="pplthanked_text">
+                      <span style={{ fontStyle: "normal" }}>
+                        {this.state.pplThanked}
+                      </span>{" "}
+                      people thanked
+                    </p>
+                  </div>
+                </div>
+              )}
+              {!context.token && (
+                <div className="pplthanked">
+                  <div className="reason1_text">
+                    <p className="pplthanked_text">
+                      <NavLink to="/login"> Login </NavLink> to track your
+                      thanking progress
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        }}
+      </AuthContext.Consumer>
     );
   }
 }
