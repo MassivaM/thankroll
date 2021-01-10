@@ -18,11 +18,14 @@ module.exports = {
       throw new Error("Unauthenticated");
     }
     const profile = new Profile({
-      name: args.profileinput.name,
+      firstName: args.profileinput.firstName,
+      lastName: args.profileinput.lastName,
       description: args.profileinput.description,
       profession: args.profileinput.profession,
       picture: args.profileinput.picture,
+      email: args.profileinput.email,
       date: new Date(args.profileinput.date),
+      accept: args.profileinput.accept,
       creator: req.userId,
     });
     let createdprofile;

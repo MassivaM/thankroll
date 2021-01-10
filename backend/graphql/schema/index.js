@@ -13,10 +13,13 @@ module.exports = buildSchema(`
     }
     type Profile{
       _id: ID!
-      name: String!
+      firstName: String!
+      lastName:String
       description: String!
       profession: String!
-      picture: String!
+      picture: String
+      email:String!
+      accept:Boolean!
       date: String!
       creator:User!
      
@@ -26,6 +29,8 @@ module.exports = buildSchema(`
      email: String!
      password: String
      createdProfiles: [Profile!]
+     firstName: String!
+     lastName: String
    }
    type AuthData{
        userId: ID!
@@ -33,15 +38,20 @@ module.exports = buildSchema(`
        tokenExpiration: Int!
    }
     input ProfileInput{
-      name: String!
+      firstName: String!
+      lastName:String
       description: String!
       profession: String!
-      picture: String!
+      picture: String
+      email:String!
+      accept:Boolean!
       date: String!
     }
     input UserInput{
       email: String!
       password: String
+      firstName: String!
+      lastName: String
     }
   type RootQuery{
       profiles: [Profile!]!
@@ -53,6 +63,7 @@ module.exports = buildSchema(`
       createUser(userinput : UserInput): User
       thankProfile(profileId: ID!, message: String!): Thanking!
       cancelThanking(thankingId: ID!): Profile!
+      uploadImage(filename: String!): String!
   }
   schema {
     query:RootQuery
