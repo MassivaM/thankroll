@@ -1,13 +1,13 @@
 export default function ValidateInfo(values) {
   let errors = {};
 
-  if (!values.firstname.trim()) {
-    errors.firstname = "First name required";
+  if (!values.firstName.trim()) {
+    errors.firstName = "First name required";
   }
   // else if (!/^[A-Za-z]+/.test(values.name.trim())) {
   //   errors.name = 'Enter a valid name';
   // }
-  if (!values.text.trim()) {
+  if (!values.description.trim()) {
     errors.text = "Description required";
   }
   if (!values.accept) {

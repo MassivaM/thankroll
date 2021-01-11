@@ -50,6 +50,11 @@ const styleSheet = {
     margin: 11,
     fontSize: 15,
   },
+  buttonlogout: {
+    margin: 11,
+    fontSize: 15,
+    color: "#6c5ce7",
+  },
   links: {
     color: "#0049B8",
     padding: 0,
@@ -124,7 +129,7 @@ class ResAppBar extends Component {
   }
 
   //Small Screens
-  createDrawer() {
+  createDrawer(context) {
     const { classes } = this.props;
     return (
       <div className={styleSheet.root}>
@@ -192,17 +197,24 @@ class ResAppBar extends Component {
                   Benefits of thanking
                 </NavLink>
               </ListItem>
-              <ListItem key={4} button divider className={classes.links2}>
-                <NavLink to="./login" className={classes.links2}>
-                  Login
-                </NavLink>{" "}
-              </ListItem>
-              {!this.context.token ?? (
-                <ListItem key={5} button divider className={classes.links2}>
-                  <NavLink to="./mypage" className={classes.links2}>
-                    Dashboard
+              {!context.token && (
+                <ListItem key={4} button divider className={classes.links2}>
+                  <NavLink to="./login" className={classes.links2}>
+                    Login
                   </NavLink>{" "}
                 </ListItem>
+              )}
+              {context.token && (
+                <React.Fragment>
+                  <ListItem key={5} button divider className={classes.links2}>
+                    <NavLink to="./mypage" className={classes.links2}>
+                      Dashboard
+                    </NavLink>{" "}
+                  </ListItem>
+                  <ListItem>
+                    <Button onClick={context.logout}>Logout</Button>
+                  </ListItem>
+                </React.Fragment>
               )}
             </List>
           </div>
@@ -250,12 +262,21 @@ class ResAppBar extends Component {
                 </NavLink>
               </Button>
             )}
+
             {context.token && (
-              <Button className={classes.button}>
-                <NavLink to="./mypage" className={classes.links}>
-                  Dashboard
-                </NavLink>
-              </Button>
+              <React.Fragment>
+                <Button className={classes.button}>
+                  <NavLink to="./mypage" className={classes.links}>
+                    Dashboard
+                  </NavLink>
+                </Button>
+                <Button
+                  onClick={context.logout}
+                  className={classes.buttonlogout}
+                >
+                  Logout
+                </Button>
+              </React.Fragment>
             )}
           </div>
         </Toolbar>
@@ -270,7 +291,7 @@ class ResAppBar extends Component {
           return (
             <div>
               {this.state.drawerActivate
-                ? this.createDrawer()
+                ? this.createDrawer(context)
                 : this.destroyDrawer(context)}
             </div>
           );

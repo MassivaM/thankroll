@@ -10,7 +10,7 @@ const Form = () => {
   }
   return (
     <>
-      <div className="form-container" style={{ paddingTop: 160 }}>
+      <div className="form-container" style={{ paddingTop: 130 }}>
         <span className="close-btn">×</span>
 
         {!isSubmitted ? (

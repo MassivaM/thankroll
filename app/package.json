@@ -10,13 +10,16 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "aos": "^3.0.0-beta.6",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
+    "formik": "^2.2.6",
     "material-ui-icons": "^1.0.0-beta.36",
     "node-sass": "^4.14.1",
     "react": "^16.14.0",
     "react-bootstrap": "^1.4.0",
     "react-burger-menu": "^2.9.2",
     "react-dom": "^16.14.0",
+    "react-dropzone": "^11.2.4",
     "react-google-login": "^5.1.25",
     "react-hook-form": "^6.12.2",
     "react-images-upload": "^1.2.8",
@@ -24,7 +27,8 @@
     "react-script-tag": "^1.1.2",
     "react-scripts": "^3.4.4",
     "react-slick": "^0.27.13",
-    "swiper": "^6.3.5"
+    "swiper": "^6.3.5",
+    "yup": "^0.32.8"
   },
   "scripts": {
     "start": "react-scripts start",

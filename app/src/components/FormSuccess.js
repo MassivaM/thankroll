@@ -7,7 +7,7 @@ const FormSuccess = () => {
         They're in the loop!
       </h1>
       <p style={{ marginTop: 30, fontWeight: 400 }}>
-        Thanks for contributing, they will soon receive a personalized emails{" "}
+        Thanks for contributing, they will soon receive a personalized email{" "}
         <br></br>
         where we've gathered all of their thank you messages
       </p>

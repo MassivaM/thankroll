@@ -5,7 +5,9 @@ import useForm from "../components/UseForm";
 import thankloop from "../assets/thankloop-white-logo.svg";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../context/authContext";
-
+import TextField from "@material-ui/core/TextField";
+import { useFormik } from "formik";
+import * as yup from "yup";
 const errors = useForm(validate);
 export default class LoginForm extends Component {
   constructor(props) {
@@ -13,7 +15,23 @@ export default class LoginForm extends Component {
     this.emailEl = React.createRef();
     this.passwordEl = React.createRef();
   }
+  validationSchema = yup.object({
+    email: yup
+      .string("Enter their email")
+      .email("Enter a valid email")
+      .required("Email is required"),
+    firstName: yup
+      .string("Enter their first name")
+      .required("First name is required"),
+    profession: yup
+      .string("Enter their first name")
+      .required("Profession is required"),
+    description: yup
+      .string("Enter their first name")
+      .required("Description is required"),
 
+    accept: yup.bool().oneOf([true], "Accept Terms & Conditions is required"),
+  });
   static contextType = AuthContext;
 
   submitHandler = (event) => {

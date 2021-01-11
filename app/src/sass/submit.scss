@@ -152,3 +152,35 @@
   transform: translate(-50%, -50%);
   /* bring your own prefixes */
 }
+.input-file {
+  border: 1px solid #adadad;
+  border-radius: 0 6px 6px 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  left: -6px;
+  padding: 6px;
+  position: relative;
+  vertical-align: middle;
+  display: block;
+  &:focus {
+    outline: none;
+  }
+  > button {
+    background: #fff;
+    border: 1px solid #adadad;
+    border-radius: 6px 0 0 6px;
+    max-width: 105px;
+    outline: none;
+    padding: 6px 12px 6px 6px;
+    vertical-align: middle;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+.input-file::-webkit-file-upload-button {
+  background-color: transparent;
+  border: 1px solid #999;
+  border-radius: 3px;
+}
