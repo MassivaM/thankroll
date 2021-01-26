@@ -5,6 +5,8 @@ const isAuth = require("./middleware/is-auth");
 const mongoose = require("mongoose");
 const graphqlSchema = require("./graphql/schema/index");
 const graphqlResolver = require("./graphql/resolvers/index");
+const schedule = require('node-schedule');
+const gl = require("./middleware/GenerateLetter");
 
 const app = express();
 
@@ -39,3 +41,5 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+schedule.scheduleJob('*/5 * * * * *', function(fireDate) { gl.GenerateLetter(fireDate); });
