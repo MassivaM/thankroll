@@ -1,7 +1,13 @@
 const Profile = require("../../models/profiles");
 const User = require("../../models/user");
 const { transformProfile } = require("./merge");
+const cloudinary = require("cloudinary");
 
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 module.exports = {
   profiles: async () => {
     try {
@@ -44,6 +50,16 @@ module.exports = {
     } catch (err) {
       console.log(err);
       throw err;
+    }
+  },
+  uploadImage: async (filename) => {
+    filename = `../../uploads/${filename}`;
+
+    try {
+      const picture = await cloudinary.v2.uploader.upload(filename);
+      return `${picture.public_id}.${picture.format}`;
+    } catch (error) {
+      throw new Error(error);
     }
   },
 };
