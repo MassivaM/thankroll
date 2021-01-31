@@ -12,6 +12,10 @@ const thankingSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    message: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

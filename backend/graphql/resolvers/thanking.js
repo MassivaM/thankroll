@@ -24,7 +24,7 @@ module.exports = {
       });
       const thank = new Thanking({
         message: args.message,
-        user: "unauthenticated user",
+        user: "5ff0c0961be1ed5112f0cfaa",
         profile: fetchedProfile,
       });
       const result = await thank.save();
