@@ -1,32 +1,32 @@
-const { profiles } = require("../graphql/resolvers/merge");
+const Profile = require("../graphql/resolvers/profiles");
+const DateUtil = require("../helpers/date");
+const { profileThankings } = require("../graphql/resolvers/merge");
 
 module.exports = {
-  GenerateLetter: async (args) => {
-  
-    console.log(args + ' ' + profiles);
-  
-    /*if (!values.firstName.trim()) {
-      errors.firstName = "First name required";
+  generateLetter: async (profile) => {
+    try{
+      var thankings = await profileThankings(profile._id);
+      console.log(profileId);
+      console.log(thankings);
+    } catch (err) {
+      console.log(err);
     }
-    // else if (!/^[A-Za-z]+/.test(values.name.trim())) {
-    //   errors.name = 'Enter a valid name';
-    // }
-    if (!values.description.trim()) {
-      errors.text = "Description required";
-    }
-    if (!values.accept) {
-      errors.accept = "Must accept the Thankloop usage conditions";
-    }
-    if (!values.profession.trim()) {
-      errors.profession = "Profession required";
-    }
-  
-    if (!values.email) {
-      errors.email = "Email required";
-    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-      errors.email = "Email address is invalid";
-    }
-  
-    return errors;*/
+  },
+
+  verifyProfiles: async (args) => {
+    
+    var fetchedProfiles = await Profile.profiles();
+
+    fetchedProfiles.forEach(async (profile,index) =>{ 
+
+      var daysBetween = DateUtil.daysBetween(new Date(profile.date), args);
+
+      console.log(daysBetween + " days since profile creation.");
+
+      if(daysBetween >= 3){
+        console.log("Generation letter for profile " + profile.firstName);
+        await module.exports.generateLetter(profile);
+      }
+    })
   }
 }

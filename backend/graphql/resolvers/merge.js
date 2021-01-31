@@ -1,5 +1,6 @@
 const Profile = require("../../models/profiles");
 const User = require("../../models/user");
+const Thanking = require("../../models/thanking");
 const { dateToString } = require("../../helpers/date");
 const transformProfile = (profile) => {
   return {
@@ -53,5 +54,17 @@ const user = async (userId) => {
   }
 };
 
+const profileThankings = async (profileId) => {
+  try {
+    const thankings = await Thanking.find({ profile: profileId });
+    return thankings.map((thank) => {
+      return transformThanking(thank);
+    });
+  } catch (err) {
+    throw err
+  }
+};
+
 exports.transformProfile = transformProfile;
 exports.transformThanking = transformThanking;
+exports.profileThankings = profileThankings;
