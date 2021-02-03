@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useForm = (callback, validate) => {
+const useForm = (callback) => {
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
@@ -63,14 +63,22 @@ const useForm = (callback, validate) => {
     };
   };
 
-  const uploadImage = (base64EncodedImage) => {
+  const uploadImage = async (base64EncodedImage) => {
     console.log(base64EncodedImage);
+    try {
+      await fetch("/api/upload", {
+        method: "POST",
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { "Content-type": "application/json" },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     //const profile = { firstName, lastName, profession, description };
-
-    setErrors(validate(values));
+    if (!previewSource) return;
     uploadImage(previewSource);
     setIsSubmitting(true);
   };

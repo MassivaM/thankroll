@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
+import useForm from "./UseForm";
 const validationSchema = yup.object({
   email: yup
     .string("Enter their email")
@@ -59,6 +60,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 const FormSignup = ({ submitForm }) => {
   const classes = useStyles();
+  const {
+    handleChange,
+    handleSubmit,
+    fileSelectedHandler,
+    handleCheck,
+    previewSource,
+    fileUploadHandler,
+    values,
+    errors,
+  } = useForm(submitForm);
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -70,9 +81,6 @@ const FormSignup = ({ submitForm }) => {
       accept: false,
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
   });
   return (
     <AuthContext.Consumer>
@@ -97,7 +105,7 @@ const FormSignup = ({ submitForm }) => {
             )}
             <div className={classes.root}></div>
             <form
-              onSubmit={formik.handleSubmit}
+              onSubmit={handleSubmit}
               className={
                 context.token ? `${classes.root}` : `${classes.rootblurred}`
               }
@@ -192,8 +200,22 @@ const FormSignup = ({ submitForm }) => {
                 component="label"
               >
                 Upload a picture of them
-                <input type="file" hidden />
+                <input
+                  type="file"
+                  onChange={fileSelectedHandler}
+                  value={values.picture}
+                  hidden
+                />
               </Button>
+              {previewSource && (
+                <div>
+                  <img
+                    src={previewSource}
+                    alt="chosen"
+                    style={{ height: "200px" }}
+                  />
+                </div>
+              )}
               <br></br>
               <FormControl required>
                 <FormControlLabel
