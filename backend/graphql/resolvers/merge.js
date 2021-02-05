@@ -6,7 +6,7 @@ const transformProfile = (profile) => {
   return {
     ...profile._doc,
     _id: profile.id,
-    date: dateToString(profile._doc.date),
+    createdAt: dateToString(profile._doc.createdAt),
     creator: user.bind(this, profile.creator),
   };
 };

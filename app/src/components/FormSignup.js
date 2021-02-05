@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AuthContext from "../context/authContext";
 import LoginForm from "./LoginForm";
 import ReactDOM from "react-dom";
-import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
+import useForm from "./UseForm";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 const validationSchema = yup.object({
   email: yup
     .string("Enter their email")
@@ -27,7 +28,8 @@ const validationSchema = yup.object({
 
   accept: yup.boolean().oneOf([true], "Accept Terms & Conditions is required"),
 });
-const useStyles = makeStyles((theme) => ({
+
+const styles = (theme) => ({
   root: {
     "& .MuiTextField-root": {
       marginTop: theme.spacing(2),
@@ -56,50 +58,143 @@ const useStyles = makeStyles((theme) => ({
     filter: "blur(5px)",
     paddingTop: 0,
   },
-}));
-const FormSignup = ({ submitForm }) => {
-  const classes = useStyles();
-  const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      profession: "",
-      description: "",
-      picture: "",
-      email: "",
-      accept: false,
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
-  return (
-    <AuthContext.Consumer>
-      {(context) => {
-        return (
-          <div style={{ padding: 0 }}>
-            {!context.token && (
-              <div className="login-submit">
-                <h1
-                  style={{
-                    fontSize: "2.7vh",
-                    fontFamily: "Baloo 2",
-                    fontWeight: 600,
-                    color: "#0049b8",
-                    paddingLeft: "1.8vh",
-                  }}
-                >
-                  Please login to submit someone
-                </h1>
-                <LoginForm />
-              </div>
-            )}
-            <div className={classes.root}></div>
+});
+
+class FormSignup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      previewSource: "",
+      isSubmitting: false,
+      unprocessedPicture: "",
+    };
+  }
+  static contextType = AuthContext;
+
+  previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      this.setState({ previewSource: reader.result });
+    };
+  };
+  fileSelectedHandler = (event) => {
+    const picture = event.target.files[0];
+    this.previewFile(picture);
+    //const value = event.target.files[0];
+  };
+  fileUploadHandler = () => {
+    console.log("success");
+  };
+
+  uploadImage = async (base64EncodedImage) => {
+    /*try {
+      await fetch("/api/upload", {
+        method: "POST",
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { "Content-type": "application/json" },
+      });
+    } catch (error) {
+      console.log(error);
+    }*/
+    console.log("test");
+  };
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <div style={{ padding: 0 }}>
+        {!this.context.token && (
+          <div className="login-submit">
+            <h1
+              style={{
+                fontSize: "2.7vh",
+                fontFamily: "Baloo 2",
+                fontWeight: 600,
+                color: "#0049b8",
+                paddingLeft: "1.8vh",
+              }}
+            >
+              Please login to submit someone
+            </h1>
+            <LoginForm />
+          </div>
+        )}
+        <div className={classes.root}></div>
+        <Formik
+          initialValues={{
+            firstName: "",
+            lastName: "",
+            profession: "",
+            description: "",
+            picture: "",
+            email: "",
+            accept: false,
+          }}
+          validationSchema={validationSchema}
+          onSubmit={(values) => {
+            alert(JSON.stringify(values, null, 2));
+
+            if (!this.state.previewSource) return;
+            this.uploadImage(this.state.previewSource);
+
+            /**
+             *
+             * Connexion to API
+             *
+             */
+
+            const requestBody = {
+              query: `
+        mutation {
+         createProfile(profileinput: {firstName: "${values.firstName}", lastName: "${values.lastName}", description: "${values.description}", profession: "${values.profession}", email: "${values.email}", picture: "", accept: ${values.accept}}),{
+          _id
+          firstName
+          lastName
+          description
+          profession
+          email
+          accept 
+          creator{
+            _id
+            email
+          }
+        }
+      }
+      `,
+            };
+            const token = this.context.token;
+            fetch("http://localhost:4000/graphql", {
+              method: "POST",
+              body: JSON.stringify(requestBody),
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+            })
+              .then((res) => {
+                if (res.status !== 200 && res.status !== 201) {
+                  throw new Error("Failed!");
+                }
+                return res.json();
+              })
+              .then((resData) => {
+                console.log(resData);
+                this.setState({ isSubmitting: true });
+              })
+
+              .catch((err) => {
+                console.log(err);
+              });
+          }}
+        >
+          {(props) => (
             <form
-              onSubmit={formik.handleSubmit}
+              onSubmit={props.handleSubmit}
               className={
-                context.token ? `${classes.root}` : `${classes.rootblurred}`
+                this.context.token
+                  ? `${classes.root}`
+                  : `${classes.rootblurred}`
               }
             >
               <h1
@@ -120,14 +215,14 @@ const FormSignup = ({ submitForm }) => {
                 id="firstName"
                 name="firstName"
                 label="First Name"
-                disabled={context.token ? false : true}
-                value={formik.values.firstName}
-                onChange={formik.handleChange}
+                disabled={this.context.token ? false : true}
+                value={props.values.firstName}
+                onChange={props.handleChange}
                 variant="outlined"
                 error={
-                  formik.touched.firstName && Boolean(formik.errors.firstName)
+                  props.touched.firstName && Boolean(props.errors.firstName)
                 }
-                helperText={formik.touched.firstName && formik.errors.firstName}
+                helperText={props.touched.firstName && props.errors.firstName}
               />
               <TextField
                 fullWidth
@@ -135,10 +230,10 @@ const FormSignup = ({ submitForm }) => {
                 name="lastName"
                 label="Last Name"
                 variant="outlined"
-                disabled={context.token ? false : true}
-                value={formik.values.lastName}
-                onChange={formik.handleChange}
-                helperText={formik.touched.lastName}
+                disabled={this.context.token ? false : true}
+                value={props.values.lastName}
+                onChange={props.handleChange}
+                helperText={props.touched.lastName}
               />
               <TextField
                 fullWidth
@@ -146,15 +241,13 @@ const FormSignup = ({ submitForm }) => {
                 name="profession"
                 label="Profession"
                 variant="outlined"
-                disabled={context.token ? false : true}
-                value={formik.values.profession}
-                onChange={formik.handleChange}
+                disabled={this.context.token ? false : true}
+                value={props.values.profession}
+                onChange={props.handleChange}
                 error={
-                  formik.touched.profession && Boolean(formik.errors.profession)
+                  props.touched.profession && Boolean(props.errors.profession)
                 }
-                helperText={
-                  formik.touched.profession && formik.errors.profession
-                }
+                helperText={props.touched.profession && props.errors.profession}
               />
               <TextField
                 fullWidth
@@ -162,11 +255,11 @@ const FormSignup = ({ submitForm }) => {
                 name="email"
                 label="Their email"
                 variant="outlined"
-                disabled={context.token ? false : true}
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
+                disabled={this.context.token ? false : true}
+                value={props.values.email}
+                onChange={props.handleChange}
+                error={props.touched.email && Boolean(props.errors.email)}
+                helperText={props.touched.email && props.errors.email}
               />
               <TextField
                 fullWidth
@@ -175,42 +268,55 @@ const FormSignup = ({ submitForm }) => {
                 multiline
                 rows={4}
                 variant="outlined"
-                disabled={context.token ? false : true}
-                value={formik.values.description}
-                onChange={formik.handleChange}
+                disabled={this.context.token ? false : true}
+                value={props.values.description}
+                onChange={props.handleChange}
                 error={
-                  formik.touched.description &&
-                  Boolean(formik.errors.description)
+                  props.touched.description && Boolean(props.errors.description)
                 }
                 helperText={
-                  formik.touched.description && formik.errors.description
+                  props.touched.description && props.errors.description
                 }
               />
               <Button
                 variant="contained"
-                disabled={context.token ? false : true}
+                disabled={this.context.token ? false : true}
                 component="label"
               >
                 Upload a picture of them
-                <input type="file" hidden />
+                <input
+                  type="file"
+                  onChange={this.fileSelectedHandler}
+                  value={this.state.unprocessedPicture}
+                  hidden
+                />
               </Button>
+              {this.state.previewSource && (
+                <div>
+                  <img
+                    src={this.state.previewSource}
+                    alt="chosen"
+                    style={{ height: "200px" }}
+                  />
+                </div>
+              )}
               <br></br>
               <FormControl required>
                 <FormControlLabel
                   htmlFor="accept"
-                  //disabled={context.token ? false : true}
-                  value={formik.values.accept}
+                  //disabled={this.context.token ? false : true}
+                  value={props.values.accept}
                   control={
                     <Checkbox
                       color="primary"
                       name="accept"
                       id="accept"
-                      onChange={formik.handleChange}
+                      onChange={props.handleChange}
                       style={{ margin: 10 }}
                       error={
-                        formik.touched.accept && Boolean(formik.errors.accept)
+                        props.touched.accept && Boolean(props.errors.accept)
                       }
-                      helperText={formik.touched.accept && formik.errors.accept}
+                      helperText={props.touched.accept && props.errors.accept}
                     />
                   }
                   label="I have gotten approval from this person to publish their
@@ -222,18 +328,18 @@ const FormSignup = ({ submitForm }) => {
                 color="primary"
                 variant="contained"
                 fullWidth
-                //disabled={context.token ? false : true}
+                //disabled={this.context.token ? false : true}
                 type="submit"
               >
                 Submit
               </Button>
             </form>
-          </div>
-        );
-      }}
-    </AuthContext.Consumer>
-  );
-};
+          )}
+        </Formik>
+      </div>
+    );
+  }
+}
 
-export default FormSignup;
+export default withStyles(styles, { withTheme: true })(FormSignup);
 /// <Button onClick={fileUploadHandler}>Upload</Button>

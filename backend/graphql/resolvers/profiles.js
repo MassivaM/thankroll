@@ -38,7 +38,6 @@ module.exports = {
       profession: args.profileinput.profession,
       picture: args.profileinput.picture,
       email: args.profileinput.email,
-      date: new Date(args.profileinput.date),
       accept: args.profileinput.accept,
       creator: req.userId,
     });

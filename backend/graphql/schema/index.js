@@ -20,7 +20,7 @@ module.exports = buildSchema(`
       picture: String
       email:String!
       accept:Boolean!
-      date: String!
+      createdAt: String!
       creator:User!
      
     }
@@ -31,6 +31,7 @@ module.exports = buildSchema(`
      createdProfiles: [Profile!]
      firstName: String!
      lastName: String
+     peopleThanked : Int!
    }
    type AuthData{
        userId: ID!
@@ -45,7 +46,7 @@ module.exports = buildSchema(`
       picture: String
       email:String!
       accept:Boolean!
-      date: String!
+  
     }
     input UserInput{
       email: String!

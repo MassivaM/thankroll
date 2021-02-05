@@ -16,6 +16,7 @@ module.exports = {
         password: hashedPassword,
         firstName: args.userinput.firstName,
         lastName: args.userinput.lastName,
+        peopleThanked: 0,
       });
 
       const result = await user.save();

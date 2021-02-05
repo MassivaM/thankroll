@@ -27,23 +27,23 @@ const profileSchema = new Schema({
     type: String,
     required: true,
   },
-  date: {
-    type: Date,
-    required: true,
-  },
-  accept: {
-    type: Boolean,
-    required: true,
-  },
   active: {
     type: Boolean,
     required: true,
   },
+    accept: {
+      type: Boolean,
+      required: true,
+    },
 
-  creator: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+    creator: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
-});
+  {
+    timestamps: true,
+  }
+);
 
 module.exports = mongoose.model("Profile", profileSchema);
