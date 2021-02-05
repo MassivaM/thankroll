@@ -7,7 +7,6 @@ import Swiper, { Navigation, Pagination } from "swiper";
 import fire from "../assets/fire.jpg";
 import send from "../assets/send.png";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
-import profiles from "../assets/data/profiles/profiles.js";
 import Stats from "./Stats.js";
 
 // configure Swiper to use modules
@@ -17,6 +16,7 @@ Swiper.use([Navigation, Pagination]);
 
 export default class Swipper extends React.Component {
   state = {
+    profiles: [],
     name: "",
     firstName: "",
     profession: "",
@@ -34,58 +34,109 @@ export default class Swipper extends React.Component {
     this.changeText = this.changeText.bind(this);
     this.changeEmail = this.changeEmail.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.fetchProfiles = this.fetchProfiles.bind(this);
   }
 
   componentDidMount() {
-    var value = Math.random(profiles.length - 1);
+    this.fetchProfiles();
+
+    var value = Math.random(this.state.profiles.length - 1);
+
     var position = Math.round(value);
     var array = [];
-    for (var i = 0; i < profiles.length; i++) {
+    for (var i = 0; i < this.state.profiles.length; i++) {
       array.push(i);
     }
     array.sort(function (a, b) {
       return 0.5 - Math.random();
     });
-    this.setState({
-      name: profiles[array[0]].name,
-      firstName: profiles[array[0]].firstName,
-      profession: profiles[array[0]].profession,
-      description: profiles[array[0]].description,
-      image: profiles[array[0]].image,
-      positionarray: [...array],
-    });
+
+    this.setState(
+      {
+        name: this.state.profiles[array[0]].firstName,
+        firstName: this.state.profiles[array[0]].firstName,
+        profession: this.state.profiles[array[0]].profession,
+        description: this.state.profiles[array[0]].description,
+        image: this.state.profiles[array[0]].picture,
+        positionarray: [...array],
+      },
+      () => console.log(this.state.profiles[array[0]].firstName)
+    );
+  }
+
+  fetchProfiles() {
+    const requestBody = {
+      query: `
+       query {
+         profiles{
+          firstName
+          lastName
+          description
+          profession
+          picture
+        }
+      }
+      `,
+    };
+
+    fetch("http://localhost:4000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Failed!");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        this.setState({ profiles: resData.data.profiles });
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   changeProfile = () => {
     if (this.state.positionarray.length > 1) {
       this.state.positionarray.shift();
 
+      const fullName = `${
+        this.state.profiles[this.state.positionarray[0]].firstName
+      } + " " + ${this.state.profiles[this.state.positionarray[0]].lastName}`;
       this.setState({
-        name: profiles[this.state.positionarray[0]].name,
-        firstName: profiles[this.state.positionarray[0]].firstName,
-        profession: profiles[this.state.positionarray[0]].profession,
-        description: profiles[this.state.positionarray[0]].description,
-        image: profiles[this.state.positionarray[0]].image,
+        name: fullName,
+        firstName: this.state.profiles[this.state.positionarray[0]].firstName,
+        profession: this.state.profiles[this.state.positionarray[0]].profession,
+        description: this.state.profiles[this.state.positionarray[0]]
+          .description,
+        image: this.state.profiles[this.state.positionarray[0]].picture,
         textValue: "",
         email: "",
         visible: false,
       });
     } else {
       var array = [];
-      for (var i = 0; i < profiles.length; i++) {
+      for (var i = 0; i < this.state.profiles.length; i++) {
         array.push(i);
       }
       array.sort(function (a, b) {
         return 0.5 - Math.random();
       });
-
+      const fullName = `${
+        this.state.profiles[this.state.positionarray[0]].firstName
+      } + " " + ${this.state.profiles[this.state.positionarray[0]].lastName}`;
       this.setState({
         positionarray: [...array],
-        name: profiles[array[0]].name,
-        firstName: profiles[array[0]].firstName,
-        profession: profiles[array[0]].profession,
-        description: profiles[array[0]].description,
-        image: profiles[array[0]].image,
+        name: fullName,
+        firstName: this.state.profiles[array[0]].firstName,
+        profession: this.state.profiles[array[0]].profession,
+        description: this.state.profiles[array[0]].description,
+        image: this.state.profiles[array[0]].picture,
         textValue: "",
         email: "",
         visible: false,
@@ -105,7 +156,6 @@ export default class Swipper extends React.Component {
     event.preventDefault();
   }
   render() {
-    console.log(this.state.visible);
     return (
       <div>
         <Stats />

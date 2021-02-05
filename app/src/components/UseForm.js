@@ -77,7 +77,7 @@ const useForm = (callback) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    //const profile = { firstName, lastName, profession, description };
+    console.log(values.firstName);
     if (!previewSource) return;
     uploadImage(previewSource);
     setIsSubmitting(true);

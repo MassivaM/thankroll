@@ -25,6 +25,10 @@ const userSchema = new Schema({
       ref: "Profile",
     },
   ],
+  peopleThanked: {
+    type: Number,
+    required: false,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
