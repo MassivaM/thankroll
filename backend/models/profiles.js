@@ -35,6 +35,10 @@ const profileSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  active: {
+    type: Boolean,
+    required: true,
+  },
 
   creator: {
     type: Schema.Types.ObjectId,

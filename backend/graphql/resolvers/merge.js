@@ -32,15 +32,6 @@ const profiles = async (profileIds) => {
     throw err;
   }
 };
-
-const singleProfile = async (profileId) => {
-  try {
-    const profile = await Profile.findById(profileId);
-    return transformProfile(profile);
-  } catch (err) {
-    throw err;
-  }
-};
 const user = async (userId) => {
   try {
     const user = await User.findById(userId);

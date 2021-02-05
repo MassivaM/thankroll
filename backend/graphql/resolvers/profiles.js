@@ -19,6 +19,14 @@ module.exports = {
       throw err;
     }
   },
+  singleProfile: async (profileId) => {
+    try {
+      const profile = await Profile.findById(profileId);
+      return transformProfile(profile);
+    } catch (err) {
+      throw err;
+    }
+  },
   createProfile: async (args, req) => {
     if (!req.isAuth) {
       throw new Error("Unauthenticated");
@@ -49,6 +57,15 @@ module.exports = {
       return createdprofile;
     } catch (err) {
       console.log(err);
+      throw err;
+    }
+  },
+  setActive: async (profileId, active) =>{
+    try{
+      const profile = await this.singleProfile(profileId);
+      profile.active = active;
+      await profile.save();
+    } catch (err) {
       throw err;
     }
   },
