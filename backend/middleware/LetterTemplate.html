@@ -8,8 +8,9 @@
             table, th, td
             {
                 font-family: Verdana, Geneva, Tahoma, sans-serif;
-                text-align: center;
                 margin: auto;
+                padding:0px;
+                text-align: center;
             }
             th
             {
@@ -21,24 +22,67 @@
             {
                 font-size: 150%;
             }
+            .spacer
+            {
+                height: 10%;
+            }
+            .message
+            {
+                height: 10%;
+            }
+            .blueBar
+            {
+                width:10%;
+                text-align: left;
+                background-color: #37CBE2;
+                color: white;
+                padding-left: 10%;
+                text-transform: uppercase;
+            }
         </style>
     </head>
     <body>
-        <table style="height:50%; width:60%">
+        <table style="height: 60%;">
             <tr>
-                <td style="height:20%;">
-                  <img style="max-width:30%;" src="thankloopLogoCropped.png" alt="ThankLoop">
+                <td class="blueBar"></td>
+                <td>
+                    <table style="height:100%; width:80%;">
+                        <tr>
+                            <td style="height:10%;">
+                              <img style="max-width:40%;" src="thankloopLogoCropped.png" alt="ThankLoop">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="height:10%;">You were nominated by your colleague #firstName# #lastName#</td>
+                        </tr>
+                        <tr>
+                            <td style="height:25%;">#description#</td>
+                        </tr>
+                        <tr>
+                            <th style="height:10%;">And here is what people have to say to you...</td>
+                        </tr>
+                    </table>
                 </td>
-            </tr>
-            <tr>
-                <th style="height:10%;">You were nominated by your colleague #FirstName# #LastName#</td>
-            </tr>
-            <tr>
-                <td>#Description#</td>
-            </tr>
-            <tr>
-                <th style="height:10%;">And here is what people have to say to you...</td>
+                <td class="blueBar"></td>
             </tr>
           </table>
+          <table style="height: 90%; width:100%">
+                <tr>
+                    <td>
+                        <table style="height: 80%; width:80%;">
+                            #messages#
+                        </table>
+                    </td>
+                    <td style="width:40%;">
+                        <img style="max-width:80%;" src="profile.jpg">
+                    </td>
+                </tr>
+                <tr style="height:10%">
+                    <td class="blueBar" colspan="2">
+                        Thankloop.io
+                    </td>
+                </tr>
+            </table>
+
     </body>
 </html>
