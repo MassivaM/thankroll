@@ -55,8 +55,8 @@ module.exports = {
         host: "smtp-relay.sendinblue.com",
         port: 587,
         auth: {
-          user: "abboudalain@gmail.com",
-          pass: "dNHhX35rVRqjDUMQ"
+          user: "",
+          pass: ""
         }
       });
 
