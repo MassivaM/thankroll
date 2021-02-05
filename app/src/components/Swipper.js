@@ -15,19 +15,6 @@ Swiper.use([Navigation, Pagination]);
 // init Swiper:
 
 export default class Swipper extends React.Component {
-  state = {
-    profiles: [],
-    name: "",
-    firstName: "",
-    profession: "",
-    image: "fire.jpg",
-    description: "",
-    email: "",
-    positionarray: [],
-    visible: false,
-    textValue: "",
-    email: "",
-  };
   constructor(props) {
     super(props);
     this.changeProfile = this.changeProfile.bind(this);
@@ -35,35 +22,76 @@ export default class Swipper extends React.Component {
     this.changeEmail = this.changeEmail.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchProfiles = this.fetchProfiles.bind(this);
+
+    this.state = {
+      profiles: [
+        {
+          firstName: "",
+          lastName: "",
+          profession: "",
+          image: "fire.jpg",
+          description: "",
+          email: "",
+        },
+      ],
+      name: "",
+      firstName: "",
+      profession: "",
+      image: "fire.jpg",
+      description: "",
+      email: "",
+      positionarray: [],
+      visible: false,
+      textValue: "",
+      email: "",
+      increment: 0,
+    };
   }
 
   componentDidMount() {
     this.fetchProfiles();
 
-    var value = Math.random(this.state.profiles.length - 1);
-
-    var position = Math.round(value);
-    var array = [];
-    for (var i = 0; i < this.state.profiles.length; i++) {
-      array.push(i);
-    }
-    array.sort(function (a, b) {
-      return 0.5 - Math.random();
-    });
-
-    this.setState(
-      {
-        name: this.state.profiles[array[0]].firstName,
-        firstName: this.state.profiles[array[0]].firstName,
-        profession: this.state.profiles[array[0]].profession,
-        description: this.state.profiles[array[0]].description,
-        image: this.state.profiles[array[0]].picture,
-        positionarray: [...array],
-      },
-      () => console.log(this.state.profiles[array[0]].firstName)
-    );
+    /*
+    );*/
   }
-
+  componentDidUpdate() {
+    this.initalSetup(this.state.profiles);
+  }
+  initalSetup(profiles) {
+    if (
+      profiles !==
+        [
+          {
+            firstName: "",
+            lastName: "",
+            profession: "",
+            image: "fire.jpg",
+            description: "",
+            email: "",
+          },
+        ] &&
+      this.state.increment == 0
+    ) {
+      var array = [];
+      for (var i = 0; i < this.state.profiles.length; i++) {
+        array.push(i);
+      }
+      array.sort(function (a, b) {
+        return 0.5 - Math.random();
+      });
+      const fullName = `${profiles[array[0]].firstName} ${
+        profiles[array[0]].lastName
+      }`;
+      this.setState({
+        name: fullName,
+        firstName: profiles[array[0]].firstName,
+        profession: profiles[array[0]].profession,
+        description: profiles[array[0]].description,
+        positionarray: [...array],
+        increment: 1,
+      });
+    }
+  }
   fetchProfiles() {
     const requestBody = {
       query: `
@@ -107,14 +135,14 @@ export default class Swipper extends React.Component {
 
       const fullName = `${
         this.state.profiles[this.state.positionarray[0]].firstName
-      } + " " + ${this.state.profiles[this.state.positionarray[0]].lastName}`;
+      } ${this.state.profiles[this.state.positionarray[0]].lastName}`;
       this.setState({
         name: fullName,
         firstName: this.state.profiles[this.state.positionarray[0]].firstName,
         profession: this.state.profiles[this.state.positionarray[0]].profession,
         description: this.state.profiles[this.state.positionarray[0]]
           .description,
-        image: this.state.profiles[this.state.positionarray[0]].picture,
+
         textValue: "",
         email: "",
         visible: false,
@@ -129,14 +157,14 @@ export default class Swipper extends React.Component {
       });
       const fullName = `${
         this.state.profiles[this.state.positionarray[0]].firstName
-      } + " " + ${this.state.profiles[this.state.positionarray[0]].lastName}`;
+      } ${this.state.profiles[this.state.positionarray[0]].lastName}`;
       this.setState({
         positionarray: [...array],
         name: fullName,
         firstName: this.state.profiles[array[0]].firstName,
         profession: this.state.profiles[array[0]].profession,
         description: this.state.profiles[array[0]].description,
-        image: this.state.profiles[array[0]].picture,
+
         textValue: "",
         email: "",
         visible: false,
