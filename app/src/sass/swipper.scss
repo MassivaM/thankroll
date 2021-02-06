@@ -239,7 +239,7 @@ body {
   display: inline-block;
 
   // we want rounded corners no matter the size of the field
-  border-radius: 9999em;
+  border-radius: 1em;
 
   // style of the actual input field
   *:not(span) {
@@ -312,4 +312,10 @@ body {
 input {
   border: 1px solid #000;
   border-radius: 0%;
+}
+.thank-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

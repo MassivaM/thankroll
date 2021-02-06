@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import thankloop from "../assets/thankloop-white-logo.svg";
 import rightarrow from "../assets/right-arrow.png";
+import { withStyles } from "@material-ui/core/styles";
 import "swiper/swiper-bundle.css";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Swiper, { Navigation, Pagination } from "swiper";
@@ -8,13 +9,22 @@ import fire from "../assets/fire.jpg";
 import send from "../assets/send.png";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import Stats from "./Stats.js";
-
+import Modal from "@material-ui/core/Modal";
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
-
+const styles = (theme) => ({
+  paper: {
+    position: "absolute",
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+});
 // init Swiper:
 
-export default class Swipper extends React.Component {
+class Swipper extends React.Component {
   constructor(props) {
     super(props);
     this.changeProfile = this.changeProfile.bind(this);
@@ -23,6 +33,7 @@ export default class Swipper extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchProfiles = this.fetchProfiles.bind(this);
     this.handleThank = this.handleThank.bind(this);
+    this.handleClose = this.handleClose.bind(this);
     this.state = {
       profiles: [
         {
@@ -221,9 +232,59 @@ export default class Swipper extends React.Component {
     this.setState({ textValue: "", email: "", visible: false });
   };
   handleThank() {
-    this.setState({ visible: !this.state.visible });
+    this.setState({ visible: true });
+  }
+  handleClose() {
+    this.setState({ visible: false });
   }
   render() {
+    const { classes } = this.props;
+    const body = (
+      <div>
+        <form className="thank-form" onSubmit={this.handleSubmit}>
+          <p className="para">
+            <span className="input">
+              <input
+                type="text"
+                placeholder="Enter your email here if you'd like to be contacted"
+                value={this.state.email}
+                onChange={this.changeEmail}
+                style={{
+                  position: "absolute",
+                  top: 10,
+                  left: 100,
+                  zIndex: 15,
+                  width: 300,
+                  fontSize: 13,
+                  borderRadius: 0,
+                }}
+              ></input>
+              <textarea
+                className="text2"
+                rows="4"
+                cols="40"
+                value={this.state.textValue}
+                onChange={this.changeText}
+                placeholder="Enter your message here, it'll go straight to their inbox"
+              ></textarea>
+
+              <span></span>
+            </span>
+          </p>
+          <button
+            type="submit"
+            style={{
+              position: "relative",
+              marginLeft: "40em",
+              top: -30,
+              zIndex: 15,
+            }}
+          >
+            <SendRoundedIcon style={{ color: "#70a1ff" }} />
+          </button>
+        </form>
+      </div>
+    );
     return (
       <div>
         <Stats />
@@ -242,59 +303,19 @@ export default class Swipper extends React.Component {
               <span>Thank {this.state.firstName}</span>
             </button>
           </div>
-
+          <Modal open={this.state.visible} onClose={this.handleClose}>
+            {body}
+          </Modal>
           <button className="next" onClick={this.changeProfile}>
             <img src={rightarrow} />
           </button>
-        </div>
-        <div
-          className={this.state.visible ? "fadeIn2" : "fadeOut2"}
-          style={{ marginTop: 300, marginLeft: 320 }}
-        >
-          <form className="thank-form" onSubmit={this.handleSubmit}>
-            <p className="para">
-              <span className="input">
-                <input
-                  type="text"
-                  placeholder="Enter your email here if you'd like to be contacted"
-                  value={this.state.email}
-                  onChange={this.changeEmail}
-                  style={{
-                    position: "absolute",
-                    top: 10,
-                    left: 100,
-                    zIndex: 15,
-                    width: 300,
-                    fontSize: 13,
-                    borderRadius: 0,
-                  }}
-                ></input>
-                <textarea
-                  className="text2"
-                  rows="4"
-                  cols="40"
-                  value={this.state.textValue}
-                  onChange={this.changeText}
-                  placeholder="Enter your message here, it'll go straight to their inbox"
-                ></textarea>
-
-                <span></span>
-              </span>
-            </p>
-            <button
-              type="submit"
-              style={{
-                position: "relative",
-                marginLeft: "36em",
-                top: -30,
-                zIndex: 15,
-              }}
-            >
-              <SendRoundedIcon style={{ color: "#70a1ff" }} />
-            </button>
-          </form>
         </div>
       </div>
     );
   }
 }
+
+export default withStyles(styles, { withTheme: true })(Swipper);
+/**<div className={this.state.visible ? "fadeIn2" : "fadeOut2"}>
+          
+        </div> */
