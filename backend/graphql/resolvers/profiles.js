@@ -11,7 +11,7 @@ cloudinary.config({
 module.exports = {
   profiles: async () => {
     try {
-      const profiles = await Profile.find();
+      const profiles = await Profile.find({ active: true });
       return profiles.map((profile) => {
         return transformProfile(profile);
       });
@@ -32,6 +32,7 @@ module.exports = {
       email: args.profileinput.email,
       accept: args.profileinput.accept,
       creator: req.userId,
+      active: true,
     });
     let createdprofile;
     try {
@@ -48,6 +49,15 @@ module.exports = {
       return createdprofile;
     } catch (err) {
       console.log(err);
+      throw err;
+    }
+  },
+  setActive: async (profileId, active) =>{
+    try{
+      const profile = await Profile.findById(profileId);
+      profile.active = active;
+      await profile.save();
+    } catch (err) {
       throw err;
     }
   },

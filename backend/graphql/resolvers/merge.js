@@ -1,5 +1,6 @@
 const Profile = require("../../models/profiles");
 const User = require("../../models/user");
+const Thanking = require("../../models/thanking");
 const { dateToString } = require("../../helpers/date");
 const transformProfile = (profile) => {
   return {
@@ -31,15 +32,6 @@ const profiles = async (profileIds) => {
     throw err;
   }
 };
-
-const singleProfile = async (profileId) => {
-  try {
-    const profile = await Profile.findById(profileId);
-    return transformProfile(profile);
-  } catch (err) {
-    throw err;
-  }
-};
 const user = async (userId) => {
   try {
     const user = await User.findById(userId);
@@ -49,9 +41,32 @@ const user = async (userId) => {
       createdProfiles: profiles.bind(this, user._doc.createdProfiles),
     };
   } catch (err) {
+    return null
+    //throw err;
+  }
+};
+
+const singleProfile = async (profileId) => {
+  try {
+    const profile = await Profile.findById(profileId);
+    return transformProfile(profile);
+  } catch (err) {
     throw err;
+  }
+};
+
+const profileThankings = async (profileId) => {
+  try {
+    const thankings = await Thanking.find({ profile: profileId });
+    return thankings.map((thank) => {
+      return transformThanking(thank);
+    });
+  } catch (err) {
+    throw err
   }
 };
 
 exports.transformProfile = transformProfile;
 exports.transformThanking = transformThanking;
+exports.profileThankings = profileThankings;
+exports.singleProfile = singleProfile;

@@ -1,6 +1,7 @@
 const Thanking = require("../../models/thanking");
 const Profile = require("../../models/profiles");
 const { transformThanking, transformProfile } = require("./merge");
+const { verifySingleProfile } = require("../../middleware/GenerateLetter");
 
 module.exports = {
   thanks: async (args, req) => {
@@ -28,6 +29,7 @@ module.exports = {
         profile: fetchedProfile,
       });
       const result = await thank.save();
+      verifySingleProfile(transformProfile(fetchedProfile));
       return transformThanking(result);
     }
     const fetchedProfile = await Profile.findOne({ _id: args.profileId });
@@ -37,6 +39,7 @@ module.exports = {
       profile: fetchedProfile,
     });
     const result = await thank.save();
+    verifySingleProfile(transformProfile(fetchedProfile));
     return transformThanking(result);
   },
   cancelThanking: async (args, req) => {
