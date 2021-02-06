@@ -43,6 +43,7 @@ class Swipper extends React.Component {
           image: "fire",
           description: "",
           email: "",
+          _id: "",
         },
       ],
       name: "",
@@ -104,6 +105,7 @@ class Swipper extends React.Component {
         positionarray: [...array],
         increment: 1,
       });
+      console.log("id" + this.state.id);
     }
   }
   fetchProfiles() {
@@ -111,6 +113,7 @@ class Swipper extends React.Component {
       query: `
        query {
          profiles{
+           _id
           firstName
           lastName
           description
@@ -136,6 +139,7 @@ class Swipper extends React.Component {
       })
       .then((resData) => {
         this.setState({ profiles: resData.data.profiles });
+        console.log(this.state.profiles);
       })
 
       .catch((err) => {
@@ -200,7 +204,7 @@ class Swipper extends React.Component {
     const requestBody = {
       query: `
        mutation {
-         thankProfile(profileId: "${this.state.id}" , message:${this.state.textValue}){
+         thankProfile(profileId: "${this.state.id}" , message:"${this.state.textValue}"){
           _id
           createdAt 
           updatedAt
@@ -239,6 +243,7 @@ class Swipper extends React.Component {
   }
   render() {
     const { classes } = this.props;
+
     const body = (
       <div>
         <form className="thank-form" onSubmit={this.handleSubmit}>
