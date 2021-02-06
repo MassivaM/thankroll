@@ -41,6 +41,16 @@ const user = async (userId) => {
       createdProfiles: profiles.bind(this, user._doc.createdProfiles),
     };
   } catch (err) {
+    return null
+    //throw err;
+  }
+};
+
+const singleProfile = async (profileId) => {
+  try {
+    const profile = await Profile.findById(profileId);
+    return transformProfile(profile);
+  } catch (err) {
     throw err;
   }
 };
@@ -59,3 +69,4 @@ const profileThankings = async (profileId) => {
 exports.transformProfile = transformProfile;
 exports.transformThanking = transformThanking;
 exports.profileThankings = profileThankings;
+exports.singleProfile = singleProfile;

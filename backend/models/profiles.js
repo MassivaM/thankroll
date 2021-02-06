@@ -27,19 +27,18 @@ const profileSchema = new Schema({
     type: String,
     required: true,
   },
+  accept: {
+    type: Boolean,
+    required: true,
+  },
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   active: {
     type: Boolean,
     required: true,
   },
-    accept: {
-      type: Boolean,
-      required: true,
-    },
-
-    creator: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
   },
   {
     timestamps: true,

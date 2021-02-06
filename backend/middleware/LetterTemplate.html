@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             html, body {
-                height: 100%;
+                height: 100vw;
+                margin:0;
+                padding:0;
             }
             table, th, td
             {
@@ -11,78 +15,80 @@
                 margin: auto;
                 padding:0px;
                 text-align: center;
+                border-spacing: 0px;
             }
             th
             {
                 font-weight: bold;
                 text-transform: uppercase;
-                font-size: 150%;
+                font-size: 1.25vw;
             }
             td
             {
-                font-size: 150%;
+                font-size: 1.25vw;
             }
             .spacer
             {
-                height: 10%;
-            }
-            .message
-            {
-                height: 10%;
+                height: 2.5vw;
             }
             .blueBar
             {
-                width:10%;
+                width:5vw;
                 text-align: left;
-                background-color: #37CBE2;
+                background-color: #70a9ff;
                 color: white;
-                padding-left: 10%;
                 text-transform: uppercase;
             }
         </style>
     </head>
     <body>
-        <table style="height: 60%;">
+        <table style="width: 100%;">
             <tr>
                 <td class="blueBar"></td>
                 <td>
-                    <table style="height:100%; width:80%;">
+                    <table style="width:90%;">
                         <tr>
-                            <td style="height:10%;">
-                              <img style="max-width:40%;" src="thankloopLogoCropped.png" alt="ThankLoop">
+                            <td class="spacer"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="height:5vw;">
+                              <img style="max-width:20vw;" src="https://res.cloudinary.com/thankloop/image/upload/v1612591300/Email/thankloopLogoCropped_pc0js3.png" alt="ThankLoop">
                             </td>
                         </tr>
                         <tr>
-                            <th style="height:10%;">You were nominated by your colleague #firstName# #lastName#</td>
+                            <th style="height:5vw;" colspan="2">You were nominated by your colleague #firstName# #lastName#</th>
                         </tr>
                         <tr>
-                            <td style="height:25%;">#description#</td>
+                            <td style="height:10vw;" colspan="2">#description#</td>
                         </tr>
                         <tr>
-                            <th style="height:10%;">And here is what people have to say to you...</td>
+                            <th style="height:5vw;" colspan="2">And here is what people have to say to you...</th>
+                        </tr>
+                        <tr>
+                            <td class="spacer"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="width:100%; padding-right: 3vw;">
+                                    #messages#
+                                    <tr>
+                                        <td class="spacer"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:40%; text-align: right;">
+                                <img style="max-width:90%;" src="#profileImage#">
+                            </td>
                         </tr>
                     </table>
                 </td>
                 <td class="blueBar"></td>
             </tr>
+            <tr style="height:5vw; width:100%">
+                <td class="blueBar" style="padding-left: 10%;" colspan="3">
+                    &#127760; Thankloop.io
+                </td>
+            </tr>
           </table>
-          <table style="height: 90%; width:100%">
-                <tr>
-                    <td>
-                        <table style="height: 80%; width:80%;">
-                            #messages#
-                        </table>
-                    </td>
-                    <td style="width:40%;">
-                        <img style="max-width:80%;" src="profile.jpg">
-                    </td>
-                </tr>
-                <tr style="height:10%">
-                    <td class="blueBar" colspan="2">
-                        Thankloop.io
-                    </td>
-                </tr>
-            </table>
-
     </body>
 </html>

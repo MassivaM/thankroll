@@ -42,4 +42,4 @@ mongoose
     console.log(err);
   });
 
-schedule.scheduleJob('*/5 * * * * *', function(fireDate) { gl.verifyProfiles(fireDate); });
+schedule.scheduleJob('* */1 * * *', function(fireDate) { gl.verifyProfiles(fireDate); });

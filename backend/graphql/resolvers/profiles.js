@@ -11,18 +11,10 @@ cloudinary.config({
 module.exports = {
   profiles: async () => {
     try {
-      const profiles = await Profile.find();
+      const profiles = await Profile.find({ active: true });
       return profiles.map((profile) => {
         return transformProfile(profile);
       });
-    } catch (err) {
-      throw err;
-    }
-  },
-  singleProfile: async (profileId) => {
-    try {
-      const profile = await Profile.findById(profileId);
-      return transformProfile(profile);
     } catch (err) {
       throw err;
     }
@@ -40,6 +32,7 @@ module.exports = {
       email: args.profileinput.email,
       accept: args.profileinput.accept,
       creator: req.userId,
+      active: true,
     });
     let createdprofile;
     try {
@@ -61,7 +54,7 @@ module.exports = {
   },
   setActive: async (profileId, active) =>{
     try{
-      const profile = await this.singleProfile(profileId);
+      const profile = await Profile.findById(profileId);
       profile.active = active;
       await profile.save();
     } catch (err) {

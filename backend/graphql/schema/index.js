@@ -20,6 +20,7 @@ module.exports = buildSchema(`
       picture: String
       email:String!
       accept:Boolean!
+      active:Boolean!
       createdAt: String!
       creator:User!
      

@@ -10,33 +10,38 @@ module.exports = {
     var creator = await profile.creator();
 
     var html;
-    fs.readFile('middleware\\LetterTemplate.html', 'utf8', function (err, data) {
-      if (err) {
-        return console.log(err);
-      }
-      html = data;
-    });
-    html.replace("#firstName#", creator.firstName);
-    html.replace("#lastName#", creator.lastName);
-    html.replace("#description#", profile.description);
+    try {
+      html = fs.readFileSync('middleware\\LetterTemplate.html', 'utf8');
+    } catch (err) {
+      throw err;
+    }
+
+    html = html.replace("#firstName#", creator.firstName);
+    html = html.replace("#lastName#", creator.lastName);
+    html = html.replace("#description#", profile.description);
+    html = html.replace("#profileImage#", profile.picture);
 
     var messagesHTML = "";
-    thankings.forEach(async (thanking, index) => {
+    for(const thanking of thankings){
       let user = await thanking.user();
+      let firstName = user == null ? "Anonymous" : user.firstName;
+      let lastName = user == null ? "" : user.lastName;
       messagesHTML += `<tr>
+                          <td class="spacer"></td>
+                        </tr>
+                        <tr>
                           <td class="message">
                             ${thanking.message}
                           </td>
                         </tr>
                         <tr>
-                          <th style="height: 5%; text-align: right;">
-                            ${user.firstName} ${user.lastName}
+                          <th style="height: 1vw; text-align: right;">
+                            - ${firstName} ${lastName}
                           </th>
                         </tr>`
-    });
-    html.replace("#messages#", messagesHTML);
-    console.log("Generation finished");
-    console.log(html);
+    }
+
+    html = html.replace("#messages#", messagesHTML);
     return html;
   },
 
@@ -45,53 +50,55 @@ module.exports = {
       var htmlMessage = await module.exports.generateHTML(profile);
 
       if(htmlMessage == null){
-        console.log("html null");
+        console.log("html messages null - Let Alain know");
         return;
       }
-
-      console.log("Sending email");
 
       var transport = nodemailer.createTransport({
         host: "smtp-relay.sendinblue.com",
         port: 587,
         auth: {
-          user: "",
-          pass: ""
+          user: "abboudalain@gmail.com",
+          pass: "dNHhX35rVRqjDUMQ"
         }
       });
 
       let message = {
-        from: 'Alain Test <abboudalain@gmail.com>',
-        to: 'abboudalain@gmail.com',
+        from: 'Alain from ThankLoop <abboudalain@thankloop.io>',
+        to: profile.email,
         subject: 'Thank you',
-        text: 'For clients with plaintext support only',
+        text: htmlMessage,
         html: htmlMessage
       }
 
       let info = await transport.sendMail(message);
-
-      console.log("Message sent: %s", info);
 
     } catch (err) {
       console.log(err);
     }
   },
 
-  verifyProfiles: async (args) => {
+  verifyProfiles: async (currentTimestamp) => {
 
     var fetchedProfiles = await Profile.profiles();
     var i = false;
 
     fetchedProfiles.forEach(async (profile, index) => {
 
-      var daysBetween = DateUtil.daysBetween(new Date(profile.date), args);
+      var daysBetween = DateUtil.daysBetween(new Date(profile.createdAt), currentTimestamp);
 
-      console.log(daysBetween + " days since profile creation.");
-
-      if (profile.firstName == "Massy" || daysBetween >= 50) {
-        console.log("Generation letter for profile " + profile.firstName);
+      if (daysBetween >= 5) {
+        Profile.setActive(profile._id, false);
         await module.exports.generateLetter(profile);
       }
     })
+  },
+
+  verifySingleProfile: async (profile) => {
+    var thankings = await profileThankings(profile._id);
+    if(thankings.length >= 8){
+      Profile.setActive(profile._id, false);
+      await module.exports.generateLetter(profile);
+    }
   }
 }
