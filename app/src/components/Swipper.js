@@ -40,6 +40,7 @@ export default class Swipper extends React.Component {
       image: "fire.jpg",
       description: "",
       email: "",
+      id: "",
       positionarray: [],
       visible: false,
       textValue: "",
@@ -88,6 +89,7 @@ export default class Swipper extends React.Component {
         profession: profiles[array[0]].profession,
         description: profiles[array[0]].description,
         image: profiles[array[0]].picture,
+        id: profiles[array[0]]._id,
         positionarray: [...array],
         increment: 1,
       });
@@ -144,6 +146,7 @@ export default class Swipper extends React.Component {
         description: this.state.profiles[this.state.positionarray[0]]
           .description,
         image: this.state.profiles[this.state.positionarray[0]].picture,
+        id: this.state.profiles[this.state.positionarray[0]]._id,
         textValue: "",
         email: "",
         visible: false,
@@ -166,6 +169,7 @@ export default class Swipper extends React.Component {
         profession: this.state.profiles[array[0]].profession,
         description: this.state.profiles[array[0]].description,
         image: this.state.profiles[array[0]].picture,
+        id: this.state.profiles[array[0]]._id,
         textValue: "",
         email: "",
         visible: false,
@@ -180,15 +184,46 @@ export default class Swipper extends React.Component {
   changeEmail(event) {
     this.setState({ email: event.target.value });
   }
-  handleSubmit(event) {
-    this.setState({ textValue: "", email: "", visible: false });
+  handleSubmit = (event) => {
     event.preventDefault();
-  }
+    const requestBody = {
+      query: `
+       mutation {
+         thankProfile(profileId: "${this.state.id}" , message:${this.state.textValue}){
+          _id
+          createdAt 
+          updatedAt
+        }
+      }
+      `,
+    };
+
+    fetch("http://localhost:4000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Failed!");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        console.log("res" + resData);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+    this.setState({ textValue: "", email: "", visible: false });
+  };
   handleThank() {
     this.setState({ visible: !this.state.visible });
   }
   render() {
-    console.log(this.state.visible);
     return (
       <div>
         <Stats />

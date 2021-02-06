@@ -94,17 +94,20 @@ class FormSignup extends React.Component {
 
   uploadImage = async (picture) => {
     const file = picture;
-
+    console.log(process.env);
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("cloud_name", "thankloop");
-    formData.append("upload_preset", "xjijfup2");
+    formData.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
+    formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
     console.log("about to fetcg");
-    let res = await fetch("https://api.cloudinary.com/v1_1/thankloop/upload/", {
-      method: "post",
-      mode: "cors",
-      body: formData,
-    });
+    let res = await fetch(
+      `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/upload/`,
+      {
+        method: "post",
+        mode: "cors",
+        body: formData,
+      }
+    );
 
     let json = await res.json();
     const url = JSON.stringify(json.secure_url);
