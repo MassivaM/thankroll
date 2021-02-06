@@ -10,6 +10,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import useForm from "./UseForm";
+import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 const validationSchema = yup.object({
   email: yup
@@ -65,8 +66,10 @@ class FormSignup extends React.Component {
     super(props);
     this.state = {
       previewSource: "",
+      picture: "",
       isSubmitting: false,
       unprocessedPicture: "",
+      pictureurl: "",
     };
   }
   static contextType = AuthContext;
@@ -80,28 +83,37 @@ class FormSignup extends React.Component {
   };
   fileSelectedHandler = (event) => {
     const picture = event.target.files[0];
+    this.setState({ picture: picture });
     this.previewFile(picture);
+
     //const value = event.target.files[0];
   };
   fileUploadHandler = () => {
     console.log("success");
   };
 
-  uploadImage = async (base64EncodedImage) => {
-    /*try {
-      await fetch("/api/upload", {
-        method: "POST",
-        body: JSON.stringify({ data: base64EncodedImage }),
-        headers: { "Content-type": "application/json" },
-      });
-    } catch (error) {
-      console.log(error);
-    }*/
-    console.log("test");
+  uploadImage = async (picture) => {
+    const file = picture;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("cloud_name", "thankloop");
+    formData.append("upload_preset", "xjijfup2");
+    console.log("about to fetcg");
+    let res = await fetch("https://api.cloudinary.com/v1_1/thankloop/upload/", {
+      method: "post",
+      mode: "cors",
+      body: formData,
+    });
+
+    let json = await res.json();
+    const url = JSON.stringify(json.secure_url);
+    return url;
   };
 
   render() {
     const { classes } = this.props;
+
     return (
       <div style={{ padding: 0 }}>
         {!this.context.token && (
@@ -132,12 +144,10 @@ class FormSignup extends React.Component {
             accept: false,
           }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
-            alert(JSON.stringify(values, null, 2));
+          onSubmit={async (values) => {
+            values.picture = await this.uploadImage(this.state.picture);
 
-            if (!this.state.previewSource) return;
-            this.uploadImage(this.state.previewSource);
-
+            console.log(values.picture);
             /**
              *
              * Connexion to API
@@ -147,7 +157,7 @@ class FormSignup extends React.Component {
             const requestBody = {
               query: `
         mutation {
-         createProfile(profileinput: {firstName: "${values.firstName}", lastName: "${values.lastName}", description: "${values.description}", profession: "${values.profession}", email: "${values.email}", picture: "", accept: ${values.accept}}),{
+         createProfile(profileinput: {firstName: "${values.firstName}", lastName: "${values.lastName}", description: "${values.description}", profession: "${values.profession}", email: "${values.email}", picture: ${values.picture}, accept: ${values.accept}}),{
           _id
           firstName
           lastName
@@ -155,6 +165,7 @@ class FormSignup extends React.Component {
           profession
           email
           accept 
+          picture
           creator{
             _id
             email

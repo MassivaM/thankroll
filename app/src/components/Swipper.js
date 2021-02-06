@@ -29,7 +29,7 @@ export default class Swipper extends React.Component {
           firstName: "",
           lastName: "",
           profession: "",
-          image: "fire.jpg",
+          image: "fire",
           description: "",
           email: "",
         },
@@ -87,6 +87,7 @@ export default class Swipper extends React.Component {
         firstName: profiles[array[0]].firstName,
         profession: profiles[array[0]].profession,
         description: profiles[array[0]].description,
+        image: profiles[array[0]].picture,
         positionarray: [...array],
         increment: 1,
       });
@@ -142,7 +143,7 @@ export default class Swipper extends React.Component {
         profession: this.state.profiles[this.state.positionarray[0]].profession,
         description: this.state.profiles[this.state.positionarray[0]]
           .description,
-
+        image: this.state.profiles[this.state.positionarray[0]].picture,
         textValue: "",
         email: "",
         visible: false,
@@ -164,7 +165,7 @@ export default class Swipper extends React.Component {
         firstName: this.state.profiles[array[0]].firstName,
         profession: this.state.profiles[array[0]].profession,
         description: this.state.profiles[array[0]].description,
-
+        image: this.state.profiles[array[0]].picture,
         textValue: "",
         email: "",
         visible: false,
@@ -190,7 +191,7 @@ export default class Swipper extends React.Component {
         <div className="card">
           <div className="left">
             <div className="ava">
-              <img src={require("../assets/" + this.state.image)} />
+              <img src={this.state.image} />
             </div>
             <h1 className="name"> {this.state.name}</h1>
 
