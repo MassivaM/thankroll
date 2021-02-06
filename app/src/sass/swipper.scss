@@ -219,16 +219,13 @@ body {
 
 .input {
   // needs to be relative so the :focus span is positioned correctly
-  position: relative;
-
-  // bigger font size for demo purposes
-  font-size: 1.5em;
-
+  //position: relative;
+  background-color: white;
   // the border gradient
   //background: $turquoise;
-  border: 2px solid $blue;
+  border: 10px solid $blue;
 
-  border-radius: 50px;
+  border-radius: 5px;
 
   //transform: translate(-50%, -51%) ;
   box-shadow: 0 10px 30px rgba(69, 69, 69, 0.3);
@@ -239,14 +236,14 @@ body {
   display: inline-block;
 
   // we want rounded corners no matter the size of the field
-  border-radius: 1em;
+  border-radius: 5px;
 
   // style of the actual input field
   *:not(span) {
     position: relative;
     display: inherit;
-    border-radius: inherit;
-    margin: 0;
+    border-radius: 0.1em;
+
     border: none;
     outline: none;
     z-index: 1; // needs to be above the :focus span
@@ -256,27 +253,6 @@ body {
       opacity: 1;
       transform: scale(1);
     }
-  }
-
-  // we don't animate box-shadow directly as that can't be done on the GPU, only animate opacity and transform for high performance animations.
-  span {
-    transform: scale(0.993, 0.94); // scale it down just a little bit
-    transition: transform 0.5s, opacity 0.25s;
-    opacity: 0; // is hidden by default
-
-    position: absolute;
-    z-index: 0; // needs to be below the field (would block input otherwise)
-    margin: 4px; // a bit bigger than .input padding, this prevents background color pixels shining through
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: inherit;
-    pointer-events: none; // this allows the user to click through this element, as the shadow is rather wide it might overlap with other fields and we don't want to block those.
-
-    // fancy shadow styles
-    box-shadow: inset 0 0 0 3px #fff, 0 0 0 4px #fff, 3px -3px 30px $blue,
-      -3px 3px 30px $blue;
   }
 }
 

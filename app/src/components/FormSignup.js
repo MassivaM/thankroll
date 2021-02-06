@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AuthContext from "../context/authContext";
 import LoginForm from "./LoginForm";
-import ReactDOM from "react-dom";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -9,8 +8,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import useForm from "./UseForm";
-import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 const validationSchema = yup.object({
   email: yup

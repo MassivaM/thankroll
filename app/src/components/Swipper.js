@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import "swiper/swiper-bundle.css";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Swiper, { Navigation, Pagination } from "swiper";
+import TextField from "@material-ui/core/TextField";
 import fire from "../assets/fire.jpg";
 import send from "../assets/send.png";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
@@ -13,6 +14,21 @@ import Modal from "@material-ui/core/Modal";
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
 const styles = (theme) => ({
+  root: {
+    background: "white",
+    margin: 5,
+    "& .MuiTextField-root": {
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
+      marginLeft: theme.spacing(10),
+      marginRight: theme.spacing(2),
+    },
+
+    paddingTop: 0,
+  },
+  resize: {
+    fontSize: 12,
+  },
   paper: {
     position: "absolute",
     width: 400,
@@ -30,10 +46,12 @@ class Swipper extends React.Component {
     this.changeProfile = this.changeProfile.bind(this);
     this.changeText = this.changeText.bind(this);
     this.changeEmail = this.changeEmail.bind(this);
+    this.changeName = this.changeName.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchProfiles = this.fetchProfiles.bind(this);
     this.handleThank = this.handleThank.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.handleCloseThank = this.handleCloseThank.bind(this);
+    this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
     this.state = {
       profiles: [
         {
@@ -56,8 +74,10 @@ class Swipper extends React.Component {
       positionarray: [],
       visible: false,
       textValue: "",
-      email: "",
+      contactEmail: null,
+      contactName: null,
       increment: 0,
+      success: false,
     };
   }
 
@@ -197,14 +217,19 @@ class Swipper extends React.Component {
   }
 
   changeEmail(event) {
-    this.setState({ email: event.target.value });
+    this.setState({ contactEmail: event.target.value });
   }
+  changeName(event) {
+    this.setState({ contactName: event.target.value });
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
+
     const requestBody = {
       query: `
        mutation {
-         thankProfile(profileId: "${this.state.id}" , message:"${this.state.textValue}"){
+         thankProfile(profileId: "${this.state.id}" , message:"${this.state.textValue}", contactName: "${this.state.contactName}" , contactEmail: "${this.state.contactEmail}"){
           _id
           createdAt 
           updatedAt
@@ -228,6 +253,7 @@ class Swipper extends React.Component {
       })
       .then((resData) => {
         console.log("res" + resData);
+        this.setState({ success: true });
       })
 
       .catch((err) => {
@@ -238,8 +264,11 @@ class Swipper extends React.Component {
   handleThank() {
     this.setState({ visible: true });
   }
-  handleClose() {
+  handleCloseThank() {
     this.setState({ visible: false });
+  }
+  handleCloseSuccess() {
+    this.setState({ success: false });
   }
   render() {
     const { classes } = this.props;
@@ -249,31 +278,32 @@ class Swipper extends React.Component {
         <form className="thank-form" onSubmit={this.handleSubmit}>
           <p className="para">
             <span className="input">
-              <input
-                type="text"
-                placeholder="Enter your email here if you'd like to be contacted"
-                value={this.state.email}
+              <TextField
+                className={classes.root}
+                id="name"
+                name="name"
+                label="Enter your name, leave blank to be anonymous"
+                value={this.state.contactName}
+                onChange={this.changeName}
+              />
+              <TextField
+                className={classes.root}
+                id="email"
+                name="email"
+                label="Enter your email , leave blank to be anonymous"
+                value={this.state.contactEmail}
                 onChange={this.changeEmail}
-                style={{
-                  position: "absolute",
-                  top: 10,
-                  left: 100,
-                  zIndex: 15,
-                  width: 300,
-                  fontSize: 13,
-                  borderRadius: 0,
-                }}
-              ></input>
-              <textarea
-                className="text2"
-                rows="4"
-                cols="40"
+              />
+
+              <TextField
+                className={classes.root}
+                id="thanks"
+                label="Enter your message here"
+                multiline
+                rows={4}
                 value={this.state.textValue}
                 onChange={this.changeText}
-                placeholder="Enter your message here, it'll go straight to their inbox"
-              ></textarea>
-
-              <span></span>
+              />
             </span>
           </p>
           <button
@@ -288,6 +318,35 @@ class Swipper extends React.Component {
             <SendRoundedIcon style={{ color: "#70a1ff" }} />
           </button>
         </form>
+      </div>
+    );
+
+    const bodySuccess = (
+      <div className="modal">
+        <div id="success-icon">
+          <div></div>
+        </div>
+        <button onClick={this.handleCloseSuccess}>
+          <svg
+            id="close-modal"
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            viewBox="0 0 10 10"
+          >
+            <line x1="1" y1="-1" x2="9" y2="11" stroke-width="2.5" />
+            <line x1="9" y1="-1" x2="1" y2="11" stroke-width="2.5" />
+          </svg>
+        </button>
+
+        <h1>
+          <strong>Success!</strong>
+        </h1>
+
+        <hr />
+        <p className="message">
+          Thank you for contributing, {this.state.firstName} will receive your
+          message in at most two weeks!
+        </p>
       </div>
     );
     return (
@@ -308,8 +367,11 @@ class Swipper extends React.Component {
               <span>Thank {this.state.firstName}</span>
             </button>
           </div>
-          <Modal open={this.state.visible} onClose={this.handleClose}>
+          <Modal open={this.state.visible} onClose={this.handleCloseThank}>
             {body}
+          </Modal>
+          <Modal open={this.state.success} onClose={this.handleCloseSuccess}>
+            {bodySuccess}
           </Modal>
           <button className="next" onClick={this.changeProfile}>
             <img src={rightarrow} />
