@@ -22,7 +22,7 @@ export default class Swipper extends React.Component {
     this.changeEmail = this.changeEmail.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchProfiles = this.fetchProfiles.bind(this);
-
+    this.handleThank = this.handleThank.bind(this);
     this.state = {
       profiles: [
         {
@@ -156,9 +156,9 @@ export default class Swipper extends React.Component {
       array.sort(function (a, b) {
         return 0.5 - Math.random();
       });
-      const fullName = `${
-        this.state.profiles[this.state.positionarray[0]].firstName
-      } ${this.state.profiles[this.state.positionarray[0]].lastName}`;
+      const fullName = `${this.state.profiles[array[0]].firstName} ${
+        this.state.profiles[array[0]].lastName
+      }`;
       this.setState({
         positionarray: [...array],
         name: fullName,
@@ -184,7 +184,11 @@ export default class Swipper extends React.Component {
     this.setState({ textValue: "", email: "", visible: false });
     event.preventDefault();
   }
+  handleThank() {
+    this.setState({ visible: !this.state.visible });
+  }
   render() {
+    console.log(this.state.visible);
     return (
       <div>
         <Stats />
@@ -199,15 +203,11 @@ export default class Swipper extends React.Component {
           </div>
           <div className="right">
             <span className="descr">{this.state.description}</span>
-            <button
-              className="follow_btn"
-              onClick={() => {
-                this.setState({ visible: !this.state.visible });
-              }}
-            >
+            <button className="follow_btn" onClick={this.handleThank}>
               <span>Thank {this.state.firstName}</span>
             </button>
           </div>
+
           <button className="next" onClick={this.changeProfile}>
             <img src={rightarrow} />
           </button>
@@ -216,7 +216,7 @@ export default class Swipper extends React.Component {
           className={this.state.visible ? "fadeIn2" : "fadeOut2"}
           style={{ marginTop: 300, marginLeft: 320 }}
         >
-          <form onSubmit={this.handleSubmit}>
+          <form className="thank-form" onSubmit={this.handleSubmit}>
             <p className="para">
               <span className="input">
                 <input

@@ -62,7 +62,7 @@ export default class Home extends Component {
                                       outline: 0,
                                       marginTop: 10,
                                     }}
-                                    disabled={this.state.show ? "" : "true"}
+                                    disabled={this.state.show ? "" : true}
                                   >
                                     Submit someone
                                   </button>
@@ -82,7 +82,13 @@ export default class Home extends Component {
                 </div>
               )}
 
-              {context.token && <Swipper />}
+              {context.token && (
+                <div>
+                  <div className="swippy">
+                    <Swipper />
+                  </div>
+                </div>
+              )}
             </body>
           );
         }}
