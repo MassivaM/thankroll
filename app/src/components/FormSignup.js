@@ -67,6 +67,7 @@ class FormSignup extends React.Component {
       isSubmitting: false,
       unprocessedPicture: "",
       pictureurl: "",
+      submit: "./submit",
     };
   }
   static contextType = AuthContext;
@@ -129,7 +130,7 @@ class FormSignup extends React.Component {
             >
               Please login to submit someone
             </h1>
-            <LoginForm />
+            <LoginForm dataParentToChild={this.state.submit} />
           </div>
         )}
         <div className={classes.root}></div>

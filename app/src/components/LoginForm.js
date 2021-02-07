@@ -15,6 +15,9 @@ export default class LoginForm extends Component {
     super(props);
     this.emailEl = React.createRef();
     this.passwordEl = React.createRef();
+    this.state = {
+      history: this.props.dataParentToChild,
+    };
   }
   history = createHashHistory();
   validationSchema = yup.object({
@@ -56,6 +59,7 @@ export default class LoginForm extends Component {
         }
       `,
     };
+    const passHistory = this.state.history;
     fetch("http://localhost:4000/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
@@ -77,7 +81,7 @@ export default class LoginForm extends Component {
             resData.data.login.tokenExpiration
           );
         }
-        this.history.push("/home");
+        this.history.push(passHistory);
       })
 
       .catch((err) => {
