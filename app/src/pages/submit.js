@@ -8,15 +8,22 @@ const Form = () => {
   function submitForm() {
     setIsSubmitted(true);
   }
+  function showForm() {
+    setIsSubmitted(false);
+  }
+
   return (
     <body className="form-container">
       <span className="close-btn">×</span>
 
       {!isSubmitted ? (
-        <FormSignup submitForm={submitForm} />
+        <FormSignup SendSuccess={submitForm} />
       ) : (
         <div>
-          <FormSuccess style={{ position: "absolute", zIndex: 10 }} />
+          <FormSuccess
+            style={{ position: "absolute", zIndex: 10 }}
+            BackToSubmit={showForm}
+          />
         </div>
       )}
     </body>

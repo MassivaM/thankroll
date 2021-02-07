@@ -88,6 +88,9 @@ class FormSignup extends React.Component {
     console.log("success");
   };
 
+  SendSuccess = () => {
+    this.props.SendSuccess(true);
+  };
   uploadImage = async (picture) => {
     const file = picture;
     console.log(process.env);
@@ -192,7 +195,7 @@ class FormSignup extends React.Component {
               })
               .then((resData) => {
                 console.log(resData);
-                this.setState({ isSubmitting: true });
+                this.SendSuccess();
               })
 
               .catch((err) => {
