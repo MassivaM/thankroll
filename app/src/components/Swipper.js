@@ -562,7 +562,6 @@ class Swipper extends React.Component {
     );
     return (
       <div>
-        <Stats />
         <div className="card">
           <div className="left">
             <div className="ava">
