@@ -440,7 +440,7 @@ class Swipper extends React.Component {
         <div className="card">
           <div className="left">
             <div className="ava">
-              <img src={this.state.image} />
+              <img className="image" src={this.state.image} />
             </div>
             <h1 className="name"> {this.state.name}</h1>
 
