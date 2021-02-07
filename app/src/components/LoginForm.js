@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import TextField from "@material-ui/core/TextField";
 import { useFormik } from "formik";
+import { createHashHistory } from "history";
 import * as yup from "yup";
 const errors = useForm(validate);
 export default class LoginForm extends Component {
@@ -15,6 +16,7 @@ export default class LoginForm extends Component {
     this.emailEl = React.createRef();
     this.passwordEl = React.createRef();
   }
+  history = createHashHistory();
   validationSchema = yup.object({
     email: yup
       .string("Enter their email")
@@ -75,6 +77,7 @@ export default class LoginForm extends Component {
             resData.data.login.tokenExpiration
           );
         }
+        this.history.push("/home");
       })
 
       .catch((err) => {

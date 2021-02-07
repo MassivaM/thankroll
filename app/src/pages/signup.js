@@ -4,6 +4,7 @@ import validate from "../components/ValidateInfo";
 import useForm from "../components/UseForm";
 import thankloop from "../assets/thankloop-white-logo.svg";
 import { NavLink } from "react-router-dom";
+import { createHashHistory } from "history";
 const errors = useForm(validate);
 export default class Signup extends Component {
   state = {
@@ -17,13 +18,13 @@ export default class Signup extends Component {
     this.firstNameEl = React.createRef();
     this.lastNameEl = React.createRef();
   }
-
+  history = createHashHistory();
   submitHandler = (event) => {
     event.preventDefault();
     const email = this.emailEl.current.value;
     const password = this.passwordEl.current.value;
     const firstName = this.firstNameEl.current.value;
-    const lastName = "";
+    const lastName = this.lastNameEl.current.value;
     if (email.trim().length === 0 || password.trim().length === 0) {
       return;
     }
@@ -31,7 +32,7 @@ export default class Signup extends Component {
     const requestBody = {
       query: `
         mutation {
-          createUser(userinput: {email: "${email}", password: "${password}", firstName:"${firstName}", lastName: "Allo"}){
+          createUser(userinput: {email: "${email}", password: "${password}", firstName:"${firstName}", lastName: "${lastName}"}){
             _id
             email
           }
@@ -49,10 +50,12 @@ export default class Signup extends Component {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed!");
         }
+
         return res.json();
       })
       .then((resData) => {
         console.log(resData);
+        this.history.push("/login");
       })
 
       .catch((err) => {
@@ -95,7 +98,7 @@ export default class Signup extends Component {
                 type="text"
                 id="firstName"
                 placeholder="Last Name"
-                ref={this.lasttNameEl}
+                ref={this.lastNameEl}
               />
               <label htmlFor="email" className="form-label">
                 Email <span style={{ color: "red" }}>*</span>{" "}
