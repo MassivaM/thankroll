@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import thankloop from "../assets/thankloop-white-logo.svg";
+import thankloop from "../assets/thankloop-logo.png";
 import rightarrow from "../assets/right-arrow.png";
 import { withStyles } from "@material-ui/core/styles";
 import "swiper/swiper-bundle.css";
@@ -8,9 +8,11 @@ import Swiper, { Navigation, Pagination } from "swiper";
 import TextField from "@material-ui/core/TextField";
 import fire from "../assets/fire.jpg";
 import send from "../assets/send.png";
+import AuthContext from "../context/authContext";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import Stats from "./Stats.js";
 import Modal from "@material-ui/core/Modal";
+import { NavLink } from "react-router-dom";
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
 const styles = (theme) => ({
@@ -41,6 +43,7 @@ const styles = (theme) => ({
 // init Swiper:
 
 class Swipper extends React.Component {
+  static contextType = AuthContext;
   constructor(props) {
     super(props);
     this.changeProfile = this.changeProfile.bind(this);
@@ -78,6 +81,7 @@ class Swipper extends React.Component {
       contactName: null,
       increment: 0,
       success: false,
+      endOfLoop: false,
     };
   }
 
@@ -186,6 +190,17 @@ class Swipper extends React.Component {
         email: "",
         visible: false,
       });
+    } else if (this.state.endOfLoop == false) {
+      this.setState({
+        endOfLoop: true,
+        name: "",
+
+        profession: "",
+        description:
+          "You've reached the end of the loop! Click below to submit someone and keep it going or click on the arrow to view profiles again",
+        image:
+          "https://res.cloudinary.com/thankloop/image/upload/v1612655964/Email/thankloop-logo_zrtor4.png",
+      });
     } else {
       var array = [];
       for (var i = 0; i < this.state.profiles.length; i++) {
@@ -205,6 +220,7 @@ class Swipper extends React.Component {
         description: this.state.profiles[array[0]].description,
         image: this.state.profiles[array[0]].picture,
         id: this.state.profiles[array[0]]._id,
+        endOfLoop: false,
         textValue: "",
         email: "",
         visible: false,
@@ -243,6 +259,46 @@ class Swipper extends React.Component {
       body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Failed!");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        console.log("res" + resData);
+        this.setState({ success: true });
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+    this.setState({ textValue: "", email: "", visible: false });
+  };
+
+  handleSubmitLoggedIn = (event) => {
+    event.preventDefault();
+
+    const requestBody = {
+      query: `
+       mutation {
+         thankProfile(profileId: "${this.state.id}" , message:"${this.state.textValue}"){
+          _id
+          createdAt 
+          updatedAt
+        }
+      }
+      `,
+    };
+    const token = this.context.token;
+    fetch("http://localhost:4000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
     })
       .then((res) => {
@@ -320,7 +376,36 @@ class Swipper extends React.Component {
         </form>
       </div>
     );
-
+    const loggedInBody = (
+      <div>
+        <form className="thank-form" onSubmit={this.handleSubmitLoggedIn}>
+          <p className="para">
+            <span className="input">
+              <TextField
+                className={classes.root}
+                id="thanks"
+                label="Enter your message here, it will go straight to their inbox"
+                multiline
+                rows={4}
+                value={this.state.textValue}
+                onChange={this.changeText}
+              />
+            </span>
+          </p>
+          <button
+            type="submit"
+            style={{
+              position: "relative",
+              marginLeft: "40em",
+              top: -30,
+              zIndex: 15,
+            }}
+          >
+            <SendRoundedIcon style={{ color: "#70a1ff" }} />
+          </button>
+        </form>
+      </div>
+    );
     const bodySuccess = (
       <div className="modal">
         <div id="success-icon">
@@ -363,13 +448,38 @@ class Swipper extends React.Component {
           </div>
           <div className="right">
             <span className="descr">{this.state.description}</span>
-            <button className="follow_btn" onClick={this.handleThank}>
-              <span>Thank {this.state.firstName}</span>
-            </button>
+            {!this.state.endOfLoop && (
+              <button className="follow_btn" onClick={this.handleThank}>
+                <span>Thank {this.state.firstName}</span>
+              </button>
+            )}
+            {this.state.endOfLoop && (
+              <button className="follow_btn" onClick={this.handleThank}>
+                <NavLink
+                  to="/submit"
+                  style={{
+                    textDecoration: "none",
+                    fontSize: 15,
+                    color: "white",
+                    fontWeight: 700,
+                  }}
+                >
+                  {" "}
+                  SUBMIT SOMEONE{" "}
+                </NavLink>
+              </button>
+            )}
           </div>
-          <Modal open={this.state.visible} onClose={this.handleCloseThank}>
-            {body}
-          </Modal>
+          {!this.context.token && (
+            <Modal open={this.state.visible} onClose={this.handleCloseThank}>
+              {body}
+            </Modal>
+          )}
+          {this.context.token && (
+            <Modal open={this.state.visible} onClose={this.handleCloseThank}>
+              {loggedInBody}
+            </Modal>
+          )}
           <Modal open={this.state.success} onClose={this.handleCloseSuccess}>
             {bodySuccess}
           </Modal>
