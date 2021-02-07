@@ -40,12 +40,19 @@ export default function Benefit() {
           />
           <div className="reason1_text">
             <h1 style={{ fontSize: 20 }}>Improving your mental health</h1>
+
             <br></br>
             <p style={{ fontSize: "1vw" }}>
               People who practice gratitude experience less toxic emotions,
               <br></br>
               ranging from envy and resentment to frustration and regret.
             </p>
+            <a
+              className="links"
+              href="https://www.health.harvard.edu/healthbeat/giving-thanks-can-make-you-happier"
+            >
+              Read More ...
+            </a>
           </div>
         </div>
         <div
@@ -65,6 +72,12 @@ export default function Benefit() {
               Gratitude helps people connect to something larger than themselves
               as individuals
             </p>
+            <a
+              className="links"
+              href="https://www.health.harvard.edu/healthbeat/giving-thanks-can-make-you-happier"
+            >
+              Read More ...
+            </a>
           </div>
         </div>
         <div
@@ -89,10 +102,19 @@ export default function Benefit() {
               <br></br>
               further longevity.
             </p>
+            <a
+              className="links"
+              href="https://positivepsychology.com/benefits-gratitude-research-questions/"
+            >
+              Read More ...
+            </a>
           </div>
         </div>
       </div>
-      <div
+    </div>
+  );
+}
+/*<div
         style={{
           width: "100%",
           display: "block",
@@ -113,7 +135,4 @@ export default function Benefit() {
             d="M0,160L40,181.3C80,203,160,245,240,229.3C320,213,400,139,480,117.3C560,96,640,128,720,165.3C800,203,880,245,960,256C1040,267,1120,245,1200,234.7C1280,224,1360,224,1400,224L1440,224L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
           ></path>
         </svg>
-      </div>
-    </div>
-  );
-}
+      </div>*/
