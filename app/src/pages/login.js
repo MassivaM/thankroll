@@ -12,7 +12,7 @@ export default class Login extends Component {
   render() {
     return (
       <div className="form-content-right-login">
-        <LoginForm />
+        <LoginForm dataParentToChild="./home" />
       </div>
     );
   }
