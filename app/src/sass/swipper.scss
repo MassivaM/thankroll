@@ -4,9 +4,12 @@ $blue: #70a1ff;
 
 @mixin centerer {
   position: absolute;
-  top: 57%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
+  @media screen and (max-height: 700px) {
+    top: 65%;
+  }
 }
 
 html {
@@ -20,8 +23,10 @@ body {
 .card {
   @include centerer;
   box-sizing: border-box;
-  width: #{"min(75vw, 1200px)"};
-  height: #{"min(30vw, 450px)"};
+
+  width: #{'min(75vw, 1200px)'};
+  height: #{'min(25vw, 450px)'};
+
   padding: 20px;
   background: #fdf7f7;
 
