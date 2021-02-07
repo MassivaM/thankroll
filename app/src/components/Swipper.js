@@ -235,7 +235,7 @@ class Swipper extends React.Component {
         description:
           "You've reached the end of the loop! Click below to submit someone and keep it going or click on the arrow to view profiles again",
         image:
-          "https://res.cloudinary.com/thankloop/image/upload/v1612655964/Email/thankloop-logo_zrtor4.png",
+          "https://res.cloudinary.com/thankloop/image/upload/c_scale,w_400/v1612655964/Email/thankloop-logo_zrtor4.png",
       });
     } else {
       var array = [];
