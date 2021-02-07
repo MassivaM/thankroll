@@ -39,9 +39,10 @@ const user = async (userId) => {
       ...user._doc,
       _id: user.id,
       createdProfiles: profiles.bind(this, user._doc.createdProfiles),
+      peopleThanked: thankings.bind(this, user._doc.peopleThanked).length,
     };
   } catch (err) {
-    return null
+    return null;
     //throw err;
   }
 };
@@ -62,7 +63,7 @@ const profileThankings = async (profileId) => {
       return transformThanking(thank);
     });
   } catch (err) {
-    throw err
+    throw err;
   }
 };
 

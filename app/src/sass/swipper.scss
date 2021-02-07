@@ -23,8 +23,10 @@ body {
 .card {
   @include centerer;
   box-sizing: border-box;
+
   width: #{'min(75vw, 1200px)'};
   height: #{'min(25vw, 450px)'};
+
   padding: 20px;
   background: #fdf7f7;
 
@@ -40,7 +42,7 @@ body {
     //margin-left: 140px;
     //margin-top: 13%;
     float: left;
-    width: #{'min(30vw, 600px)'};
+    width: #{"min(30vw, 600px)"};
     height: 100%;
     transform: translate(20%, 20%);
     //background:grey;
@@ -55,14 +57,14 @@ body {
   padding: 20px;
   bottom: 40px;
   height: 100%;
-  width: #{'min(25vw, 350px)'};
+  width: #{"min(25vw, 350px)"};
   //background: blue;
 }
 
 .ava {
-  margin-top: #{'min(4vw, 60px)'};
-  width: #{'min(20vw, 300px)'};
-  height: #{'min(15vw, 250px)'};
+  margin-top: #{"min(4vw, 60px)"};
+  width: #{"min(20vw, 300px)"};
+  height: #{"min(15vw, 250px)"};
   background: linear-gradient(145deg, rgba(255, 0, 0, 1) 0%, #630eff 100%);
   -webkit-clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
   clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
@@ -70,25 +72,25 @@ body {
   background-size: cover;
 
   .image {
-    width: #{'min(20vw, 300px)'};
+    width: #{"min(20vw, 300px)"};
   }
 }
 
 .name {
-  margin: #{'min(1vw,20px)'} 0 6px;
+  margin: #{"min(1vw,20px)"} 0 6px;
   font-weight: 800;
-  font-size: #{'min(1.8vw, 28px)'};
+  font-size: #{"min(1.8vw, 28px)"};
   width: 100%;
 }
 
 .status {
   opacity: 0.4;
-  font-size: #{'min(1.6vw, 16px)'};
+  font-size: #{"min(1.6vw, 16px)"};
   font-weight: 600;
 }
 .descr {
   opacity: 0.8;
-  font-size: #{'min(1.2vw, 30px)'};
+  font-size: #{"min(1.2vw, 30px)"};
   font-weight: 600;
 }
 #edit {
@@ -168,16 +170,15 @@ body {
   background: linear-gradient(145deg, #454545 0%, #454545 100%);
   mask: url(http://dariographics.com//DUI/006/hearth_icon.svg);
 }
-
-.follow_btn {
+.follow_btn_submit {
   border: none;
   position: absolute;
   bottom: 40px;
   //display: inline-block;
-  top: 70%;
+  top: 65%;
   left: 20%;
-  width: #{'min(20vw, 200px)'};
-  height: #{'min(5vw, 50px)'};
+  width: #{"min(20vw, 200px)"};
+  height: #{"min(5vw, 50px)"};
   background: #70a1ff;
   text-align: center;
   border-radius: 45px;
@@ -189,10 +190,56 @@ body {
     font-weight: 700;
     color: white;
     text-transform: uppercase;
-    font-size: #{'min(1.6vw, 12px)'};
+    font-size: #{"min(1.6vw, 12px)"};
+  }
+}
+.follow_btn {
+  border: none;
+  position: absolute;
+  bottom: 40px;
+  //display: inline-block;
+  top: 65%;
+  left: 0%;
+  width: #{"min(20vw, 200px)"};
+  height: #{"min(5vw, 50px)"};
+  background: #70a1ff;
+  text-align: center;
+  border-radius: 45px;
+  img {
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  span {
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    font-size: #{"min(1.6vw, 12px)"};
   }
 }
 
+.follow_btn2 {
+  border: none;
+  position: absolute;
+  bottom: 40px;
+  //display: inline-block;
+  top: 65%;
+  left: 50%;
+  width: #{"min(20vw, 200px)"};
+  height: #{"min(5vw, 50px)"};
+  background: #70a1ff;
+  text-align: center;
+  border-radius: 45px;
+  img {
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  span {
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    font-size: #{"min(1.6vw, 12px)"};
+  }
+}
 .next {
   position: absolute;
   padding-left: 50px;

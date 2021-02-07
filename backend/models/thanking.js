@@ -16,6 +16,18 @@ const thankingSchema = new Schema(
       type: String,
       required: true,
     },
+    contactEmail: {
+      type: String,
+      required: false,
+    },
+    contactName: {
+      type: String,
+      required: false,
+    },
+    shareEmail: {
+      type: Boolean,
+      required: false,
+    },
   },
   {
     timestamps: true,
