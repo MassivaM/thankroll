@@ -10,7 +10,11 @@ module.exports = buildSchema(`
     createdAt: String!
     updatedAt: String!
     message: String!
+    contactEmail: String
+    contactName: String
+    shareEmail: Boolean
     }
+
     type Profile{
       _id: ID!
       firstName: String!
@@ -59,11 +63,12 @@ module.exports = buildSchema(`
       profiles: [Profile!]!
       thanks: [Thanking!]!
       login(email:String!, password:String!): AuthData!
+      users: [User!]!
   }
   type RootMutation{
       createProfile(profileinput: ProfileInput): Profile
       createUser(userinput : UserInput): User
-      thankProfile(profileId: ID!, message: String!): Thanking!
+      thankProfile(profileId: ID!, message: String!, contactEmail: String, contactName: String ): Thanking!
       cancelThanking(thankingId: ID!): Profile!
       uploadImage(filename: String!): String!
   }
