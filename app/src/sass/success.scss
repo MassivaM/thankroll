@@ -13,8 +13,9 @@ body {
 
 .checkmark {
   position: absolute;
-  top: 35%;
-  left: 30%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: large;
   text-align: center;
   padding: 0;

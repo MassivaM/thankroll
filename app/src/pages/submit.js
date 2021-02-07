@@ -8,20 +8,25 @@ const Form = () => {
   function submitForm() {
     setIsSubmitted(true);
   }
-  return (
-    <>
-      <div className="form-container" style={{ paddingTop: 130 }}>
-        <span className="close-btn">×</span>
+  function showForm() {
+    setIsSubmitted(false);
+  }
 
-        {!isSubmitted ? (
-          <FormSignup submitForm={submitForm} />
-        ) : (
-          <div>
-            <FormSuccess style={{ position: "absolute", zIndex: 10 }} />
-          </div>
-        )}
-      </div>
-    </>
+  return (
+    <body className="form-container">
+      <span className="close-btn">×</span>
+
+      {!isSubmitted ? (
+        <FormSignup SendSuccess={submitForm} />
+      ) : (
+        <div>
+          <FormSuccess
+            style={{ position: "absolute", zIndex: 10 }}
+            BackToSubmit={showForm}
+          />
+        </div>
+      )}
+    </body>
   );
 };
 

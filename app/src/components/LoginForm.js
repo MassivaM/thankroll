@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import TextField from "@material-ui/core/TextField";
 import { useFormik } from "formik";
+import { createHashHistory } from "history";
 import * as yup from "yup";
 const errors = useForm(validate);
 export default class LoginForm extends Component {
@@ -14,7 +15,11 @@ export default class LoginForm extends Component {
     super(props);
     this.emailEl = React.createRef();
     this.passwordEl = React.createRef();
+    this.state = {
+      history: this.props.dataParentToChild,
+    };
   }
+  history = createHashHistory();
   validationSchema = yup.object({
     email: yup
       .string("Enter their email")
@@ -54,6 +59,7 @@ export default class LoginForm extends Component {
         }
       `,
     };
+    const passHistory = this.state.history;
     fetch("http://localhost:4000/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
@@ -75,6 +81,7 @@ export default class LoginForm extends Component {
             resData.data.login.tokenExpiration
           );
         }
+        this.history.push(passHistory);
       })
 
       .catch((err) => {

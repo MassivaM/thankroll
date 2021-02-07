@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AuthContext from "../context/authContext";
 import LoginForm from "./LoginForm";
-import ReactDOM from "react-dom";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -9,8 +8,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import useForm from "./UseForm";
-import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 const validationSchema = yup.object({
   email: yup
@@ -40,7 +37,6 @@ const styles = (theme) => ({
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(2),
     },
-    paddingTop: 0,
   },
   rootblurred: {
     "& .MuiTextField-root": {
@@ -57,7 +53,6 @@ const styles = (theme) => ({
       marginBottom: theme.spacing(2),
     },
     filter: "blur(5px)",
-    paddingTop: 0,
   },
 });
 
@@ -70,6 +65,7 @@ class FormSignup extends React.Component {
       isSubmitting: false,
       unprocessedPicture: "",
       pictureurl: "",
+      submit: "./submit",
     };
   }
   static contextType = AuthContext;
@@ -92,6 +88,9 @@ class FormSignup extends React.Component {
     console.log("success");
   };
 
+  SendSuccess = () => {
+    this.props.SendSuccess(true);
+  };
   uploadImage = async (picture) => {
     const file = picture;
     console.log(process.env);
@@ -118,7 +117,9 @@ class FormSignup extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div style={{ padding: 0 }}>
+      <body
+        className={this.state.previewSource ? "big-padding" : "small-padding"}
+      >
         {!this.context.token && (
           <div className="login-submit">
             <h1
@@ -132,7 +133,7 @@ class FormSignup extends React.Component {
             >
               Please login to submit someone
             </h1>
-            <LoginForm />
+            <LoginForm dataParentToChild={this.state.submit} />
           </div>
         )}
         <div className={classes.root}></div>
@@ -194,7 +195,7 @@ class FormSignup extends React.Component {
               })
               .then((resData) => {
                 console.log(resData);
-                this.setState({ isSubmitting: true });
+                this.SendSuccess();
               })
 
               .catch((err) => {
@@ -350,7 +351,7 @@ class FormSignup extends React.Component {
             </form>
           )}
         </Formik>
-      </div>
+      </body>
     );
   }
 }

@@ -4,7 +4,7 @@ import "./sass/base.scss";
 import NavBar from "./components/NavBar";
 import Swipper from "./components/Swipper";
 
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
 import PageRenderer from "./page-renderer";
 import AuthContext from "./context/authContext";
 
@@ -21,7 +21,7 @@ class App extends Component {
   };
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div className="App">
           <AuthContext.Provider
             value={{
@@ -40,7 +40,7 @@ class App extends Component {
             </Switch>
           </AuthContext.Provider>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }

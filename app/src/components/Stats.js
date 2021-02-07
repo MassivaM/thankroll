@@ -30,8 +30,19 @@ export default class Stats extends React.Component {
                 <div className="pplthanked">
                   <div className="reason1_text">
                     <p className="pplthanked_text">
-                      <NavLink to="/login"> Login </NavLink> to track your
-                      thanking progress
+                      <NavLink
+                        to="/login"
+                        style={{
+                          textDecoration: "none",
+                          fontSize: 28,
+                          color: "#0049B8",
+                          fontWeight: 700,
+                        }}
+                      >
+                        {" "}
+                        Login{" "}
+                      </NavLink>{" "}
+                      to track your thanking progress
                     </p>
                   </div>
                 </div>
