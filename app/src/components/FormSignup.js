@@ -37,7 +37,6 @@ const styles = (theme) => ({
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(2),
     },
-    paddingTop: 0,
   },
   rootblurred: {
     "& .MuiTextField-root": {
@@ -54,7 +53,6 @@ const styles = (theme) => ({
       marginBottom: theme.spacing(2),
     },
     filter: "blur(5px)",
-    paddingTop: 0,
   },
 });
 
@@ -116,7 +114,9 @@ class FormSignup extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div style={{ padding: 0 }}>
+      <body
+        className={this.state.previewSource ? "big-padding" : "small-padding"}
+      >
         {!this.context.token && (
           <div className="login-submit">
             <h1
@@ -348,7 +348,7 @@ class FormSignup extends React.Component {
             </form>
           )}
         </Formik>
-      </div>
+      </body>
     );
   }
 }
