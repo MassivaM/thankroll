@@ -4,7 +4,7 @@ $blue: #70a1ff;
 
 @mixin centerer {
   position: absolute;
-  top: 52%;
+  top: 57%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -20,8 +20,8 @@ body {
 .card {
   @include centerer;
   box-sizing: border-box;
-  width: 1200px;
-  height: 450px;
+  width: #{'min(75vw, 1200px)'};
+  height: #{'min(30vw, 450px)'};
   padding: 20px;
   background: #fdf7f7;
 
@@ -37,9 +37,9 @@ body {
     //margin-left: 140px;
     //margin-top: 13%;
     float: left;
-    width: 500px;
+    width: #{'min(30vw, 600px)'};
     height: 100%;
-    transform: translate(30%, 30%);
+    transform: translate(20%, 20%);
     //background:grey;
   }
 }
@@ -48,40 +48,44 @@ body {
   //margin-top: -200px;
   position: relative;
   float: left;
-  left: 5em;
+  left: 5vw;
   padding: 20px;
   bottom: 40px;
   height: 100%;
-  width: 260px;
+  width: #{'min(25vw, 350px)'};
   //background: blue;
 }
 
 .ava {
-  margin-top: 80px;
-  width: 260px;
-  height: 220px;
+  margin-top: #{'min(4vw, 60px)'};
+  width: #{'min(20vw, 300px)'};
+  height: #{'min(15vw, 250px)'};
   background: linear-gradient(145deg, rgba(255, 0, 0, 1) 0%, #630eff 100%);
   -webkit-clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
   clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
   background-image: url(http://dariographics.com//DUI/006/ava.png);
   background-size: cover;
+
+  .image {
+    width: #{'min(20vw, 300px)'};
+  }
 }
 
 .name {
-  margin: 20px 0 6px;
+  margin: #{'min(1vw,20px)'} 0 6px;
   font-weight: 800;
-  font-size: 28px;
+  font-size: #{'min(1.8vw, 28px)'};
   width: 100%;
 }
 
 .status {
   opacity: 0.4;
-  font-size: 16px;
+  font-size: #{'min(1.6vw, 16px)'};
   font-weight: 600;
 }
 .descr {
   opacity: 0.8;
-  font-size: 20px;
+  font-size: #{'min(1.2vw, 30px)'};
   font-weight: 600;
 }
 #edit {
@@ -167,10 +171,10 @@ body {
   position: absolute;
   bottom: 40px;
   //display: inline-block;
-  top: 55%;
-  left: 30%;
-  width: 200px;
-  height: 50px;
+  top: 70%;
+  left: 20%;
+  width: #{'min(20vw, 200px)'};
+  height: #{'min(5vw, 50px)'};
   background: #70a1ff;
   text-align: center;
   border-radius: 45px;
@@ -182,6 +186,7 @@ body {
     font-weight: 700;
     color: white;
     text-transform: uppercase;
+    font-size: #{'min(1.6vw, 12px)'};
   }
 }
 
